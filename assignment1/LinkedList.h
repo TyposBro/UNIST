@@ -38,20 +38,20 @@ public:
 	// Add val at index
 	void AddAtIndex(const int index, const Type &val);
 
-	// // Delete an element located at index
-	// void DeleteAtIndex(const int index);
+	// Delete an element located at index
+	void DeleteAtIndex(const int index);
 
-	// // Delete val in linked list
-	// void DeleteValue(const Type &val);
+	// Delete val in linked list
+	void DeleteValue(const Type &val);
 
-	// // Move the first element of val to head
-	// void MoveToHead(const Type &val);
+	// Move the first element of val to head
+	void MoveToHead(const Type &val);
 
-	// // Rotate the linked list right by steps times
-	// void Rotate(const int steps);
+	// Rotate the linked list right by steps times
+	void Rotate(const int steps);
 
-	// // Reduce value that repeats multiple times
-	// void Reduce();
+	// Reduce value that repeats multiple times
+	void Reduce();
 
 	// // Reverse at every k number of nodes at a time
 	// void K_Reverse(const int k);
@@ -59,14 +59,23 @@ public:
 	// // Sort even and odd numbers separately then append
 	// void EvenOddSeparateSort();
 
-	// // Return the number of elements in the linked list
+	// Return the number of elements in the linked list
 	int Size();
 
-	// // Delete all elements from the linked list
+	// Delete all elements from the linked list
 	void CleanUp();
 
-	// // Print the list
+	// Print the list
 	void Print();
+
+	// My helper function for AddAtIndex
+
+	// Add at the end of the list
+	void append(const Type &val);
+	// Remove from the beginning of the list
+	void shift();
+	// Remove from the end of the list
+	void pop();
 };
 
 /*
@@ -93,7 +102,7 @@ Type LinkedList<Type>::Get(const int index)
 {
 	int step = 0;
 	Node<Type> *ptr = head;
-	if (index <= -1 && index >= Size())
+	if (index <= -1 || index >= Size())
 	{
 		return -1;
 	}
@@ -124,32 +133,143 @@ void LinkedList<Type>::AddAtHead(const Type &val)
 template <typename Type>
 void LinkedList<Type>::AddAtIndex(const int index, const Type &val)
 {
+	int size = Size();
+	if (index <= -1 || index > size)
+	{
+		return;
+	}
+	if (index == 0)
+	{
+		AddAtHead(val);
+		return;
+	}
+	if (index == size)
+	{
+		append(val);
+	}
+
+	int step = 0;
+	Node<Type> *ptr = head;
+	Node<Type> *prev = ptr;
+	while (ptr->next != NULL && index != step)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+		step++;
+	}
+	Node<Type> *newNode = new Node<Type>(val, ptr);
+	prev->next = newNode;
+	return;
 }
 
-// template <typename Type>
-// void LinkedList<Type>::DeleteAtIndex(const int index)
-// {
-// }
+template <typename Type>
+void LinkedList<Type>::DeleteAtIndex(const int index)
+{
+	int size = Size();
+	int step = 0;
+	Node<Type> *ptr = head;
+	Node<Type> *prev = ptr;
+	if (index <= -1 || index >= size)
+	{
+		return;
+	}
+	if (index == 0)
+	{
+		shift();
+	}
+	if (index == size - 1)
+	{
+		pop();
+	}
 
-// template <typename Type>
-// void LinkedList<Type>::DeleteValue(const Type &val)
-// {
-// }
+	while (index != step)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+		step++;
+	}
+	prev->next = ptr->next;
+	delete ptr;
+}
 
-// template <typename Type>
-// void LinkedList<Type>::MoveToHead(const Type &val)
-// {
-// }
+template <typename Type>
+void LinkedList<Type>::DeleteValue(const Type &val)
+{
+	Node<Type> *ptr = head;
+	Node<Type> *prev = ptr;
+	while (ptr != NULL && ptr->data != val)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+	}
+	if (ptr->data == val)
+	{
+		prev->next = ptr->next;
+		delete ptr;
+	}
+}
 
-// template <typename Type>
-// void LinkedList<Type>::Rotate(const int steps)
-// {
-// }
+template <typename Type>
+void LinkedList<Type>::MoveToHead(const Type &val)
+{
+	Node<Type> *ptr = head;
+	Node<Type> *prev = ptr;
+	while (ptr != NULL && ptr->data != val)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+	}
+	if (ptr->data == val)
+	{
+		prev->next = ptr->next;
+		AddAtHead(ptr->data);
+	}
+}
 
-// template <typename Type>
-// void LinkedList<Type>::Reduce()
-// {
-// }
+template <typename Type>
+void LinkedList<Type>::Rotate(const int steps)
+{
+	int lastItemIndex = Size() - 1;
+	int step = 0;
+
+	Node<Type> *ptr = head;
+	if (steps <= 0)
+	{
+		return;
+	}
+	while (step != steps)
+	{
+		step++;
+		int data = Get(lastItemIndex);
+		AddAtHead(data);
+		pop();
+	}
+}
+
+template <typename Type>
+void LinkedList<Type>::Reduce()
+{
+	Node<Type> *ptr = head;
+
+	while (ptr != NULL && ptr->next != NULL)
+	{
+
+		Node<Type> *secondLoop = ptr;
+		while (secondLoop->next != NULL)
+		{
+
+			if (ptr->data == secondLoop->next->data)
+			{
+				Node<Type> *temp = secondLoop->next;
+				secondLoop->next = secondLoop->next->next;
+				delete temp;
+				continue;
+			}
+			secondLoop = secondLoop->next;
+		}
+		ptr = ptr->next;
+	}
+}
 
 // template <typename Type>
 // void LinkedList<Type>::K_Reverse(const int k)
@@ -198,5 +318,40 @@ void LinkedList<Type>::Print()
 	}
 	cout << ptr->data << ")" << endl;
 }
+
+// Helper functions
+template <typename Type>
+void LinkedList<Type>::append(const Type &val)
+{
+	Node<Type> *ptr = head;
+	while (ptr->next != NULL)
+	{
+		ptr = ptr->next;
+	}
+	Node<Type> *newNode = new Node<Type>(val);
+	ptr->next = newNode;
+}
+
+template <typename Type>
+void LinkedList<Type>::shift()
+{
+	Node<Type> *ptr = head;
+	head = head->next;
+	delete ptr;
+};
+
+template <typename Type>
+void LinkedList<Type>::pop()
+{
+	Node<Type> *ptr = head;
+	Node<Type> *prev = ptr;
+	while (ptr->next != NULL)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+	}
+	prev->next = NULL;
+	delete ptr;
+};
 
 #endif

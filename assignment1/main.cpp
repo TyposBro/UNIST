@@ -12,26 +12,26 @@ int main()
 
 	cout << LL.Get(2) << endl; // 8
 
-	// LL.AddAtIndex(2,8);
-	// LL.Print(); // (10,9,8,8,7,6,5,4,3,2,1)
+	LL.AddAtIndex(2, 88);
+	LL.Print(); // (10,9,8,8,7,6,5,4,3,2,1)
 
-	// LL.DeleteAtIndex(3);
-	// LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
+	LL.DeleteAtIndex(3);
+	LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
 
-	// LL.DeleteValue(9);
-	// LL.Print(); // (10,8,7,6,5,4,3,2,1)
+	LL.DeleteValue(9);
+	LL.Print(); // (10,8,7,6,5,4,3,2,1)
 
-	// LL.MoveToHead(2);
-	// LL.Print(); // (2,10,8,7,6,5,4,3,1)
+	LL.MoveToHead(2);
+	LL.Print(); // (2,10,8,7,6,5,4,3,1)
 
-	// LL.Rotate(2);
-	// LL.Print(); // (3,1,2,10,8,7,6,5,4)
+	LL.Rotate(2);
+	LL.Print(); // (3,1,2,10,8,7,6,5,4)
 
-	// LL.AddAtHead(4);
-	// LL.Print(); // (4,3,1,2,10,8,7,6,5,4)
+	LL.AddAtHead(4);
+	LL.Print(); // (4,3,1,2,10,8,7,6,5,4)
 
-	// LL.Reduce();
-	// LL.Print(); // (4,3,1,2,10,8,7,6,5)
+	LL.Reduce();
+	LL.Print(); // (4,3,1,2,10,8,7,6,5)
 
 	// LL.AddAtIndex(7,10);
 	// LL.Print(); // (4,3,1,2,10,8,7,10,6,5)
