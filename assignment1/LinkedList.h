@@ -53,11 +53,11 @@ public:
 	// Reduce value that repeats multiple times
 	void Reduce();
 
-	// // Reverse at every k number of nodes at a time
-	// void K_Reverse(const int k);
+	// Reverse at every k number of nodes at a time
+	void K_Reverse(const int k);
 
-	// // Sort even and odd numbers separately then append
-	// void EvenOddSeparateSort();
+	// Sort even and odd numbers separately then append
+	void EvenOddSeparateSort();
 
 	// Return the number of elements in the linked list
 	int Size();
@@ -68,14 +68,19 @@ public:
 	// Print the list
 	void Print();
 
-	// My helper function for AddAtIndex
+	// *** My helper function for AddAtIndex ***
 
 	// Add at the end of the list
 	void append(const Type &val);
+
 	// Remove from the beginning of the list
 	void shift();
+
 	// Remove from the end of the list
 	void pop();
+
+	// reverseBetween(Node<Type> *start, Node<Type> *end)
+	Node<Type> *reverseBetween(Node<Type> *start, Node<Type> *end);
 };
 
 /*
@@ -145,7 +150,9 @@ void LinkedList<Type>::AddAtIndex(const int index, const Type &val)
 	}
 	if (index == size)
 	{
+
 		append(val);
+		return;
 	}
 
 	int step = 0;
@@ -197,12 +204,12 @@ void LinkedList<Type>::DeleteValue(const Type &val)
 {
 	Node<Type> *ptr = head;
 	Node<Type> *prev = ptr;
-	while (ptr != NULL && ptr->data != val)
+	while (ptr && ptr->data != val)
 	{
 		prev = ptr;
 		ptr = ptr->next;
 	}
-	if (ptr->data == val)
+	if (ptr && ptr->data == val)
 	{
 		prev->next = ptr->next;
 		delete ptr;
@@ -214,12 +221,12 @@ void LinkedList<Type>::MoveToHead(const Type &val)
 {
 	Node<Type> *ptr = head;
 	Node<Type> *prev = ptr;
-	while (ptr != NULL && ptr->data != val)
+	while (ptr && ptr->data != val)
 	{
 		prev = ptr;
 		ptr = ptr->next;
 	}
-	if (ptr->data == val)
+	if (ptr && ptr->data == val)
 	{
 		prev->next = ptr->next;
 		AddAtHead(ptr->data);
@@ -237,7 +244,7 @@ void LinkedList<Type>::Rotate(const int steps)
 	{
 		return;
 	}
-	while (step != steps)
+	while (ptr && step != steps)
 	{
 		step++;
 		int data = Get(lastItemIndex);
@@ -251,7 +258,7 @@ void LinkedList<Type>::Reduce()
 {
 	Node<Type> *ptr = head;
 
-	while (ptr != NULL && ptr->next != NULL)
+	while (ptr && ptr->next != NULL)
 	{
 
 		Node<Type> *secondLoop = ptr;
@@ -271,22 +278,45 @@ void LinkedList<Type>::Reduce()
 	}
 }
 
-// template <typename Type>
-// void LinkedList<Type>::K_Reverse(const int k)
-// {
-// }
+template <typename Type>
+void LinkedList<Type>::K_Reverse(const int k)
+{
 
-// template <typename Type>
-// void LinkedList<Type>::EvenOddSeparateSort()
-// {
-// }
+	if (!head || !head->next)
+	{
+		return;
+	}
+	Node<Type> *preHead = new Node<Type>(-1, head);
+	Node<Type> *start = preHead;
+	int i = 0;
+	while (head)
+	{
+		i++;
+		if (i % k == 0)
+		{
+			start = reverseBetween(start, head->next);
+			head = start->next;
+		}
+		else
+		{
+			head = head->next;
+		}
+	}
+
+	head = preHead->next;
+}
+
+template <typename Type>
+void LinkedList<Type>::EvenOddSeparateSort()
+{
+}
 
 template <typename Type>
 int LinkedList<Type>::Size()
 {
 	Node<Type> *ptr = head;
 	int count = 0;
-	while (ptr != NULL)
+	while (ptr)
 	{
 		ptr = ptr->next;
 		count++;
@@ -298,7 +328,7 @@ template <typename Type>
 void LinkedList<Type>::CleanUp()
 {
 	Node<Type> *ptr = head;
-	while (head != NULL)
+	while (head)
 	{
 		ptr = head;
 		head = head->next;
@@ -310,6 +340,11 @@ template <typename Type>
 void LinkedList<Type>::Print()
 {
 	Node<Type> *ptr = head;
+	if (!ptr)
+	{
+		return;
+	}
+
 	cout << "(";
 	while (ptr->next != NULL)
 	{
@@ -324,17 +359,21 @@ template <typename Type>
 void LinkedList<Type>::append(const Type &val)
 {
 	Node<Type> *ptr = head;
-	while (ptr->next != NULL)
+	while (ptr && ptr->next)
 	{
 		ptr = ptr->next;
 	}
-	Node<Type> *newNode = new Node<Type>(val);
-	ptr->next = newNode;
+	ptr->next = new Node<Type>(val);
 }
 
 template <typename Type>
 void LinkedList<Type>::shift()
 {
+	if (!head)
+	{
+		return;
+	}
+
 	Node<Type> *ptr = head;
 	head = head->next;
 	delete ptr;
@@ -343,9 +382,14 @@ void LinkedList<Type>::shift()
 template <typename Type>
 void LinkedList<Type>::pop()
 {
+	if (!head)
+	{
+		return;
+	}
+
 	Node<Type> *ptr = head;
 	Node<Type> *prev = ptr;
-	while (ptr->next != NULL)
+	while (ptr->next)
 	{
 		prev = ptr;
 		ptr = ptr->next;
@@ -354,4 +398,23 @@ void LinkedList<Type>::pop()
 	delete ptr;
 };
 
+template <typename Type>
+Node<Type> *LinkedList<Type>::reverseBetween(Node<Type> *start, Node<Type> *end)
+{
+	Node<Type> *ptr = start->next;
+	Node<Type> *prev = start;
+	Node<Type> *first = ptr;
+	Node<Type> *next;
+
+	while (ptr != end)
+	{
+		next = ptr->next;
+		ptr->next = prev;
+		prev = ptr;
+		ptr = next;
+	}
+	start->next = prev;
+	first->next = ptr;
+	return first;
+};
 #endif

@@ -8,7 +8,7 @@ int main()
 	LinkedList<int> LL;
 	for (int i = 1; i < 11; i++)
 		LL.AddAtHead(i);
-	LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
+	LL.Print();
 
 	cout << LL.Get(2) << endl; // 8
 
@@ -33,11 +33,11 @@ int main()
 	LL.Reduce();
 	LL.Print(); // (4,3,1,2,10,8,7,6,5)
 
-	// LL.AddAtIndex(7,10);
-	// LL.Print(); // (4,3,1,2,10,8,7,10,6,5)
+	LL.AddAtIndex(7, 10);
+	LL.Print(); // (4,3,1,2,10,8,7,10,6,5)
 
-	// LL.K_Reverse(3);
-	// LL.Print(); // (1,3,4,8,10,2,6,10,7,5)
+	LL.K_Reverse(3);
+	LL.Print();				   // (1,3,4,8,10,2,6,10,7,5)
 	cout << LL.Size() << endl; // 10
 
 	// LL.EvenOddSeparateSort();
