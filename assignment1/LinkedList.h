@@ -83,8 +83,8 @@ public:
 	Node<Type> *reverseBetween(Node<Type> *start, Node<Type> *end);
 
 	//
-	void ascEven(Node<Type> **even, const int &val);
-	void descOdd(Node<Type> **odd, const int &val);
+	void ascEven(Node<Type> **even, Node<Type> *val);
+	void descOdd(Node<Type> **odd, Node<Type> *val);
 };
 
 /*
@@ -311,20 +311,29 @@ void LinkedList<Type>::K_Reverse(const int k)
 template <typename Type>
 void LinkedList<Type>::EvenOddSeparateSort()
 {
-	// Node<Type> *ptr = head;
-	// Node<Type> *even = NULL;
-	// Node<Type> *odd = NULL;
-	// while (ptr)
-	// {
-	// 	if (ptr->data % 2 == 0)
-	// 	{
-	// 		// void ascEven(Node<Type> **even, ptr->data);
-	// 		continue;
-	// 	}
-	// 	// void descOdd(Node<Type> **odd, ptr->data);
+	Node<Type> *ptr = head;
+	Node<Type> *even = NULL;
+	Node<Type> *odd = NULL;
+	while (ptr)
+	{
+		if (ptr->data % 2 == 0)
+		{
+			ascEven(&even, ptr);
+		}
+		else
+		{
+			descOdd(&odd, ptr);
+		}
 
-	// 	ptr = ptr->next;
-	// }
+		ptr = ptr->next;
+	}
+	ptr = even;
+	while (ptr->next)
+	{
+		ptr = ptr->next;
+	}
+	ptr->next = odd;
+	head = even;
 }
 
 template <typename Type>
@@ -435,15 +444,52 @@ Node<Type> *LinkedList<Type>::reverseBetween(Node<Type> *start, Node<Type> *end)
 };
 
 template <typename Type>
-void LinkedList<Type>::ascEven(Node<Type> **even, const int &val)
+void LinkedList<Type>::ascEven(Node<Type> **even, Node<Type> *val)
 {
 	Node<Type> *ptr = *even;
+	Node<Type> *prev = ptr;
+
 	if (!ptr)
 	{
-		*even = new Node<Type>(val);
+		*even = new Node<Type>(val->data);
+		return;
 	}
+	else if (ptr->data > val->data)
+	{
+		*even = new Node<Type>(val->data, ptr);
+		return;
+	}
+	while (ptr && ptr->data < val->data)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+	}
+
+	prev->next = new Node<Type>(val->data, ptr);
 };
 
 template <typename Type>
-void LinkedList<Type>::descOdd(Node<Type> **odd, const int &val){};
+void LinkedList<Type>::descOdd(Node<Type> **odd, Node<Type> *val)
+{
+	Node<Type> *ptr = *odd;
+	Node<Type> *prev = ptr;
+
+	if (!ptr)
+	{
+		*odd = new Node<Type>(val->data);
+		return;
+	}
+	else if (ptr->data < val->data)
+	{
+		*odd = new Node<Type>(val->data, ptr);
+		return;
+	}
+	while (ptr && ptr->data > val->data)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+	}
+
+	prev->next = new Node<Type>(val->data, ptr);
+};
 #endif
