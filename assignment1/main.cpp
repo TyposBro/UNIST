@@ -12,7 +12,7 @@ int main()
 
 	cout << LL.Get(2) << endl; // 8
 
-	LL.AddAtIndex(2, 88);
+	LL.AddAtIndex(2, 8);
 	LL.Print(); // (10,9,8,8,7,6,5,4,3,2,1)
 
 	LL.DeleteAtIndex(3);
@@ -40,9 +40,9 @@ int main()
 	LL.Print();				   // (1,3,4,8,10,2,6,10,7,5)
 	cout << LL.Size() << endl; // 10
 
-	// LL.EvenOddSeparateSort();
-	// LL.Print(); // (2,4,6,8,10,10,7,5,3,1)
-	// cout<<LL.Size()<< endl; // 10
+	LL.EvenOddSeparateSort();
+	LL.Print();				   // (2,4,6,8,10,10,7,5,3,1)
+	cout << LL.Size() << endl; // 10
 
 	LL.CleanUp();
 	cout << LL.Size() << endl; // 0

@@ -68,10 +68,10 @@ public:
 	// Print the list
 	void Print();
 
-	// *** My helper function for AddAtIndex ***
+	// *** My helper function for AddAtIndex *** //
 
 	// Add at the end of the list
-	void append(const Type &val);
+	void append(Node<Type> *head, const Type &val);
 
 	// Remove from the beginning of the list
 	void shift();
@@ -81,6 +81,10 @@ public:
 
 	// reverseBetween(Node<Type> *start, Node<Type> *end)
 	Node<Type> *reverseBetween(Node<Type> *start, Node<Type> *end);
+
+	//
+	void ascEven(Node<Type> **even, const int &val);
+	void descOdd(Node<Type> **odd, const int &val);
 };
 
 /*
@@ -125,8 +129,6 @@ void LinkedList<Type>::AddAtHead(const Type &val)
 	if (!head)
 	{
 		head = new Node<Type>(val);
-		head->data = val;
-		head->next = NULL;
 		return;
 	}
 
@@ -151,7 +153,7 @@ void LinkedList<Type>::AddAtIndex(const int index, const Type &val)
 	if (index == size)
 	{
 
-		append(val);
+		append(head, val);
 		return;
 	}
 
@@ -309,6 +311,20 @@ void LinkedList<Type>::K_Reverse(const int k)
 template <typename Type>
 void LinkedList<Type>::EvenOddSeparateSort()
 {
+	// Node<Type> *ptr = head;
+	// Node<Type> *even = NULL;
+	// Node<Type> *odd = NULL;
+	// while (ptr)
+	// {
+	// 	if (ptr->data % 2 == 0)
+	// 	{
+	// 		// void ascEven(Node<Type> **even, ptr->data);
+	// 		continue;
+	// 	}
+	// 	// void descOdd(Node<Type> **odd, ptr->data);
+
+	// 	ptr = ptr->next;
+	// }
 }
 
 template <typename Type>
@@ -356,7 +372,7 @@ void LinkedList<Type>::Print()
 
 // Helper functions
 template <typename Type>
-void LinkedList<Type>::append(const Type &val)
+void LinkedList<Type>::append(Node<Type> *head, const Type &val)
 {
 	Node<Type> *ptr = head;
 	while (ptr && ptr->next)
@@ -417,4 +433,17 @@ Node<Type> *LinkedList<Type>::reverseBetween(Node<Type> *start, Node<Type> *end)
 	first->next = ptr;
 	return first;
 };
+
+template <typename Type>
+void LinkedList<Type>::ascEven(Node<Type> **even, const int &val)
+{
+	Node<Type> *ptr = *even;
+	if (!ptr)
+	{
+		*even = new Node<Type>(val);
+	}
+};
+
+template <typename Type>
+void LinkedList<Type>::descOdd(Node<Type> **odd, const int &val){};
 #endif
