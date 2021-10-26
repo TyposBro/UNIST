@@ -8,7 +8,7 @@ int main()
 	LinkedList<int> LL;
 	for (int i = 1; i < 11; i++)
 		LL.AddAtHead(i);
-	LL.Print();
+	LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
 
 	cout << LL.Get(2) << endl; // 8
 
