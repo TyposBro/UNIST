@@ -51,6 +51,9 @@ public:
 
   // Number of elements stored
   int size() const;
+
+  // my Utils
+  void reverse();
 };
 
 // Implement functions below
@@ -123,5 +126,23 @@ int Stack<type>::size() const
 
   return count;
 }
+template <typename type>
+void Stack<type>::reverse()
+{
+  Node<type> *prev;
+  Node<type> *ptr;
+  Node<type> *next;
+  ptr = prev = _top;
+  ptr = ptr->next;
+  prev->next = NULL;
+  while (ptr != NULL)
+  {
 
+    next = ptr->next;
+    ptr->next = prev;
+    prev = ptr;
+    ptr = next;
+  }
+  _top = prev;
+}
 #endif // STACK_H

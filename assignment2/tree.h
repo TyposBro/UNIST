@@ -69,23 +69,58 @@ struct Tree
     // My Utils
 
     int height();
-    void printLevel(int level);
+    void printLevel(int level, bool stopNull);
 };
 
 // -------- implement below --------
-
+Stack<string> stack;
 void Tree::print()
 {
 
     for (int i = 1; i <= height(); i++)
     {
-        bool printNull = (i == height());
-        this->printLevel(i);
+        bool stopNull = (i == height());
+        this->printLevel(i, stopNull);
     }
+
+    while (stack.top() == "null")
+    {
+        stack.pop();
+    }
+    stack.reverse();
+    string res = "(";
+    while (!stack.empty())
+    {
+        res += stack.top();
+        stack.pop();
+        if (!stack.empty())
+            res += ",";
+    }
+    res += ")";
+    cout << res << endl;
 }
 
 double Tree::eval()
 {
+    if (!this)
+        return 0;
+
+    if (!this->left && !this->right)
+        return stod(this->expr);
+
+    double l = this->left->eval();
+    double r = this->right->eval();
+
+    if (this->expr == "+")
+        return l + r;
+
+    if (this->expr == "-")
+        return l - r;
+
+    if (this->expr == "*")
+        return l * r;
+
+    return l / r;
 }
 
 Tree *build_expression_tree(const string &postfix)
@@ -116,6 +151,26 @@ Tree *build_expression_tree(const string &postfix)
 }
 
 // My Utils
+
+void Tree::printLevel(int level, bool stopNull)
+{
+    if (this == NULL)
+    {
+        if (!stopNull)
+            stack.push("null");
+        return;
+    }
+    if (level == 1)
+    {
+        stack.push(this->expr);
+    }
+    else if (level > 1)
+    {
+        this->left->printLevel(level - 1, stopNull);
+        this->right->printLevel(level - 1, stopNull);
+    }
+};
+
 Queue<string> parser(const string &postfix)
 {
     Queue<string> q;
@@ -158,26 +213,5 @@ int Tree::height()
         }
     }
 }
-
-void Tree::printLevel(int level)
-{
-    if (this == NULL)
-    {
-        string str = "null,";
-        cout << "null,";
-
-        return;
-    }
-    if (level == 1)
-    {
-        string str = this->expr;
-        cout << this->expr << ",";
-    }
-    else if (level > 1)
-    {
-        this->left->printLevel(level - 1);
-        this->right->printLevel(level - 1);
-    }
-};
 
 #endif // TREE_H
