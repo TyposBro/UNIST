@@ -33,8 +33,8 @@ int main()
 
     // part 2: convert infix to postfix
     string infix = "-1 * (2 + -3 * 4) / -2";
-    // string postfix = to_postfix(infix);
-    string postfix = "1 2 + 3 4 5 + * *";
+    string postfix = to_postfix(infix);
+    // string postfix = "1 2 + 3 4 5 + * *";
 
     cout << postfix << endl; // -1 2 -3 4 * + * -2 /
 
