@@ -109,7 +109,7 @@ void HierarchyHash::print()
 
   // Exceptionally, keep this code only for the case there is no key in the table
   if( getNumofKeys() == 0){
-    std::cout << "[]" << std::endl;
+    std::cout << "()" << std::endl;
     return;
   }
 

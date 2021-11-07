@@ -96,12 +96,12 @@ void FlatHash::print()
   // Print valid key pair - (index1:key1,index2:key2)
   // Give **NO** space between each character
   // e.g., (1:3,3:7,5:1)
-  std::cout << "[";
+  std::cout << "(";
 
   // Write your code
 
 
-  std::cout << "]" << std::endl;
+  std::cout << ")" << std::endl;
 }
 
 #endif
