@@ -48,6 +48,16 @@ public:
   void clearTombstones();
 
   void print();
+  unsigned int *create_table(const unsigned int size)
+  {
+    unsigned int *table = new unsigned int[size];
+    for (unsigned int i = 0; i < size; i++)
+    {
+      table[i] = 0;
+    }
+
+    return table;
+  }
 };
 
 FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
@@ -58,7 +68,7 @@ FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
   flag = _flag;
   alpha = _alpha;
 
-  // Write your code
+  hashtable = create_table(table_size);
 }
 
 FlatHash::~FlatHash()
