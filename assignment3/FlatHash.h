@@ -4,15 +4,17 @@
 #include <iostream>
 
 // Flag(hint) for overflow handling
-enum overflow_handle {
+enum overflow_handle
+{
   LINEAR_PROBING = 0,
   QUADRATIC_PROBING
 };
 
 class FlatHash
+
 {
 private:
-  unsigned int* hashtable;
+  unsigned int *hashtable;
   // Variable for overflow handling
   enum overflow_handle flag;
   // Loading factor
@@ -50,45 +52,39 @@ public:
 
 FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
 {
-  // Initial table size is 1000 
+  // Initial table size is 1000
   table_size = 1000;
   num_of_keys = 0;
   flag = _flag;
   alpha = _alpha;
-  
-  // Write your code
 
+  // Write your code
 }
 
 FlatHash::~FlatHash()
 {
   // Write your code
-
 }
 
 int FlatHash::insert(const unsigned int key)
 {
   // You have to implement two overflow handling by using flag
   // Write your code
-
 }
 
 int FlatHash::remove(const unsigned int key)
 {
   // Write your code
-
 }
 
 int FlatHash::search(const unsigned int key)
 {
   // Write your code
-
 }
 
 void FlatHash::clearTombstones()
 {
   // Write your code
-  
 }
 
 void FlatHash::print()
@@ -99,7 +95,6 @@ void FlatHash::print()
   std::cout << "(";
 
   // Write your code
-
 
   std::cout << ")" << std::endl;
 }
