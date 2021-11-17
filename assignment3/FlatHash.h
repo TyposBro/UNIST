@@ -66,6 +66,7 @@ public:
     for (unsigned int i = 0; i < table_size; i++)
     {
       unsigned int index = hashFunction(key + i);
+      unsigned int foo = hashtable[index];
       if (hashtable[index] == 0 || hashtable[index] == thumbstone)
       {
         hashtable[index] = key;
@@ -108,18 +109,14 @@ public:
     float load_factor = (float)getNumofKeys() / (float)getTableSize();
     if (load_factor >= alpha)
     {
-      unsigned int *oldTable = hashtable;
-      unsigned int oldSize = table_size;
       table_size *= 2;
-      hashtable = create_table(table_size);
-      for (unsigned int i = 0; i < oldSize; i++)
+      unsigned int *newTable = new unsigned int[table_size];
+      for (unsigned int i = 0; i < table_size; i++)
       {
-        if (flag == QUADRATIC_PROBING)
-          quadratic_probing(oldTable[i]);
-
-        else
-          linear_probing(oldTable[i]);
+        newTable[i] = (i >= table_size / 2) ? 0 : hashtable[i];
       }
+      delete[] hashtable;
+      hashtable = newTable;
     }
   };
 };
@@ -127,7 +124,8 @@ public:
 FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
 {
   // Initial table size is 1000
-  table_size = 1000;
+  // FIXME: 1000
+  table_size = 5;
   num_of_keys = 0;
   flag = _flag;
   alpha = _alpha;
@@ -171,6 +169,7 @@ int FlatHash::insert(const unsigned int key)
   else
   { // FLAG = LINEAR
     l = linear_probing(key);
+
     check_load_factor();
     return l;
   }
