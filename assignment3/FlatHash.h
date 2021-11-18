@@ -4,6 +4,10 @@
 #include <iostream>
 using namespace std;
 
+// TODO: REHASH
+// TODO: insert
+// TODO: TEST
+
 int _probing(const unsigned int key, unsigned int *local_hashtable, unsigned int size, bool isLinear);
 // Flag(hint) for overflow handling
 enum overflow_handle
