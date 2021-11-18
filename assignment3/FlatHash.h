@@ -53,148 +53,14 @@ public:
   void print();
 
   // CUSTOM
-  unsigned int *create_table(const unsigned int size)
-  {
-    unsigned int *table = new unsigned int[size];
-    for (unsigned int i = 0; i < size; i++)
-    {
-      table[i] = 0;
-    }
-
-    return table;
-  }
-  int linear_probing(const unsigned int key)
-  {
-    for (unsigned int i = 0; i < table_size; i++)
-    {
-      unsigned int index = hashFunction(key + i);
-
-      if (hashtable[index] == 0 || hashtable[index] == thumbstone)
-      {
-        hashtable[index] = key;
-        num_of_keys++;
-        return i + 1;
-      }
-      if (hashtable[index] == key)
-      {
-        i += 1;
-        i = -i;
-        return i;
-      }
-    }
-    return 0;
-  };
-
-  int quadratic_probing(const unsigned int key)
-  {
-    for (unsigned int i = 0; i < table_size; i++)
-    {
-      unsigned int index = hashFunction(key + i * i);
-      if (hashtable[index] == 0 || hashtable[index] == thumbstone)
-      {
-        hashtable[index] = key;
-        num_of_keys++;
-        return i + 1;
-      }
-      if (hashtable[index] == key)
-      {
-        i += 1;
-        i = -i;
-        return i;
-      }
-    }
-    return 0;
-  };
-
-  void check_load_factor()
-  {
-    float load_factor = (float)getNumofKeys() / (float)getTableSize();
-    if (load_factor >= alpha)
-    {
-      hashtable = rehash_resize();
-    }
-  };
-
-  int _remove(const unsigned int key, bool isLinear)
-  {
-    int res = 0;
-    for (unsigned int i = 0; i < table_size; i++)
-    {
-      unsigned int input = isLinear ? key + i : key + i * i;
-      unsigned int index = hashFunction(input);
-      if (hashtable[index] == key)
-      {
-        hashtable[index] = thumbstone;
-        num_of_keys--;
-        return i + 1;
-      }
-      if (hashtable[index] == 0)
-      {
-        res = -i - 1;
-        return res;
-      }
-    }
-
-    res = -table_size;
-    return res;
-  }
-
-  int left_shift(const unsigned int index)
-  {
-    unsigned int i = index;
-    do
-    {
-      i = hashFunction(i + 1);
-      if (hashtable[i] != 0)
-      {
-        if (i - 1 >= 0)
-        {
-          hashtable[i - 1] = hashtable[i];
-        }
-        else
-        {
-          hashtable[table_size - 1] = hashtable[i];
-        }
-
-        continue;
-      }
-      break;
-    } while (i != index);
-  }
-
-  // REHASH is READY
-  unsigned int *rehash_resize()
-  {
-    unsigned int *newTable = create_table(table_size * 2);
-    for (unsigned int i = 0; i < table_size; i++)
-    {
-      if (hashtable[i] != 0 && hashtable[i] != thumbstone)
-      {
-        bool isLinear = (flag == LINEAR_PROBING) ? true : false;
-        _probing(hashtable[i], newTable, table_size * 2, isLinear);
-      }
-    }
-    // for (unsigned int i = table_size; i < table_size * 2; i++)
-    //   newTable[i] = 0;
-    delete[] hashtable;
-    table_size *= 2;
-    return newTable;
-  }
-
-  unsigned int *rehash()
-  {
-    unsigned int *newTable = create_table(table_size);
-    for (unsigned int i = 0; i < table_size; i++)
-    {
-      if (hashtable[i] != 0 && hashtable[i] != thumbstone)
-      {
-        bool isLinear = (flag == LINEAR_PROBING) ? true : false;
-        _probing(hashtable[i], newTable, table_size, isLinear);
-      }
-    }
-    delete[] hashtable;
-    return newTable;
-  }
+  unsigned int *create_table(const unsigned int size);
+  int linear_probing(const unsigned int key);
+  int quadratic_probing(const unsigned int key);
+  void check_load_factor();
+  int _remove(const unsigned int key, bool isLinear);
+  unsigned int *rehash_resize();
+  unsigned int *rehash();
+  int _search(const unsigned int key, const bool isLinear);
 };
 
 FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
@@ -259,16 +125,48 @@ int FlatHash::remove(const unsigned int key)
 {
   // Write your code
   int res = 0;
+  int q = 0;
+  int l = 0;
 
-  if (flag == LINEAR_PROBING)
+  // FLAG QUADRATIC
+  if (flag == QUADRATIC_PROBING)
   {
-    res = _remove(key, true);
-    // TODO: LEFT SHIFT @88
-    if (res > 0)
-      hashtable = rehash();
+    q = _remove(key, false);
+    // QUADRATIC FAILED
+    if (q == -1 - table_size)
+    {
+      // LINEAR
+      l = _remove(key, true);
+      // TODO: LEFT SHIFT @88
+      // LINEAR FOUND
+      if (l > 0)
+      {
+        hashtable = rehash();
+        return l + table_size;
+      }
+      // BOTH QUADRATIC & LINEAR TILL LAST FAILED
+      if (l == -1 - table_size)
+      {
+        res = -2 * table_size;
+        return res;
+      }
+      // LINEAR REACHED 0
+      return l - table_size;
+    }
+
     return res;
   }
-  res = _remove(key, false);
+
+  res = _remove(key, true);
+  // TODO: LEFT SHIFT @88
+  if (res > 0)
+    hashtable = rehash();
+  if (res == -1 - table_size)
+  {
+    res = -table_size;
+    return res;
+  }
+
   return res;
 }
 
@@ -276,38 +174,23 @@ int FlatHash::search(const unsigned int key)
 {
   // Write your code
   int res = 0;
-  if (flag == LINEAR_PROBING)
+  int q = 0;
+  if (flag == QUADRATIC_PROBING)
   {
-    for (unsigned int i = 0; i < table_size; i++)
+    q = _search(key, false);
+    if (q == -table_size)
     {
-      unsigned int index = hashFunction(key + i);
-      if (hashtable[index] == key)
-        return i + 1;
-
-      if (hashtable[index] == 0)
+      res = _search(key, true);
+      if (res < 0)
       {
-        res = -i - 1;
-        return res;
+        return res - table_size;
       }
+      return res + table_size;
     }
-
-    res = -table_size;
-    return res;
+    return q;
   }
-
-  for (unsigned int i = 0; i < table_size; i++)
-  {
-    unsigned int index = hashFunction(key + i * i);
-    if (hashtable[index] == key)
-      return i;
-
-    if (hashtable[index] == 0)
-    {
-      res = -i - 1;
-      return res;
-    }
-  }
-  res = -table_size;
+  // FLAG LINEAR
+  res = _search(key, true);
   return res;
 }
 
@@ -318,6 +201,7 @@ void FlatHash::clearTombstones()
   {
     if (hashtable[i] == thumbstone)
       hashtable[i] = 0;
+    hashtable = rehash();
   }
 }
 
@@ -332,11 +216,10 @@ void FlatHash::print()
   string s = "";
   for (int i = 0; i < table_size; i++)
   {
-    s += to_string(i) + ":" + to_string(hashtable[i]) + ",";
-    // if (hashtable[i] != 0)
-    // {
-    //   s += to_string(i) + ":" + to_string(hashtable[i]) + ",";
-    // }
+    if (hashtable[i] != 0)
+    {
+      s += to_string(i) + ":" + to_string(hashtable[i]) + ",";
+    }
   }
   string out = s.substr(0, s.size() - 1);
   cout << out;
@@ -366,5 +249,142 @@ int _probing(const unsigned int key, unsigned int *local_hashtable, unsigned int
   }
   return 0;
 };
+
+unsigned int *FlatHash::create_table(const unsigned int size)
+{
+  unsigned int *table = new unsigned int[size];
+  for (unsigned int i = 0; i < size; i++)
+  {
+    table[i] = 0;
+  }
+
+  return table;
+}
+
+int FlatHash::linear_probing(const unsigned int key)
+{
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    unsigned int index = hashFunction(key + i);
+
+    if (hashtable[index] == 0 || hashtable[index] == thumbstone)
+    {
+      hashtable[index] = key;
+      num_of_keys++;
+      return i + 1;
+    }
+    if (hashtable[index] == key)
+    {
+      i += 1;
+      i = -i;
+      return i;
+    }
+  }
+  return 0;
+};
+
+int FlatHash::quadratic_probing(const unsigned int key)
+{
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    unsigned int index = hashFunction(key + i * i);
+    if (hashtable[index] == 0 || hashtable[index] == thumbstone)
+    {
+      hashtable[index] = key;
+      num_of_keys++;
+      return i + 1;
+    }
+    if (hashtable[index] == key)
+    {
+      i += 1;
+      i = -i;
+      return i;
+    }
+  }
+  return 0;
+};
+
+void FlatHash::check_load_factor()
+{
+  float load_factor = (float)getNumofKeys() / (float)getTableSize();
+  if (load_factor >= alpha)
+  {
+    hashtable = rehash_resize();
+  }
+};
+
+int FlatHash::_remove(const unsigned int key, bool isLinear)
+{
+  int res = 0;
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    unsigned int input = isLinear ? key + i : key + i * i;
+    unsigned int index = hashFunction(input);
+    if (hashtable[index] == key)
+    {
+      hashtable[index] = thumbstone;
+      num_of_keys--;
+      return i + 1;
+    }
+    if (hashtable[index] == 0)
+    {
+      res = -i - 1;
+      return res;
+    }
+  }
+
+  res = -1 - table_size;
+  return res;
+}
+
+unsigned int *FlatHash::rehash_resize()
+{
+  unsigned int *newTable = create_table(table_size * 2);
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    if (hashtable[i] != 0 && hashtable[i] != thumbstone)
+    {
+      bool isLinear = (flag == LINEAR_PROBING) ? true : false;
+      _probing(hashtable[i], newTable, table_size * 2, isLinear);
+    }
+  }
+  delete[] hashtable;
+  table_size *= 2;
+  return newTable;
+}
+
+unsigned int *FlatHash::rehash()
+{
+  unsigned int *newTable = create_table(table_size);
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    if (hashtable[i] != 0 && hashtable[i] != thumbstone)
+    {
+      bool isLinear = (flag == LINEAR_PROBING) ? true : false;
+      _probing(hashtable[i], newTable, table_size, isLinear);
+    }
+  }
+  delete[] hashtable;
+  return newTable;
+}
+int FlatHash::_search(const unsigned int key, const bool isLinear)
+{
+  int res = 0;
+  for (unsigned int i = 0; i < table_size; i++)
+  {
+    unsigned int index = (isLinear) ? hashFunction(key + i) : hashFunction(key + i * i);
+    if (hashtable[index] == key)
+      return i + 1;
+
+    if (hashtable[index] == 0)
+    {
+      res = -i - 1;
+      return res;
+    }
+  }
+
+  res = -table_size;
+  return res;
+}
 
 #endif
