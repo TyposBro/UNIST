@@ -157,6 +157,7 @@ int FlatHash::remove(const unsigned int key)
     return res;
   }
 
+  // FLAG LINEAR
   res = _remove(key, true);
   // TODO: LEFT SHIFT @88
   if (res > 0)
@@ -175,22 +176,34 @@ int FlatHash::search(const unsigned int key)
   // Write your code
   int res = 0;
   int q = 0;
+  // QUADRATIC
   if (flag == QUADRATIC_PROBING)
   {
+
     q = _search(key, false);
-    if (q == -table_size)
+    // QUADRATIC FAILED
+    if (q == -1 - table_size)
     {
+      // LINEAR FOUND
       res = _search(key, true);
-      if (res < 0)
+      if (res > 0)
+        return res + table_size;
+      // LINEAR FAILED
+      if (res == -1 - table_size)
       {
-        return res - table_size;
+        return -2 * table_size;
       }
-      return res + table_size;
+      return res - table_size;
     }
+
     return q;
   }
   // FLAG LINEAR
   res = _search(key, true);
+  if (res == -1 - table_size)
+  {
+    return res + 1;
+  }
   return res;
 }
 
@@ -383,7 +396,7 @@ int FlatHash::_search(const unsigned int key, const bool isLinear)
     }
   }
 
-  res = -table_size;
+  res = -1 - table_size;
   return res;
 }
 
