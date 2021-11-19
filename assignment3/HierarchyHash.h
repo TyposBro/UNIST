@@ -9,6 +9,7 @@ class HierarchyHash
 private:
   unsigned int **hashtable;
   unsigned int thumbstone = 1000001;
+  unsigned int allocatedSize = 0;
 
   // Variable for overflow handling
   enum overflow_handle flag;
@@ -33,7 +34,7 @@ public:
   unsigned int getNumofKeys() { return num_of_keys; }
 
   // Return the size of allocated sub hash table
-  unsigned int getAllocatedSize();
+  unsigned int getAllocatedSize() { return allocatedSize; };
 
   // Return time cost
   int insert(const unsigned int key);
@@ -53,6 +54,8 @@ public:
   unsigned int *create_sub_table();
   unsigned int **prepare_table(unsigned int tableIndex);
   int _insert(unsigned int key, bool isLinear);
+  void check_load_factor();
+  unsigned int **rehash(const int factor);
 };
 
 HierarchyHash::HierarchyHash(enum overflow_handle _flag, float _alpha)
@@ -69,11 +72,6 @@ HierarchyHash::HierarchyHash(enum overflow_handle _flag, float _alpha)
 }
 
 HierarchyHash::~HierarchyHash()
-{
-  // Write your code
-}
-
-unsigned int HierarchyHash::getAllocatedSize()
 {
   // Write your code
 }
@@ -96,12 +94,12 @@ int HierarchyHash::insert(const unsigned int key)
       if (l < 0)
         return l - table_size;
       // LINEAR INSERT
-      // check_load_factor();
+      check_load_factor();
       return l + table_size;
     }
     else
     {
-      // check_load_factor();
+      check_load_factor();
       return q;
     }
   }
@@ -109,7 +107,7 @@ int HierarchyHash::insert(const unsigned int key)
   { // FLAG = LINEAR
     l = _insert(key, true);
 
-    // check_load_factor();
+    check_load_factor();
     return l;
   }
 }
@@ -149,6 +147,7 @@ void HierarchyHash::print()
 }
 unsigned int *HierarchyHash::create_sub_table()
 {
+  allocatedSize += sub_table_size;
   unsigned int *temp = new unsigned int[sub_table_size];
   for (unsigned int i = 0; i < sub_table_size; i++)
   {
@@ -161,7 +160,11 @@ unsigned int **HierarchyHash::prepare_table(unsigned int tableIndex)
 {
 
   if (hashtable[tableIndex])
+  {
+    // TODO: CHECK
+    cout << "Hashtable[" << tableIndex << "]" << endl;
     return hashtable;
+  }
 
   hashtable[tableIndex] = create_sub_table();
   return hashtable;
@@ -179,6 +182,7 @@ int HierarchyHash::_insert(unsigned int key, bool isLinear)
     cout << hashtable[row][col] << endl;
     if (hashtable[row][col] == 0 || hashtable[row][col] == thumbstone)
     {
+      num_of_keys++;
       hashtable[row][col] = key;
       return i + 1;
     }
@@ -187,9 +191,41 @@ int HierarchyHash::_insert(unsigned int key, bool isLinear)
       int res = -i - 1;
       return res;
     }
-
+    // FIXME: COUT
     cout << hashtable[row][col] << endl;
   }
   return 0;
 };
+
+void HierarchyHash::check_load_factor()
+{
+  float load_factor = (float)getNumofKeys() / (float)getAllocatedSize();
+  if (load_factor >= alpha)
+  {
+    hashtable = rehash(2);
+  }
+};
+
+unsigned int **HierarchyHash::rehash(const int factor)
+{
+  bool isLinear = (flag == LINEAR_PROBING) ? true : false;
+  for (int i = 0; i < factor; i++)
+  {
+    unsigned int *newSubTable = create_sub_table();
+  }
+
+  for (unsigned int row = 0; row < 10; row++)
+  {
+    for (unsigned int col = 0; col < sub_table_size; col++)
+    {
+      if (hashtable[row][col] == 0 || hashtable[row][col] == thumbstone)
+        continue;
+      // _probing(hashtable[i], newSubTable, table_size * factor, isLinear);
+    }
+  }
+
+  // delete[] hashtable;
+  // table_size *= factor;
+  // return newTable;
+}
 #endif
