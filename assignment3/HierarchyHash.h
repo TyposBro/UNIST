@@ -7,7 +7,8 @@
 class HierarchyHash
 {
 private:
-  unsigned int** hashtable;
+  unsigned int **hashtable;
+
   // Variable for overflow handling
   enum overflow_handle flag;
   // Loading factor
@@ -18,7 +19,6 @@ private:
   unsigned int sub_table_size;
   // Nums of keys
   unsigned int num_of_keys;
-
 
 public:
   HierarchyHash(enum overflow_handle _flag, float _alpha);
@@ -47,6 +47,9 @@ public:
   void clearTombstones();
 
   void print();
+
+  // CUSTOM
+  unsigned int *create_sub_table();
 };
 
 HierarchyHash::HierarchyHash(enum overflow_handle _flag, float _alpha)
@@ -59,43 +62,37 @@ HierarchyHash::HierarchyHash(enum overflow_handle _flag, float _alpha)
   alpha = _alpha;
 
   // Write your code
-
+  hashtable = new unsigned int *[10];
 }
 
 HierarchyHash::~HierarchyHash()
 {
   // Write your code
-
 }
 
 unsigned int HierarchyHash::getAllocatedSize()
 {
   // Write your code
-
 }
 
 int HierarchyHash::insert(const unsigned int key)
 {
   // Write your code
-
 }
 
 int HierarchyHash::remove(const unsigned int key)
 {
   // Write your code
-
 }
 
 int HierarchyHash::search(const unsigned int key)
 {
   // Write your code
-
 }
 
 void HierarchyHash::clearTombstones()
 {
   // Write your code
-  
 }
 
 void HierarchyHash::print()
@@ -108,13 +105,21 @@ void HierarchyHash::print()
   //       9:(902:90,938:82)
 
   // Exceptionally, keep this code only for the case there is no key in the table
-  if( getNumofKeys() == 0){
+  if (getNumofKeys() == 0)
+  {
     std::cout << "()" << std::endl;
     return;
   }
 
   // Write your code
-
 }
-
+unsigned int *HierarchyHash::create_sub_table()
+{
+  unsigned int *temp = new unsigned int[sub_table_size];
+  for (unsigned int i = 0; i < sub_table_size; i++)
+  {
+    temp[i] = 0;
+  }
+  return temp;
+};
 #endif
