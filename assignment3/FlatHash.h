@@ -82,7 +82,7 @@ FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
 
 FlatHash::~FlatHash()
 {
-  // Write your code
+
   if (table_size != 0)
   {
     delete[] hashtable;
