@@ -66,6 +66,7 @@ public:
   unsigned int *rehash(const int factor);
   int _search(const unsigned int key, const bool isLinear);
   unsigned int *shift(const unsigned int factor);
+  unsigned int *getFHT() { return hashtable; };
 };
 
 FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
@@ -82,12 +83,6 @@ FlatHash::FlatHash(enum overflow_handle _flag, float _alpha)
 
 FlatHash::~FlatHash()
 {
-
-  if (table_size != 0)
-  {
-    delete[] hashtable;
-    table_size = 0;
-  }
 }
 
 int FlatHash::insert(const unsigned int key)
@@ -143,12 +138,15 @@ int FlatHash::remove(const unsigned int key)
     if (quadratic == 0)
     {
       // LINEAR
+
       linear = _remove(key, true, &index);
       // TODO: LEFT SHIFT @88
       // LINEAR FOUND
       if (linear > 0)
       {
         hashtable = shift(index);
+
+        clearTombstones();
         return linear + table_size;
       }
       // BOTH QUADRATIC & LINEAR TILL LAST FAILED
@@ -165,10 +163,16 @@ int FlatHash::remove(const unsigned int key)
   }
 
   // FLAG LINEAR
+
   linear = _remove(key, true, &index);
   // TODO: SHIFT @88
+
   if (linear > 0)
+  {
+
     hashtable = shift(index);
+  }
+
   if (linear == 0)
   {
     linear = -table_size;
@@ -235,7 +239,7 @@ void FlatHash::print()
 
   // Write your code
   string s = "";
-  for (int i = 0; i < table_size; i++)
+  for (unsigned int i = 0; i < table_size; i++)
   {
     if (hashtable[i] != 0)
     {
@@ -386,35 +390,23 @@ int FlatHash::_search(const unsigned int key, const bool isLinear)
 
 unsigned int *FlatHash::shift(const unsigned int index)
 {
-  unsigned int *newTable = create_table(table_size);
+  // unsigned int *newTable = create_table(table_size);
   unsigned int i = index;
 
   do
   {
-    bool isLinear = (flag == LINEAR_PROBING) ? true : false;
     if (hashtable[i] == 0)
       break;
-
-    if (hashtable[i] != thumbstone)
-      _probing(hashtable[i], newTable, table_size, isLinear);
-
-    i = (i + 1) % table_size;
-  } while (index != i);
-
-  do
-  {
-
-    if (hashtable[i] == 0 || flag == LINEAR_PROBING)
-      break;
-
-    if (hashtable[i] != thumbstone)
-      _probing(hashtable[i], newTable, table_size, true);
+    if (hashtable[i] == thumbstone && (i + 1) != table_size)
+    {
+      hashtable[i] = hashtable[i + 1];
+    }
 
     i = (i + 1) % table_size;
   } while (index != i);
 
-  delete[] hashtable;
-  return newTable;
+  hashtable = rehash(1);
+  return hashtable;
 }
 
 #endif
