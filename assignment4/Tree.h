@@ -338,6 +338,20 @@ public:
                 Node_t<keyT, valT> *subTree = temp->right;
                 temp->right = n;
                 n->left = subTree;
+
+                // change parents
+                temp->parent = n->parent;
+                n->parent = temp;
+                if (subTree)
+                {
+                    subTree->parent = n;
+                }
+                n = temp;
+                if (!n->parent)
+                {
+                    root = n;
+                }
+
                 return;
             }
         }
@@ -348,6 +362,19 @@ public:
             temp->left = n;
             n->right = subTree;
 
+            // change parents
+            temp->parent = n->parent;
+            n->parent = temp;
+            if (subTree)
+            {
+                subTree->parent = n;
+            }
+
+            n = temp;
+            if (!n->parent)
+            {
+                root = n;
+            }
             return;
         }
     }
