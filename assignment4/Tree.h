@@ -350,8 +350,9 @@ public:
                 if (!n->parent)
                 {
                     root = n;
+                    return;
                 }
-
+                n->parent->left = n;
                 return;
             }
         }
@@ -374,8 +375,9 @@ public:
             if (!n->parent)
             {
                 root = n;
+                return;
             }
-            return;
+            n->parent->right = n;
         }
     }
 };
