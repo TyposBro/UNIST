@@ -1,3 +1,5 @@
+// TODO: ROTATE CHECK
+
 #ifndef __TREE_H__
 #define __TREE_H__
 #include <sstream>
@@ -14,6 +16,7 @@ struct Node_t
     valT value;
     Node_t<keyT, valT> *parent, *left, *right;
     short meta; // AVL: balance factor, RB: color
+    short height;
 };
 
 /*
@@ -125,6 +128,7 @@ public:
     {
         this->root = nullptr;
     }
+    Node_t<keyT, valT> **get() { return &root; }
 
     void free_subtree(Node_t<keyT, valT> *r)
     {
@@ -336,6 +340,8 @@ public:
             {
                 Node_t<keyT, valT> *temp = n->left;
                 Node_t<keyT, valT> *subTree = temp->right;
+
+                // perform rotation
                 temp->right = n;
                 n->left = subTree;
 
@@ -360,6 +366,8 @@ public:
         {
             Node_t<keyT, valT> *temp = n->right;
             Node_t<keyT, valT> *subTree = temp->left;
+
+            // perform rotation
             temp->left = n;
             n->right = subTree;
 
