@@ -4,6 +4,7 @@ template <class keyT, class valT>
 class AVLTree_t : public Tree_t<keyT, valT>
 {
     using Tree_t<keyT, valT>::get;
+    using Tree_t<keyT, valT>::get_min;
     Node_t<keyT, valT> **root = get();
     long check_bf(Node_t<keyT, valT> *n)
     {
@@ -199,35 +200,102 @@ public:
         /* 3. Get the balance factor of this ancestor
             node to check whether this node became
             unbalanced */
-        short balance = getBalance(node);
-        node->meta = balance;
+        short meta = getBalance(node);
+        node->meta = meta;
 
         // If this node becomes unbalanced, then
         // there are 4 cases
 
         // Left Left Case
-        if (balance > 1 && key < node->left->key)
+        if (meta > 1 && key < node->left->key)
             return rightRotate(node, true);
 
         // Right Right Case
-        if (balance < -1 && key > node->right->key)
+        if (meta < -1 && key > node->right->key)
             return leftRotate(node, true);
 
         // Left Right Case
-        if (balance > 1 && key > node->left->key)
+        if (meta > 1 && key > node->left->key)
         {
             node->left = leftRotate(node->left, false);
             return rightRotate(node, false);
         }
 
         // Right Left Case
-        if (balance < -1 && key < node->right->key)
+        if (meta < -1 && key < node->right->key)
         {
             node->right = rightRotate(node->right, false);
             return leftRotate(node, false);
         }
 
         /* return the (unchanged) node pointer */
+        return node;
+    }
+
+    Node_t<keyT, valT> *remove_util(Node_t<keyT, valT> *node, keyT key)
+    {
+        // Standard BST delete
+        if (node == NULL)
+            return node;
+        if (key < node->key)
+            node->left = remove_util(node->left, key);
+        else if (key > node->key)
+            node->right = remove_util(node->right, key);
+        else
+        {
+            if ((node->left == NULL) ||
+                (node->right == NULL))
+            {
+                Node_t<keyT, valT> *temp = node->left ? node->left : node->right;
+                if (temp == NULL)
+                {
+                    temp = node;
+                    node = NULL;
+                }
+                else
+                    *node = *temp;
+                free(temp);
+            }
+            else
+            {
+                Node_t<keyT, valT> *temp = get_min(node->right);
+                node->key = temp->key;
+                node->parent = temp->parent;
+                node->value = temp->value;
+                node->right = remove_util(node->right, temp->key);
+            }
+        }
+        if (node == NULL)
+            return node;
+
+        int meta = getBalance(node);
+        node->meta = meta;
+
+        if (meta > 1 &&
+            getBalance(node->left) >= 0)
+            return rightRotate(node, true);
+
+        // Left Right Case
+        if (meta > 1 &&
+            getBalance(node->left) < 0)
+        {
+            node->left = leftRotate(node->left, false);
+            return rightRotate(node, false);
+        }
+
+        // Right Right Case
+        if (meta < -1 &&
+            getBalance(node->right) <= 0)
+            return leftRotate(node, true);
+
+        // Right Left Case
+        if (meta < -1 &&
+            getBalance(node->right) > 0)
+        {
+            node->right = rightRotate(node->right, false);
+            return leftRotate(node, false);
+        }
+
         return node;
     }
 
@@ -244,6 +312,7 @@ public:
 
     bool remove(keyT key)
     {
+        *root = remove_util(*root, key);
         // Find the node that has the given key and remove that node.
     }
 };
