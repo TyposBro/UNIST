@@ -56,24 +56,24 @@ int main()
     t.search(0);
 
     // and removals
-    // t.remove(-1);
-    // std::cout << t.to_string_pre_order() << '\n';
-    // std::cout << t.to_string_level_order() << '\n';
-    // t.remove(0);
-    // std::cout << t.to_string_pre_order() << '\n';
-    // std::cout << t.to_string_level_order() << '\n';
+    t.remove(-1);
+    std::cout << t.to_string_pre_order() << '\n';
+    std::cout << t.to_string_level_order() << '\n';
+    t.remove(0);
+    std::cout << t.to_string_pre_order() << '\n';
+    std::cout << t.to_string_level_order() << '\n';
 
-    // // try to search for nonexisting keys
-    // t.search(1000);
-    // t.search(-42);
+    // try to search for nonexisting keys
+    t.search(1000);
+    t.search(-42);
 
-    // // and removals
-    // t.remove(100);
-    // std::cout << t.to_string_pre_order() << '\n';
-    // std::cout << t.to_string_level_order() << '\n';
-    // t.remove(-1);
-    // std::cout << t.to_string_pre_order() << '\n';
-    // std::cout << t.to_string_level_order() << '\n';
+    // and removals
+    t.remove(100);
+    std::cout << t.to_string_pre_order() << '\n';
+    std::cout << t.to_string_level_order() << '\n';
+    t.remove(-1);
+    std::cout << t.to_string_pre_order() << '\n';
+    std::cout << t.to_string_level_order() << '\n';
 
     // These tests are by no means exhaustive
     // Try to think of your own edge cases!

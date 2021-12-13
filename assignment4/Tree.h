@@ -140,7 +140,7 @@ public:
         return;
     }
 
-    ~Tree_t<keyT, valT>()
+    virtual ~Tree_t<keyT, valT>()
     {
         if (root)
             free_subtree(root);

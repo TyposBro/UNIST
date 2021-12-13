@@ -78,7 +78,7 @@ public:
         return height(N->left) - height(N->right);
     }
 
-    Node_t<keyT, valT> *rightRotate(Node_t<keyT, valT> *n, bool LL)
+    Node_t<keyT, valT> *rightRotate(Node_t<keyT, valT> *n)
 
     {
         Node_t<keyT, valT> *temp = n->left;
@@ -101,16 +101,6 @@ public:
 
             *root = temp;
         }
-        else if (LL)
-        {
-            // LL temp->parent->left = temp;
-
-            temp->parent->left = temp;
-        }
-        else
-        {
-            temp->parent->right = temp;
-        }
 
         // Update heights
         n->height = max(height(n->left),
@@ -126,7 +116,7 @@ public:
         return temp;
     }
 
-    Node_t<keyT, valT> *leftRotate(Node_t<keyT, valT> *n, bool LL)
+    Node_t<keyT, valT> *leftRotate(Node_t<keyT, valT> *n)
     {
         Node_t<keyT, valT> *temp = n->right;
         Node_t<keyT, valT> *subTree = temp->left;
@@ -147,14 +137,6 @@ public:
         if (!temp->parent)
         {
             *root = temp;
-        }
-        else if (LL)
-        {
-            temp->parent->right = temp;
-        }
-        else
-        {
-            temp->parent->left = temp;
         }
 
         // Update heights
@@ -208,24 +190,26 @@ public:
 
         // Left Left Case
         if (meta > 1 && key < node->left->key)
-            return rightRotate(node, true);
+            return rightRotate(node);
 
         // Right Right Case
         if (meta < -1 && key > node->right->key)
-            return leftRotate(node, true);
+            // +
+            return leftRotate(node);
 
         // Left Right Case
         if (meta > 1 && key > node->left->key)
         {
-            node->left = leftRotate(node->left, false);
-            return rightRotate(node, false);
+            // +++++
+            node->left = leftRotate(node->left);
+            return rightRotate(node);
         }
 
         // Right Left Case
         if (meta < -1 && key < node->right->key)
         {
-            node->right = rightRotate(node->right, false);
-            return leftRotate(node, false);
+            node->right = rightRotate(node->right);
+            return leftRotate(node);
         }
 
         /* return the (unchanged) node pointer */
@@ -261,7 +245,6 @@ public:
             {
                 Node_t<keyT, valT> *temp = get_min(node->right);
                 node->key = temp->key;
-                node->parent = temp->parent;
                 node->value = temp->value;
                 node->right = remove_util(node->right, temp->key, found);
             }
@@ -274,33 +257,33 @@ public:
 
         int meta = getBalance(node);
         node->meta = meta;
+
+        // Left Left
         if (meta > 1 &&
             getBalance(node->left) >= 0)
-            // return leftRotate(node, true);
 
-            return rightRotate(node, false);
+            return rightRotate(node);
 
         // Left Right Case
         if (meta > 1 &&
             getBalance(node->left) < 0)
         {
-            node->left = leftRotate(node->left, false);
-            return rightRotate(node, false);
+            node->left = leftRotate(node->left);
+            return rightRotate(node); // success
         }
 
         // Right Right Case
         if (meta < -1 &&
             getBalance(node->right) <= 0)
-            // return leftRotate(node, true);
-            return leftRotate(node, false);
+            return leftRotate(node);
 
         // Right Left Case
         if (meta < -1 &&
             getBalance(node->right) > 0)
         {
-            // FIXME: original true
-            node->right = rightRotate(node->right, false);
-            return leftRotate(node, false);
+            // SUCCESS
+            node->right = rightRotate(node->right);
+            return leftRotate(node);
         }
 
         return node;
