@@ -232,17 +232,18 @@ public:
         return node;
     }
 
-    Node_t<keyT, valT> *remove_util(Node_t<keyT, valT> *node, keyT key)
+    Node_t<keyT, valT> *remove_util(Node_t<keyT, valT> *node, keyT key, bool *found)
     {
         // Standard BST delete
         if (node == NULL)
             return node;
         if (key < node->key)
-            node->left = remove_util(node->left, key);
+            node->left = remove_util(node->left, key, found);
         else if (key > node->key)
-            node->right = remove_util(node->right, key);
+            node->right = remove_util(node->right, key, found);
         else
         {
+            *found = true;
             if ((node->left == NULL) ||
                 (node->right == NULL))
             {
@@ -262,7 +263,7 @@ public:
                 node->key = temp->key;
                 node->parent = temp->parent;
                 node->value = temp->value;
-                node->right = remove_util(node->right, temp->key);
+                node->right = remove_util(node->right, temp->key, found);
             }
         }
         if (node == NULL)
@@ -318,7 +319,9 @@ public:
 
     bool remove(keyT key)
     {
-        *root = remove_util(*root, key);
+        bool found = false;
+        *root = remove_util(*root, key, &found);
+        return found;
         // Find the node that has the given key and remove that node.
     }
 };
