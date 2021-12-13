@@ -268,12 +268,16 @@ public:
         if (node == NULL)
             return node;
 
+        node->height = 1 + max(height(node->left),
+                               height(node->right));
+
         int meta = getBalance(node);
         node->meta = meta;
-
         if (meta > 1 &&
             getBalance(node->left) >= 0)
-            return rightRotate(node, true);
+            // return leftRotate(node, true);
+
+            return rightRotate(node, false);
 
         // Left Right Case
         if (meta > 1 &&
@@ -286,12 +290,14 @@ public:
         // Right Right Case
         if (meta < -1 &&
             getBalance(node->right) <= 0)
-            return leftRotate(node, true);
+            // return leftRotate(node, true);
+            return leftRotate(node, false);
 
         // Right Left Case
         if (meta < -1 &&
             getBalance(node->right) > 0)
         {
+            // FIXME: original true
             node->right = rightRotate(node->right, false);
             return leftRotate(node, false);
         }
