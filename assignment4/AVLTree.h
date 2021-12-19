@@ -8,7 +8,7 @@ class AVLTree_t : public Tree_t<keyT, valT>
     Node_t<keyT, valT> **root = get();
     long check_bf(Node_t<keyT, valT> *n)
     {
-        // Checks balance factor values in tree.
+        // // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         long hr, hl, h;
         hr = hl = 0;
         if (!n)
@@ -46,49 +46,63 @@ class AVLTree_t : public Tree_t<keyT, valT>
 
 public:
     // Utils
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
     short height(Node_t<keyT, valT> *n)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (n == NULL)
             return 0;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         else
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             return n->height;
     }
 
     short max(short a, short b)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         return (a > b) ? a : b;
     }
-
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
     Node_t<keyT, valT> *newNode(keyT key, valT value, Node_t<keyT, valT> *parent = NULL)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *node = new Node_t<keyT, valT>();
         node->key = key;
         node->value = value;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         node->left = NULL;
         node->right = NULL;
         node->parent = parent;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         node->height = 1;
 
         return node;
     }
+
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
     short getBalance(Node_t<keyT, valT> *N)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (N == NULL)
             return 0;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         return height(N->left) - height(N->right);
     }
 
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
     Node_t<keyT, valT> *rightRotate(Node_t<keyT, valT> *n)
 
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *temp = n->left;
         Node_t<keyT, valT> *subTree = temp->right;
 
-        // perform rotation
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         temp->right = n;
         n->left = subTree;
 
-        // change parents
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         temp->parent = n->parent;
         n->parent = temp;
         if (subTree)
@@ -118,22 +132,25 @@ public:
 
     Node_t<keyT, valT> *leftRotate(Node_t<keyT, valT> *n)
     {
+
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *temp = n->right;
         Node_t<keyT, valT> *subTree = temp->left;
 
-        // Perform rotation
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         temp->left = n;
         n->right = subTree;
 
-        // change parents
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         temp->parent = n->parent;
         n->parent = temp;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (subTree)
         {
             subTree->parent = n;
         }
 
-        // n = temp;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (!temp->parent)
         {
             *root = temp;
