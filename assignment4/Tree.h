@@ -9,6 +9,9 @@
 #include <queue>
 using namespace std;
 
+#define BLACK 0
+#define RED 1
+
 template <class keyT, class valT>
 struct Node_t
 {
@@ -17,7 +20,61 @@ struct Node_t
     Node_t<keyT, valT> *parent, *left, *right;
     short meta; // AVL: balance factor, RB: color
     short height;
+
+    // RBT helpers
+    Node_t<keyT, valT> *_uncle()
+    {
+        // If no parent or grandparent, then no uncle
+        if (parent == NULL or parent->parent == NULL)
+            return NULL;
+
+        if (parent->_isOnLeft())
+            // uncle on right
+            return parent->parent->right;
+        else
+            // uncle on left
+            return parent->parent->left;
+    }
+    bool _isOnLeft() { return this == parent->left; }
+
+    // returns pointer to sibling
+    Node_t<keyT, valT> *_sibling()
+    {
+        // sibling null if no parent
+        if (parent == NULL)
+            return NULL;
+
+        if (_isOnLeft())
+            return parent->right;
+
+        return parent->left;
+    }
+
+    // moves node down and moves given node in its place
+    void _moveDown(Node_t<keyT, valT> *nParent)
+    {
+        if (parent != NULL)
+        {
+            if (_isOnLeft())
+            {
+                parent->left = nParent;
+            }
+            else
+            {
+                parent->right = nParent;
+            }
+        }
+        nParent->parent = parent;
+        parent = nParent;
+    }
+
+    bool _hasRedChild()
+    {
+        return (left != NULL and left->meta == RED) or
+               (right != NULL and right->meta == RED);
+    }
 };
+;
 
 /*
  * This struct is used for search to return two items.
@@ -329,7 +386,7 @@ public:
         if (root->right)
             dump_subtree(root->right, prefix + string("r-"));
     }
-
+    // Util for RBT
     void rotate(Node_t<keyT, valT> *n, bool direction)
     {
         // Implement rotation here
