@@ -51,7 +51,7 @@ struct Node_t
     }
 
     // moves node down and moves given node in its place
-    void _moveDown(Node_t<keyT, valT> *nParent)
+    void d(Node_t<keyT, valT> *nParent)
     {
         if (parent != NULL)
         {
@@ -68,7 +68,7 @@ struct Node_t
         parent = nParent;
     }
 
-    bool _hasRedChild()
+    bool rc()
     {
         return (left != NULL and left->meta == RED) or
                (right != NULL and right->meta == RED);

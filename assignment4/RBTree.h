@@ -55,19 +55,22 @@ class RBTree_t : public Tree_t<keyT, valT>
     }
 
 public:
-    bool rr = false;
-    bool ll = false;
-    bool lr = false;
-    bool rl = false;
-
+    // Construct New Node with given keyT key, valT value
     Node_t<keyT, valT> *newNode(keyT key, valT value, Node_t<keyT, valT> *parent = NULL)
     {
+        // Empty Node
         Node_t<keyT, valT> *node = new Node_t<keyT, valT>();
+        // Assign Key with given gustom type
         node->key = key;
+        // Assign Value with given gustom type
         node->value = value;
+        // Assign left child to NULL
         node->left = NULL;
+        // Assign right child to NULL
         node->right = NULL;
+        // Assign Parent Pointer with given gustom type
         node->parent = parent;
+        // Assign Meta Pointer to RED
         node->meta = RED;
 
         return node;
@@ -79,48 +82,67 @@ public:
         // create a new one, place it in the right place, and store the value.
         // If there already is a node that has the given key,
         // update the value, rather than making a new one.
+
+        // Construct New Node with given keyT key, valT value
         Node_t<keyT, valT> *node = newNode(key, value);
 
+        // Check if tree is empty
         if (this->root == NULL)
         {
+            // Check if empty, make it Black
             node->meta = BLACK;
+            // then make it root
             this->root = node;
         }
         else
         {
+            // Search for the given KEY
             Node_t<keyT, valT> *temp = _search(key);
 
+            // if KEY is found, check the value
             if (temp->key == key)
             {
+                // if value is the same
                 if (temp->value == value)
-
+                    // do nothing
+                    // return void
                     return;
                 else
                 {
+                    // Update Value
                     temp->value = value;
+                    // return void
                     return;
                 }
             }
 
+            // change parent to of the given node to temp
             node->parent = temp;
+            // if key is less
             if (key < temp->key)
+                // make node its left child
                 temp->left = node;
             else
+                // make node its right child
                 temp->right = node;
-            _fixRedRed(node);
+            rr(node);
         }
     }
 
-    void _swapColors(Node_t<keyT, valT> *x1, Node_t<keyT, valT> *x2)
+    // swap given colors of x1 and x2 of type Node_t<keyT, valT> *, Node_t<keyT, valT> *
+    void color(Node_t<keyT, valT> *x1, Node_t<keyT, valT> *x2)
     {
-        short temp;
-        temp = x1->meta;
+        // assign meta of x1 to temporary meta
+        short temp = x1->meta;
+        // assign meta of x2 to x1
         x1->meta = x2->meta;
+        // assign meta of x1 to x2
         x2->meta = temp;
     }
 
-    void _swapValues(Node_t<keyT, valT> *u, Node_t<keyT, valT> *v)
+    void valueKey(Node_t<keyT, valT> *u, Node_t<keyT, valT> *v)
     {
+
         valT val = u->value;
         u->value = v->value;
         v->value = val;
@@ -131,86 +153,100 @@ public:
 
     void left(Node_t<keyT, valT> *x)
     {
-        // new parent will be node's right child
-        Node_t<keyT, valT> *nParent = x->right;
+        // store right child of given node to p pointer
+        Node_t<keyT, valT> *p = x->right;
 
-        // update root if current node is root
+        // if it's the same as root
         if (x == this->root)
-            this->root = nParent;
+            // change root to p
+            this->root = p;
+        // move the given node down relative to it's parent
+        x->d(p);
 
-        x->_moveDown(nParent);
-
-        // connect x with new parent's left element
-        x->right = nParent->left;
-        // connect new parent's left element with node
-        // if it is not null
-        if (nParent->left != NULL)
-            nParent->left->parent = x;
-
-        // connect new parent with x
-        nParent->left = x;
+        // assign p's left child to x's left child
+        x->right = p->left;
+        // if p's left child is empty
+        if (p->left != NULL)
+            // make given node p's left child's parent
+            p->left->parent = x;
+        p->left = x;
     }
 
     void right(Node_t<keyT, valT> *x)
     {
-        // new parent will be node's left child
-        Node_t<keyT, valT> *nParent = x->left;
+        // fenvrtbgr;hnjmk;.ljevnrslbgtkdhn fkj
+        Node_t<keyT, valT> *p = x->left;
 
-        // update root if current node is root
+        // fweilgrtbh;gkmu:tmrslnh5tbrntkenjk/m
         if (x == this->root)
-            this->root = nParent;
+            this->root = p;
 
-        x->_moveDown(nParent);
+        x->d(p);
 
-        // connect x with new parent's right element
-        x->left = nParent->right;
-        // connect new parent's right element with node
-        // if it is not null
-        if (nParent->right != NULL)
-            nParent->right->parent = x;
+        // fvrkgbt.dfnyujm;l,nkymg/ fmgjmlfy/km /sbntrbk.gj dnktrjdbkdtn
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+        !x->left = p->right;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+        if (p->right != NULL)
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+            p->right->parent = x;
 
-        // connect new parent with x
-        nParent->right = x;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+        p->right = x;
     }
 
-    void _fixRedRed(Node_t<keyT, valT> *x)
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+    void rr(Node_t<keyT, valT> *x)
     {
-        // if x is root color it black and return
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (x == this->root)
         {
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             x->meta = BLACK;
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             return;
         }
 
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *parent = x->parent, *gp = parent->parent,
-                           *uncleSam = x->_uncle();
+                           // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+                                                    *uncleSam = x->_uncle();
 
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (parent->meta != BLACK)
         {
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             if (uncleSam != NULL && uncleSam->meta == RED)
             {
-                // uncleSam red, perform recoloring and recurse
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 parent->meta = BLACK;
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 uncleSam->meta = BLACK;
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 gp->meta = RED;
-                _fixRedRed(gp);
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+                rr(gp);
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             }
             else
             {
-                // Else perform LR, LL, RL, RR
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 if (parent->_isOnLeft())
                 {
+                    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                     if (x->_isOnLeft())
                     {
-                        // for left right
-                        _swapColors(parent, gp);
+                        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+                        color(parent, gp);
                     }
                     else
                     {
+                        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                         left(parent);
-                        _swapColors(x, gp);
+                        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
+                        color(x, gp);
                     }
-                    // for left left and left right
+
                     right(gp);
                 }
                 else
@@ -219,11 +255,11 @@ public:
                     {
                         // for right left
                         right(parent);
-                        _swapColors(x, gp);
+                        color(x, gp);
                     }
                     else
                     {
-                        _swapColors(parent, gp);
+                        color(parent, gp);
                     }
 
                     // for right right and right left
@@ -235,53 +271,58 @@ public:
 
     Node_t<keyT, valT> *_successor(Node_t<keyT, valT> *x)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *temp = x;
-
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         while (temp->left != NULL)
             temp = temp->left;
-
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         return temp;
     }
 
     Node_t<keyT, valT> *_BSTreplace(Node_t<keyT, valT> *x)
     {
-        // when node have 2 children
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (x->left != NULL and x->right != NULL)
             return _successor(x->right);
 
-        // when leaf
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (x->left == NULL and x->right == NULL)
             return NULL;
 
-        // when single child
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         if (x->left != NULL)
             return x->left;
         else
             return x->right;
     }
 
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
     void _deleteNode(Node_t<keyT, valT> *v, bool *found)
     {
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *u = _BSTreplace(v);
 
-        // True when u and v are both black
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         bool uvBlack = ((u == NULL or u->meta == BLACK) and (v->meta == BLACK));
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
         Node_t<keyT, valT> *parent = v->parent;
+        // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
 
         if (u == NULL)
         {
-            // u is NULL therefore v is leaf
+            // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
             if (v == this->root)
             {
-                // v is root, making root null
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 this->root = NULL;
             }
             else
             {
+                // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                 if (uvBlack)
                 {
-                    // u and v both black
-                    // v is leaf, fix double black at v
+                    // Lorem ipsum dolor sit amet consectetur adipisicing elit.Quo, animi similique quis corporis illo aperiam incidunt nemo quam !Laboriosam obcaecati at itaque.Sit neque consectetur sint vitae suscipit, tempora distinctio
                     _fixDoubleBlack(v);
                 }
                 else
@@ -346,7 +387,7 @@ public:
         }
 
         // v has 2 children, swap values with successor and recurse
-        _swapValues(u, v);
+        valueKey(u, v);
         _deleteNode(u, found);
     }
 
@@ -383,7 +424,7 @@ public:
             else
             {
                 // Sibling black
-                if (sibling->_hasRedChild())
+                if (sibling->rc())
                 {
                     // at least 1 red children
                     if (sibling->left != NULL and sibling->left->meta == RED)
