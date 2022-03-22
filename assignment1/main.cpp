@@ -1,49 +1,46 @@
+//* Azizbek Umidjonov (ID: 20202043)
+//^ main driver file containing functions for getting input from a user and printing values
 #include <iostream>
-#include "LinkedList.h"
+#include "functions.h"
+#include <iomanip>
 
-using namespace std;
+int get_input()
+{
+    using namespace std;
+    cout << "Enter a number: ";
+    int k;
+    cin >> k;
+
+    if (!cin or k <= 0)
+        exit(1);
+
+    return k;
+}
+
+void print(int k)
+{
+    using namespace std;
+
+    cout << fixed;
+    cout.precision(7);
+
+    for (ssize_t n = 1; n <= k; n++)
+    {
+        double res = probability(k, n);
+        cout << setw(2) << right << n << " " << setw(10) << right << res * 100 << endl;
+    }
+}
 
 int main()
 {
-	LinkedList<int> LL;
-	for (int i = 1; i < 11; i++)
-		LL.AddAtHead(i);
-	LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
+    using namespace std;
+    int k;
 
-	cout << LL.Get(2) << endl; // 8
+    while (true)
+    {
+        k = get_input();
+        print(k);
+    }
 
-	LL.AddAtIndex(2, 8);
-	LL.Print(); // (10,9,8,8,7,6,5,4,3,2,1)
-
-	LL.DeleteAtIndex(3);
-	LL.Print(); // (10,9,8,7,6,5,4,3,2,1)
-
-	LL.DeleteValue(9);
-	LL.Print(); // (10,8,7,6,5,4,3,2,1)
-
-	LL.MoveToHead(2);
-	LL.Print(); // (2,10,8,7,6,5,4,3,1)
-
-	LL.Rotate(2);
-	LL.Print(); // (3,1,2,10,8,7,6,5,4)
-
-	LL.AddAtHead(4);
-	LL.Print(); // (4,3,1,2,10,8,7,6,5,4)
-
-	LL.Reduce();
-	LL.Print(); // (4,3,1,2,10,8,7,6,5)
-
-	LL.AddAtIndex(7, 10);
-	LL.Print(); // (4,3,1,2,10,8,7,10,6,5)
-
-	LL.K_Reverse(3);
-	LL.Print();				   // (1,3,4,8,10,2,6,10,7,5)
-	cout << LL.Size() << endl; // 10
-
-	LL.EvenOddSeparateSort();
-	LL.Print();				   // (2,4,6,8,10,10,7,5,3,1)
-	cout << LL.Size() << endl; // 10
-
-	LL.CleanUp();
-	cout << LL.Size() << endl; // 0
+    return 0;
 }
