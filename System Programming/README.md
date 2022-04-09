@@ -1,3 +1,3 @@
-# UNIST 2021 Fall Data Structures
+# Spring 2022 System Programming
 
 ## assignments submitted by Azizbek (@khasanjonovich)

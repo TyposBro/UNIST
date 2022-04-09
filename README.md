@@ -1,3 +1,3 @@
-# UNIST 2021 Fall Data Structures
+# UNIST Computer Science & Engineering (2020-2024)
 
 ## assignments submitted by Azizbek (@khasanjonovich)
