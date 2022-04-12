@@ -86,15 +86,14 @@ void general_mean(double *values, size_t n)
     using namespace std;
     cout << "Overall mean: " << mean(values, n) << endl;
     double *highest = maximum_value(values, n);
-    cout << "highest: " << *highest << endl;
+
     *highest = NAN;
-    cout << "highest 2: " << *highest << endl;
 
     cout << "Mean after removing the largest value: " << mean(values, n) << endl;
     double *second_highest = maximum_value(values, n);
-    cout << "second_highest: " << *second_highest << endl;
+
     *second_highest = NAN;
-    cout << "second_highest 2: " << *second_highest << endl;
+
     cout << "Mean after removing the 2 largest values: " << mean(values, n) << endl;
 }
 
