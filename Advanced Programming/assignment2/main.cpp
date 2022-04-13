@@ -48,6 +48,7 @@ void get_input(double *values, size_t *n)
     using namespace std;
     while (cin && !cin.eof() && *n < 1000)
     {
+
         cin >> values[*n];
         while (cin.fail())
         {
@@ -81,19 +82,30 @@ void sliding_window(double *values, size_t n)
     cout << endl;
 }
 
+// void foo_bar(double *values, size_t n)
+// {
+//     using namespace std;
+//     size_t foo = 0;
+//     for (size_t i = 0; i < n; i++)
+//     {
+//         if (isnan(values[i]))
+
+//             foo++;
+//     }
+//     cout << "foo: " << foo << endl;
+// }
+
 void general_mean(double *values, size_t n)
 {
     using namespace std;
     cout << "Overall mean: " << mean(values, n) << endl;
+
     double *highest = maximum_value(values, n);
-
     *highest = NAN;
-
     cout << "Mean after removing the largest value: " << mean(values, n) << endl;
+
     double *second_highest = maximum_value(values, n);
-
     *second_highest = NAN;
-
     cout << "Mean after removing the 2 largest values: " << mean(values, n) << endl;
 }
 
