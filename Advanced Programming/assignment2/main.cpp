@@ -57,9 +57,7 @@ void get_input(double *values, size_t *n)
             values[*n] = NAN;
         }
         if (cin.eof())
-        {
-            (*n)--;
-        }
+            break;
 
         if (cin)
             (*n)++;
