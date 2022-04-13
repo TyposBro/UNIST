@@ -6,7 +6,7 @@
 double mean(double const *values, size_t n)
 {
 
-        size_t count = 0;
+    size_t count = 0;
     double res = 0;
     for (size_t i = 0; i < n; i++)
     {
@@ -32,17 +32,13 @@ double *maximum_value(double *values, size_t n)
     for (size_t i = 0; i < n; i++)
     {
         if (isnan(values[i]))
-        {
-            i++;
             continue;
-        }
+
         if (max < values[i])
         {
             max = values[i];
             track = i;
         }
-
-        // i++;
     }
 
     return &values[track];
