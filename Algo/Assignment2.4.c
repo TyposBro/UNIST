@@ -2,66 +2,77 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define maxN 10000000
-int n;
-int a[maxN];
-long long s;
-long long minS;
+#define Length 10000000
 
-void shot(int *first, int *last)
+void bar(int *first, int *last)
 {
-    int len = last - first + 1;
-    int *l = first;
-    int *r = last;
-    int pivot = *(l + (rand() % len));
-    while (l <= r)
+    int cur_size = last - first + 1;
+    int *left = first;
+    int *right = last;
+    int piv = *(left + (rand() % cur_size));
+    do
     {
-        while (*l < pivot)
-            l++;
-        while (*r > pivot)
-            r--;
-        if (l <= r)
+        if (left > right)
+            break;
+
+        while (*right > piv)
+            right--;
+        while (*left < piv)
+            left++;
+        if (left <= right)
         {
-            int tmp = *l;
-            *l = *r;
-            *r = tmp;
-            l++;
-            r--;
+            int foo = *left;
+            *left = *right;
+            *right = foo;
+            right--;
+            left++;
         }
-    }
-    if (l < last)
-        shot(l, last);
-    if (first < r)
-        shot(first, r);
+    } while (1);
+
+    if (first < right)
+        bar(first, right);
+    if (left < last)
+        bar(left, last);
 }
 
+int len = 0;
+int arr[Length];
+long long sum = 0;
+long long res = 0;
+int i = 0;
 int main()
 {
-    /* Intializes random number generator */
+
+    //* generate random number
     srand(time(NULL));
 
-    printf("Array Length: ");
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    // printf("Array Length: ");
+    scanf("%d", &len);
+
+    while (i < len)
     {
-        printf("%dth element of the Array: ", i + 1);
-        scanf("%d", &a[i]);
+        scanf("%d", &arr[i]);
+        i++;
     }
 
-    shot(a, a + n - 1);
-
-    s = 0;
-    for (int i = 1; i < n; ++i)
-        s = s + 1LL * abs(a[0] - a[i]);
-    minS = s;
-
-    for (int i = 1; i < n; ++i)
+    bar(arr, arr + len - 1);
+    i = 1;
+    while (i < len)
     {
-        long long diff = 1LL * (a[i] - a[i - 1]);
-        s = s + 1LL * (i)*diff - 1LL * (n - i) * diff;
-        if (minS > s)
-            minS = s;
+        sum += 1LL * abs(arr[0] - arr[i]);
+        i++;
     }
-    printf("%lld\n", minS);
+    res = sum;
+
+    int i = 1;
+    while (i < len)
+    {
+        long long d = (arr[i] - arr[i - 1]) * 1LL;
+        sum += 1LL * (i)*d - 1LL * (len - i) * d;
+        if (res > sum)
+            res = sum;
+        i++;
+    }
+    printf("%lld\n", res);
     return 0;
 }
