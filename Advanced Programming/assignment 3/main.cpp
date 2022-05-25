@@ -1,35 +1,19 @@
-#include <iostream>
-#include <bits/stdc++.h>
-#include <regex>
-
-#define MAX_LEN 1000
-enum DNA
-{
-    A,
-    C,
-    U,
-    G
-};
+#include "utils.h"
 
 int main()
 {
     using namespace std;
-    string str1;
-    string str2;
-    getline(cin, str1);
-    getline(cin, str2);
-    string bigStr = str1.size() > str2.size() ? str1 : str2;
-    string smallStr = str1.size() < str2.size() ? str1 : str2;
-    size_t bigSize = bigStr.size();
-    size_t smallSize = smallStr.size();
 
-    string whiteSpace(smallSize - 2, ' ');
-    bigStr = whiteSpace + bigStr + whiteSpace;
+    rna_base rna1[1000], rna2[1000];
 
-    for (size_t i = 0; i < bigSize + smallSize - 1; i += 2)
+    size_t len1 = get_input(rna1);
+    size_t len2 = get_input(rna2);
+    if (len1 == 0 or len2 == 0)
     {
-        
+        cout << "Bad input" << endl;
+        return 1;
     }
 
+    cout << "Best Score: " << score_without_realigning(rna1, len1, rna2, len2) << endl;
     return 0;
 }

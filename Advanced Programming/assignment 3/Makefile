@@ -6,10 +6,10 @@ SANFLAGS = -fsanitize=address
  CXXFLAGS += -Wall -g -std=c++17 -pedantic $(SANFLAGS)
  LDFLAGS += $(SANFLAGS)
 
-# COMMON_SOURCES = array.cpp
+COMMON_SOURCES = functions.cpp utils.cpp
 TARGET_SOURCES = main.cpp
 
-# COMMON_OBJECTS = $(COMMON_SOURCES:.cpp=.o)
+COMMON_OBJECTS = $(COMMON_SOURCES:.cpp=.o)
 TARGET_OBJECTS = $(TARGET_SOURCES:.cpp=.o)
 EXECUTABLE = main
 
@@ -21,5 +21,5 @@ all: target
 target: $(EXECUTABLE)
 
 
-$(EXECUTABLE): $(TARGET_OBJECTS)
+$(EXECUTABLE): $(COMMON_OBJECTS) $(TARGET_OBJECTS)
 	$(CXX) $(LDFLAGS) $^ -o $@
