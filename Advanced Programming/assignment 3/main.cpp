@@ -1,3 +1,7 @@
+//* Azizbek Umidjonov (ID: 20202043)
+//^ Advanced Programming Assignment 03
+//! main file to manage code execusion
+
 #include "utils.h"
 
 int main()

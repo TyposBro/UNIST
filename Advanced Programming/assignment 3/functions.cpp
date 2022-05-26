@@ -1,3 +1,7 @@
+//* Azizbek Umidjonov (ID: 20202043)
+//^ Advanced Programming Assignment 03
+//! functions file to calculate default score and best possible alignment
+
 #include "functions.h"
 
 int score_without_realigning(rna_base const *rna1, size_t len1, rna_base const *rna2, size_t len2)

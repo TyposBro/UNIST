@@ -1,3 +1,7 @@
+//* Azizbek Umidjonov (ID: 20202043)
+//^ Advanced Programming Assignment 03
+//! header functions
+
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 

@@ -1,3 +1,7 @@
+//* Azizbek Umidjonov (ID: 20202043)
+//^ Advanced Programming Assignment 03
+//! utils file to handle input/output and conversion
+
 #include "utils.h"
 
 size_t get_input(rna_base *arr)
