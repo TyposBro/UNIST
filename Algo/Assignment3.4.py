@@ -4,7 +4,9 @@ import math
 
 def min_distance(points, n):
     distance = 0.0
-    node, distance, nodes = [(0, 0)], 0, set(range(n))
+    node = [(0, 0)]
+    nodes = set(range(n))
+
     heapq.heapify(node)
     while nodes:
         d, i = heapq.heappop(node)
