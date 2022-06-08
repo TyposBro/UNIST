@@ -6,14 +6,14 @@ SANFLAGS = -fsanitize=address
  CXXFLAGS += -Wall -g -std=c++17 -pedantic $(SANFLAGS)
  LDFLAGS += $(SANFLAGS)
 
-COMMON_SOURCES = functions.cpp
+COMMON_SOURCES = random-gen.cpp
 TARGET_SOURCES = main.cpp
-TEST_SOURCES = check.cpp
+# TEST_SOURCES = check.cpp
 COMMON_OBJECTS = $(COMMON_SOURCES:.cpp=.o)
 TARGET_OBJECTS = $(TARGET_SOURCES:.cpp=.o)
-TEST_OBJECTS = $(TEST_SOURCES:.cpp=.o)
+# TEST_OBJECTS = $(TEST_SOURCES:.cpp=.o)
 EXECUTABLE = main
-TEST_EXECUTABLE = check
+# TEST_EXECUTABLE = check
 
 .PHONY: all target test
 
