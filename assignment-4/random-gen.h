@@ -28,8 +28,16 @@ public:
 };
 
 template <class T>
-class predetermined
+class predetermined : public random_gen
 {
+public:
+    T *arr;
+    size_t step = 0;
+    size_t n;
+
+    predetermined(T *arr, size_t n) arr = new T[n];
+    ~predetermined() delete[] arr;
+    virtual double between(double, double);
 };
 
 class mix

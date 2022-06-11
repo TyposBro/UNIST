@@ -46,8 +46,7 @@ int main(int argc, char **argv)
         if (c == 6)
         {
             cout << "Between what and what? ";
-            cin >> start;
-            cin >> end;
+            scanf("%lf %lf", &start, &end);
         }
     }
 
