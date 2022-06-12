@@ -50,8 +50,9 @@ int main(int argc, char **argv)
         }
         if (c == 3)
         {
-            // int arr[6] = {0, 2, 4, 1, 3, 5};
-            // predetermined<int> cycles(arr, 6);
+            int arr[6] = {0, 2, 4, 1, 3, 5};
+            predetermined<int> *cycles = new predetermined<int>(arr, 6);
+            v.push_back(cycles);
             cout << "c = 3" << endl;
         }
 

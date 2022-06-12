@@ -30,18 +30,20 @@ public:
     virtual ~biased_die(){};
 };
 
-// template <class T>
-// class predetermined : public random_gen
-// {
-// public:
-//     T *arr;
-//     size_t step = 0;
-//     size_t n;
+template <class T>
+class predetermined : public random_gen<T>
+{
+public:
+using base_t = random_gen<T>;
+    T *arr;
+    size_t step = 0;
+    size_t n;
 
-//     predetermined(T *arr, size_t n) : arr(arr), n(n){};
-//     virtual double between(double, double);
-// };
+    predetermined(T *arr, size_t n) : arr(arr), n(n){};
+    virtual double between(double, double) override;
+    virtual ~predetermined(){};
+};
 
-// class mix
-// {
-// };
+class mix
+{
+};

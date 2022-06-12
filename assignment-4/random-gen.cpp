@@ -26,21 +26,21 @@ double biased_die::between(double a, double b)
     return ans;
 };
 
-// template <class T>
-// double predetermined<T>::between(double a, double b)
-// {
-//             (b - a)(x - min)
-//     f(x) = ------------------ + a = 4*1/5-2
-//                  max -min
-//
-// max = 10 / min = 5
-// a = -2 / b = 2
-// x = 6
+template <class T>
+double predetermined<T>::between(double a, double b) override
+{
+    //             (b - a)(x - min)
+    //     f(x) = ------------------ + a = 4*1/5-2
+    //                  max -min
+    //
+    //     max = 10 / min = 5
+    //     a = -2 / b = 2
+    //     x = 6
 
-//     double min_v = arr[0];
-//     double max_v = arr[n - 1];
+    double min_v = arr[0];
+    double max_v = arr[n - 1];
 
-//     double ans = (b - a) * (arr[step] - min_v) / (max_v - min_v) + a;
-//     step++;
-//     return ans;
-// }
+    double ans = (b - a) * (arr[step] - min_v) / (max_v - min_v) + a;
+    step++;
+    return ans;
+}
