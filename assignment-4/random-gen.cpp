@@ -5,8 +5,8 @@ double die::between(double a, double b)
 {
     //! Generate array of uniformly distributed numbers within a range
     double max_v = num_sides;
-    double min_v = 0;
-    double ans = (b - a) * (roll() - min_v) / (max_v - min_v) + a;
+    double min_v = 1;
+    double ans = (b - a) * roll() / (max_v - min_v) + a;
     return ans;
 }
 
@@ -21,8 +21,9 @@ double biased_die::between(double a, double b)
 {
     //! Generate array of uniformly distributed numbers within a range
     double max_v = num_sides;
-    double min_v = 0;
-    double ans = (b - a) * (roll() - min_v) / (max_v - min_v) + a;
+    double min_v = 1;
+
+    double ans = (b - a) * roll() / (max_v - min_v) + a;
     return ans;
 };
 
