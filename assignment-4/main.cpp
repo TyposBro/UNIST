@@ -53,7 +53,7 @@ int main(int argc, char **argv)
         if (c == 3)
         {
             int arr[6] = {0, 2, 4, 1, 3, 5};
-            predetermined<int> *cycles = new predetermined<int>(arr, 3);
+            predetermined<int> *cycles = new predetermined<int>(arr, 6);
             v.push_back(cycles);
         }
 
@@ -65,6 +65,11 @@ int main(int argc, char **argv)
         }
         if (c == 5)
         {
+            random_gen *first = v[v.size() - 1];
+            random_gen *second = v[v.size() - 2];
+            //* init
+            mix<random_gen, random_gen> *m = new mix<random_gen, random_gen>(first, second);
+            v.push_back(m);
         }
 
         if (c == 6)

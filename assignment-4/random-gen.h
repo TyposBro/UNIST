@@ -49,7 +49,7 @@ public:
     virtual double between(double a, double b)
     {
         //             (b - a)(x - min)
-        //     f(x) = ------------------ + a = 4*1/5-2
+        //     f(x) = ------------------ + a
         //                  max -min
         //
         //     max = 5 / min = 0
@@ -57,22 +57,15 @@ public:
         //     x = 6
         double min_v = arr[0];
         double max_v = arr[n - 1];
-        std::cout << "ARR: [";
+
         for (size_t i = 0; i < n; i++)
         {
-            std::cout << arr[i] << " ";
             if (min_v > arr[i])
-            {
                 min_v = arr[i];
-            }
+
             if (max_v < arr[i])
-            {
                 max_v = arr[i];
-            }
         }
-        std::cout << "]" << std::endl;
-        std::cout << "MAX: " << max_v << std::endl;
-        std::cout << "MIN: " << min_v << std::endl;
 
         double ans = (b - a) * (arr[step] - min_v) / (max_v - min_v) + a;
 
@@ -93,6 +86,19 @@ public:
     };
 };
 
-class mix
+template <class T, class U>
+class mix : public random_gen
 {
+public:
+    T *first;
+    U *second;
+    mix(T *f, U *s) : first(f), second(s){};
+    virtual double between(double start, double end)
+    {
+        double mid = (end - start) / 2;
+        double ans = first->between(start, mid) + second->between(start, mid);
+
+        return ans;
+    }
+    virtual ~mix() = default;
 };
