@@ -6,6 +6,7 @@ class random_gen
 {
 public:
     virtual double between(double, double) = 0;
+    virtual ~random_gen(){};
 };
 
 class die : public random_gen
@@ -15,9 +16,10 @@ public:
     die(int sides) : num_sides(sides){};
     virtual int roll() const { return std::rand() % this->num_sides; }
     virtual double between(double, double);
+    virtual ~die(){};
 };
 
-class biased_die : public random_gen, public die
+class biased_die : public die
 {
 
 public:
@@ -25,21 +27,21 @@ public:
     biased_die(int sides, int biased) : die(sides), b(biased){};
     virtual int roll() const;
     virtual double between(double, double);
+    virtual ~biased_die(){};
 };
 
-template <class T>
-class predetermined : public random_gen
-{
-public:
-    T *arr;
-    size_t step = 0;
-    size_t n;
+// template <class T>
+// class predetermined : public random_gen
+// {
+// public:
+//     T *arr;
+//     size_t step = 0;
+//     size_t n;
 
-    predetermined(T *arr, size_t n) arr = new T[n];
-    ~predetermined() delete[] arr;
-    virtual double between(double, double);
-};
+//     predetermined(T *arr, size_t n) : arr(arr), n(n){};
+//     virtual double between(double, double);
+// };
 
-class mix
-{
-};
+// class mix
+// {
+// };
