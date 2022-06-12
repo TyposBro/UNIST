@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
     //* My Code starts here
     //* ###################
-
+    // *
     using namespace std;
     unsigned int c = 123;
     int sides;

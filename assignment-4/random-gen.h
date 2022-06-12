@@ -17,7 +17,7 @@ public:
     die(int sides) : num_sides(sides){};
     virtual int roll() const { return std::rand() % this->num_sides; }
     virtual double between(double, double);
-    virtual ~die(){};
+    virtual ~die() = default;
 };
 
 class biased_die : public die
@@ -28,7 +28,7 @@ public:
     biased_die(int sides, int biased) : die(sides), b(biased){};
     virtual int roll() const;
     virtual double between(double, double);
-    virtual ~biased_die(){};
+    virtual ~biased_die() = default;
 };
 
 template <class T>
