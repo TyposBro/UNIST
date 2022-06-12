@@ -5,8 +5,9 @@
 class random_gen
 {
 public:
+    random_gen() = default;
     virtual double between(double, double) = 0;
-    virtual ~random_gen(){};
+    virtual ~random_gen() = default;
 };
 
 class die : public random_gen
@@ -31,17 +32,65 @@ public:
 };
 
 template <class T>
-class predetermined : public random_gen<T>
+class predetermined : public random_gen
 {
 public:
-using base_t = random_gen<T>;
     T *arr;
     size_t step = 0;
     size_t n;
 
-    predetermined(T *arr, size_t n) : arr(arr), n(n){};
-    virtual double between(double, double) override;
-    virtual ~predetermined(){};
+    predetermined(T *array, size_t n)
+    {
+        arr = new T[n];
+        for (size_t i = 0; i < n; i++)
+            this->arr[i] = array[i];
+        this->n = n;
+    };
+    virtual double between(double a, double b)
+    {
+        //             (b - a)(x - min)
+        //     f(x) = ------------------ + a = 4*1/5-2
+        //                  max -min
+        //
+        //     max = 5 / min = 0
+        //     a = 0 / b = 5
+        //     x = 6
+        double min_v = arr[0];
+        double max_v = arr[n - 1];
+        std::cout << "ARR: [";
+        for (size_t i = 0; i < n; i++)
+        {
+            std::cout << arr[i] << " ";
+            if (min_v > arr[i])
+            {
+                min_v = arr[i];
+            }
+            if (max_v < arr[i])
+            {
+                max_v = arr[i];
+            }
+        }
+        std::cout << "]" << std::endl;
+        std::cout << "MAX: " << max_v << std::endl;
+        std::cout << "MIN: " << min_v << std::endl;
+
+        double ans = (b - a) * (arr[step] - min_v) / (max_v - min_v) + a;
+
+        if (step < n - 1)
+        {
+            step++;
+        }
+        else
+        {
+            step = 0;
+        }
+
+        return ans;
+    }
+    virtual ~predetermined()
+    {
+        delete[] arr;
+    };
 };
 
 class mix

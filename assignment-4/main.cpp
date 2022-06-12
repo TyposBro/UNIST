@@ -26,7 +26,9 @@ int main(int argc, char **argv)
         cout << "(2) Add a that cheats" << endl;
         cout << "(3) Add a die that cycles 0, 2, 4, 1, 3, 5, ..." << endl;
         cout << "(4) Add a sequence of fractions 1, 1/2, 1/3, 1/4, 1/5, 1/6, 1/7, 1/8, 1, 1/2, ..." << endl;
-        cout << "(5) Add a mixture of the last two generators added" << endl;
+        if (v.size() > 1)
+            cout << "(5) Add a mixture of the last two generators added" << endl;
+
         cout << "(6) Generate random numbers" << endl;
         cout << "Enter your choice: ";
         cin >> c;
@@ -51,17 +53,15 @@ int main(int argc, char **argv)
         if (c == 3)
         {
             int arr[6] = {0, 2, 4, 1, 3, 5};
-            predetermined<int> *cycles = new predetermined<int>(arr, 6);
+            predetermined<int> *cycles = new predetermined<int>(arr, 3);
             v.push_back(cycles);
-            cout << "c = 3" << endl;
         }
 
         if (c == 4)
         {
-            cout << "c = 4" << endl;
-
-            // double arr[8] = {1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8};
-            // predetermined<double> factions(arr, 8);
+            double arr[8] = {(double)1, (double)1 / 2, (double)1 / 3, (double)1 / 4, (double)1 / 5, (double)1 / 6, (double)1 / 7, (double)1 / 8};
+            predetermined<double> *factions = new predetermined<double>(arr, 8);
+            v.push_back(factions);
         }
         if (c == 5)
         {
@@ -73,6 +73,7 @@ int main(int argc, char **argv)
             scanf("%lf %lf", &start, &end);
             for (size_t i = 0; i < v.size(); i++)
                 cout << v[i]->between(start, end) << " ";
+            cout << endl;
         }
     }
 
