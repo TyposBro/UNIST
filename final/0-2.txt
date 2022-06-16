@@ -1,0 +1,7 @@
+ 2827.4334 Circle(30.0000)
+  280.0000 Rectangle(20.0000,14.0000)
+   10.8900 Rectangle(3.3000,3.3000)
+  113.0973 Circle(6.0000)
+ 6590.6450 Rectangle(85.0000,77.5370)
+Biggest: Rectangle(85.0000,77.5370)
+Second: Circle(30.0000)
