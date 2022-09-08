@@ -8,7 +8,7 @@ int main()
 {
     using namespace std;
 
-    rna_base rna1[MAX_LEN], rna2[MAX_LEN];
+    rna_base rna1[1000], rna2[1000];
 
     size_t len1 = get_input(rna1);
     size_t len2 = get_input(rna2);
@@ -17,11 +17,7 @@ int main()
         cout << "Bad input" << endl;
         return 1;
     }
-    long shift = 0;
 
-    cout << "Best score: " << best_alignment(rna1, len1, rna2, len2, shift) << endl;
-
-    cout << "Best alignment: " << shift << endl;
-    print(rna1, len1, rna2, len2, shift);
+    cout << "Best Score: " << score_without_realigning(rna1, len1, rna2, len2) << endl;
     return 0;
 }
