@@ -1,3 +1,3 @@
-# Data Structures (Fall of 2021)
+# Algorithms (Spring of 2022)
 
 ## assignments submitted by Azizbek (@typosbro)

@@ -1,3 +1,3 @@
-# Spring 2022 Advanced Programming
+# Advanced Programming (Spring of 2022)
 
-## assignments submitted by Azizbek (@khasanjonovich)
+## assignments submitted by Azizbek (@typosbro)
