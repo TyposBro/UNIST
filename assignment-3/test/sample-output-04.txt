@@ -1,0 +1,4 @@
+Best score: 3
+Best alignment: 7
+U U C U U G A C A G 
+              G U C A A G G U 
