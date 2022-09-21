@@ -33,17 +33,15 @@ object Hw1 extends App {
     
   }
 
-  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = init match {
-    case Cons => 1
-    case Nil => 0 
+  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = list match {
+    case Cons(v,t) => ftn(foldRight(init, ftn, t), v)
+    case Nil => init
   }
   def filter(f: Int => Boolean, list: IntList): IntList = Nil
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
   
-  def insert(t: BTree, a: Int): BTree = {
-    
-  }
+  def insert(t: BTree, a: Int): BTree = Leaf
 
   def eval(f: Formula): Boolean = false
 
