@@ -49,7 +49,9 @@ object Hw1 extends App {
   }
 
   
-  def insert(t: BTree, a: Int): BTree = Leaf
+  def insert(t: BTree, a: Int): BTree = {
+    println(t)
+  }
 
   def eval(f: Formula): Boolean = false
 
