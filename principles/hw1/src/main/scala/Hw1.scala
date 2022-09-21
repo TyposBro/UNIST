@@ -28,14 +28,12 @@ object Hw1 extends App {
   }
 
   def sum(f: Int=>Int, n: Int): Int ={
-    
+    if (n==1) f(1)
+    else f(n)+sum(f, n-1)
     
   }
 
-  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = {
-  
-  }
-
+  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = 1
   def filter(f: Int => Boolean, list: IntList): IntList = Nil
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
