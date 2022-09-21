@@ -44,7 +44,7 @@ object Hw1 extends App {
   }
 
   def iter[A](f: A => A, n: Int): A => A = {
-    if (n>1) iter(f compose f,n-2)
+    if (n>1) f compose iter(f,n-1)
     else f
   }
 
