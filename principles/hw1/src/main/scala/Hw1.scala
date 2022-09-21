@@ -37,7 +37,10 @@ object Hw1 extends App {
     case Cons(v,t) => ftn(foldRight(init, ftn, t), v)
     case Nil => init
   }
-  def filter(f: Int => Boolean, list: IntList): IntList = Nil
+  def filter(f: Int => Boolean, list: IntList): IntList = list match{
+    case Cons(v,t) => 0
+    case Nil => 0
+  }
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
   
