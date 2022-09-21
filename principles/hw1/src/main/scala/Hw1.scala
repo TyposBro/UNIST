@@ -43,9 +43,9 @@ object Hw1 extends App {
     case Nil => Nil
   }
 
-  def iter[A](f: A => A, n: Int): A => A = (x: A) => {
-    if(n>1) f(iter(f, n-1))
-    else f(x)
+  def iter[A](f: A => A, n: Int): A => A = {
+    if (n>1) iter(f compose f,n-2)
+    else f
   }
 
   
