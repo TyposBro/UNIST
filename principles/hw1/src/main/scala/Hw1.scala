@@ -33,7 +33,10 @@ object Hw1 extends App {
     
   }
 
-  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = 1
+  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = init match {
+    case Cons => 1
+    case Nil => 0 
+  }
   def filter(f: Int => Boolean, list: IntList): IntList = Nil
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
