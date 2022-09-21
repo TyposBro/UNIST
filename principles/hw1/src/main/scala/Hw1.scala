@@ -38,8 +38,9 @@ object Hw1 extends App {
     case Nil => init
   }
   def filter(f: Int => Boolean, list: IntList): IntList = list match{
-    case Cons(v,t) => 0
-    case Nil => 0
+
+    case Cons(v,t) => if (f(v)) Cons(v, filter(f,t)) else filter(f,t)
+    case Nil => Nil
   }
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
