@@ -19,17 +19,30 @@ object Hw1 extends App {
 
   println("Hw1!")
 
-  def fibo(n: Int): Int = 1
+  def fibo(n: Int): Int ={
+    _fibo(n+1)
+  }
+  def _fibo(n: Int): Int ={
+    if(n<2) n
+    else _fibo(n-1)+_fibo(n-2)
+  }
 
-  def sum(f: Int=>Int, n: Int): Int = 1
+  def sum(f: Int=>Int, n: Int): Int ={
+    
+    
+  }
 
-  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = 1
+  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = {
+  
+  }
 
   def filter(f: Int => Boolean, list: IntList): IntList = Nil
 
   def iter[A](f: A => A, n: Int): A => A = (x: A) => x
   
-  def insert(t: BTree, a: Int): BTree = Leaf
+  def insert(t: BTree, a: Int): BTree = {
+    
+  }
 
   def eval(f: Formula): Boolean = false
 
