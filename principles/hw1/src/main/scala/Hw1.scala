@@ -43,7 +43,11 @@ object Hw1 extends App {
     case Nil => Nil
   }
 
-  def iter[A](f: A => A, n: Int): A => A = (x: A) => x
+  def iter[A](f: A => A, n: Int): A => A = {
+    // (x: A) => x
+    if(n>1) iter(f, n-1)
+    else f(n)
+    }
   
   def insert(t: BTree, a: Int): BTree = Leaf
 
