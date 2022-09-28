@@ -17,7 +17,20 @@ class Triangle(Polygon):
         super().__init__()
 
     def draw(self):
-        pass
+        glBegin(GL_TRIANGLES)
+
+        # * VERTEX 1
+        glColor3f(0, 0.1, 0)
+        glVertex2f(200, 300)
+
+        # * VERTEX 2
+        glColor3f(-0.1, -0.1, 0)
+        glVertex2f(400, 300)
+
+        # * VERTEX 3
+        glColor3f(0.1, -0.1, 0)
+        glVertex2f(300, 400)
+        glEnd()
 
 
 class Rectangle(Polygon):
@@ -25,7 +38,24 @@ class Rectangle(Polygon):
         super().__init__()
 
     def draw(self):
-        pass
+        glBegin(GL_QUADS)
+
+        # * VERTEX 1
+        glColor3f(-0.1, 0.1, 0)
+        glVertex2f(100, 100)
+
+        # * VERTEX 2
+        glColor3f(-0.1, 0.1, 0)
+        glVertex2f(200, 100)
+
+        # * VERTEX 3
+        glColor3f(-0.1, 0.1, 0)
+        glVertex2f(200, 200)
+
+        # * VERTEX 4
+        glColor3f(-0.1, 0.1, 0)
+        glVertex2f(100, 200)
+        glEnd()
 
 
 class Ellipse(Polygon):
@@ -34,6 +64,7 @@ class Ellipse(Polygon):
 
     def draw(self):
         pass
+
 
 class Viewer:
     def __init__(self):
@@ -44,10 +75,29 @@ class Viewer:
         glClearColor(0, 0, 0, 1)
 
         glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        self.iterate()
+        glColor3f(1.0, 0.0, 3.0)
 
         # TODO: visualize your polygons here
+        t = Triangle()
+        t.draw()
+
+        # r = Rectangle()
+        # r.draw()
+
+        # e = Ellipse()
+        # e.draw()
 
         glutSwapBuffers()
+
+    def iterate(foo):
+        glViewport(0, 0, 800, 600)
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        glOrtho(0.0, 800, 0.0, 600, 0.0, 1.0)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
 
     def keyboard(self, key, x, y):
         print(f"keyboard event: key={key}, x={x}, y={y}")
