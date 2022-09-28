@@ -11,7 +11,7 @@ class Polygon:
         raise NotImplementedError
 
 
-# define your polygons here
+# TODO: define your polygons here
 class Triangle(Polygon):
     def __init__(self):
         super().__init__()
@@ -19,6 +19,21 @@ class Triangle(Polygon):
     def draw(self):
         pass
 
+
+class Rectangle(Polygon):
+    def __init__(self):
+        super().__init__()
+
+    def draw(self):
+        pass
+
+
+class Ellipse(Polygon):
+    def __init__(self):
+        super().__init__()
+
+    def draw(self):
+        pass
 
 class Viewer:
     def __init__(self):
@@ -30,7 +45,7 @@ class Viewer:
 
         glMatrixMode(GL_MODELVIEW)
 
-        # visualize your polygons here
+        # TODO: visualize your polygons here
 
         glutSwapBuffers()
 
@@ -52,7 +67,8 @@ class Viewer:
 
     def mouse(self, button, state, x, y):
         # button macros: GLUT_LEFT_BUTTON, GLUT_MIDDLE_BUTTON, GLUT_RIGHT_BUTTON
-        print(f"mouse press event: button={button}, state={state}, x={x}, y={y}")
+        print(
+            f"mouse press event: button={button}, state={state}, x={x}, y={y}")
 
         glutPostRedisplay()
 
