@@ -1,5 +1,9 @@
+from glob import glob
+from turtle import position
 from OpenGL.GL import *
+from OpenGL.GL import shaders
 from OpenGL.GLUT import *
+from OpenGL.GLU import *
 import numpy as np
 
 
@@ -12,25 +16,54 @@ class Polygon:
 
 
 # TODO: define your polygons here
+
+VERTEX_SHADER = '''
+#version 330
+
+in vec4 position;
+void main(){
+    gl_Position = position;
+}
+'''
+
+FRAGNMENT_SHADER = '''
+#version 330
+
+void main(){
+    gl_FragColor = vec4(0.2f, 0.6f, 0.8f, 1.0f);
+}
+'''
+shaderProgram = None
+
+
+def initialize():
+    global VERTEX_SHADER
+    global FRAGNMENT_SHADER
+    global shaderProgram
+
+    vertexshader = shaders.compileShader(VERTEX_SHADER, GL_VERTEX_SHADER)
+    fragmentshader = shaders.compileShader(
+        FRAGNMENT_SHADER, GL_FRAGMENT_SHADER)
+
+    shaderProgram = shaders.compileProgram(vertexshader, fragmentshader)
+    triangle = [0.0, 0.1, 0.0, -0.1, -0.1, 0.0, 0.1, -0.1, 0.0]
+    triangle = np.array(triangle, dtype=np.float32)
+
+    VBO = glGenBuffers(1)
+    glBindBuffer(GL_ARRAY_BUFFER, VBO)
+    glBufferData(GL_ARRAY_BUFFER, triangle.nbytes, triangle, GL_STATIC_DRAW)
+
+    position = glGetAttribLocation(shaderProgram, "position")
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, 0, None)
+    glEnableVertexAttribArray(position)
+
+
 class Triangle(Polygon):
     def __init__(self):
         super().__init__()
 
     def draw(self):
-        glBegin(GL_TRIANGLES)
-
-        # * VERTEX 1
-        glColor3f(0, 0.1, 0)
-        glVertex2f(200, 300)
-
-        # * VERTEX 2
-        glColor3f(-0.1, -0.1, 0)
-        glVertex2f(400, 300)
-
-        # * VERTEX 3
-        glColor3f(0.1, -0.1, 0)
-        glVertex2f(300, 400)
-        glEnd()
+        pass
 
 
 class Rectangle(Polygon):
@@ -38,24 +71,7 @@ class Rectangle(Polygon):
         super().__init__()
 
     def draw(self):
-        glBegin(GL_QUADS)
-
-        # * VERTEX 1
-        glColor3f(-0.1, 0.1, 0)
-        glVertex2f(100, 100)
-
-        # * VERTEX 2
-        glColor3f(-0.1, 0.1, 0)
-        glVertex2f(200, 100)
-
-        # * VERTEX 3
-        glColor3f(-0.1, 0.1, 0)
-        glVertex2f(200, 200)
-
-        # * VERTEX 4
-        glColor3f(-0.1, 0.1, 0)
-        glVertex2f(100, 200)
-        glEnd()
+        pass
 
 
 class Ellipse(Polygon):
@@ -73,31 +89,14 @@ class Viewer:
     def display(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glClearColor(0, 0, 0, 1)
-
         glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
-        self.iterate()
-        glColor3f(1.0, 0.0, 3.0)
 
         # TODO: visualize your polygons here
-        t = Triangle()
-        t.draw()
-
-        # r = Rectangle()
-        # r.draw()
-
-        # e = Ellipse()
-        # e.draw()
-
+        # * TRIANGLE
+        glUseProgram(shaderProgram)
+        glDrawArrays(GL_TRIANGLES, 0, 3)
+        glUseProgram(0)
         glutSwapBuffers()
-
-    def iterate(foo):
-        glViewport(0, 0, 800, 600)
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-        glOrtho(0.0, 800, 0.0, 600, 0.0, 1.0)
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
 
     def keyboard(self, key, x, y):
         print(f"keyboard event: key={key}, x={x}, y={y}")
@@ -133,7 +132,7 @@ class Viewer:
         glutInitWindowSize(800, 600)
         glutInitWindowPosition(0, 0)
         glutCreateWindow("CS471 Computer Graphics #1")
-
+        initialize()
         glutDisplayFunc(self.display)
         glutKeyboardFunc(self.keyboard)
         glutSpecialFunc(self.special)
