@@ -61,6 +61,7 @@ class Triangle(Polygon):
         position = glGetAttribLocation(shaderProgram, "position")
         glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, 0, None)
         glEnableVertexAttribArray(position)
+        glUseProgram(shaderProgram)
 
 
 class Rectangle(Polygon):
@@ -186,9 +187,7 @@ class Viewer:
             # * TRIANGLE
             t = Triangle()
             t.draw()
-            glUseProgram(shaderProgram)
             glDrawArrays(GL_TRIANGLES, 0, 3)
-            glUseProgram(0)
 
         elif self.key == b"2":
             r = Rectangle()
@@ -198,7 +197,6 @@ class Viewer:
         elif self.key == b"3":
             e = Ellipse()
             e.draw()
-            # glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,  None)
 
         glutSwapBuffers()
 
