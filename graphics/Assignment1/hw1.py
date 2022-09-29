@@ -88,9 +88,7 @@ class Viewer:
         glMatrixMode(GL_MODELVIEW)
 
         # TODO: visualize your polygons here
-
         if self.key == b"1":
-            # * TRIANGLE
             t = Triangle()
             t.draw()
 
