@@ -29,20 +29,39 @@ class Triangle(Polygon):
     def draw(self):
         VERTEX_SHADER = '''
         #version 330
-
-        in vec4 position;
-        void main(){
-            gl_Position = position;
-        }
+ 
+        in vec3 position;
+        in vec3 color;
+        out vec3 newColor;
+        
+        void main() {
+         
+         gl_Position = vec4(position, 1.0);
+         newColor = color;
+     
+          }
         '''
 
         FRAGNMENT_SHADER = '''
         #version 330
-
-        void main(){
-            gl_FragColor = vec4(0.2f, 0.6f, 0.8f, 1.0f);
+        
+        in vec3 newColor;
+        out vec4 outColor;
+ 
+        void main() {
+ 
+          outColor = vec4(newColor, 1.0f);
+ 
         }
         '''
+
+        triangle = [0, 0.1, 0, 0.2, 0.6, 0.8,
+                    -0.1, -0.1, 0, 0.2, 0.6, 0.8,
+                    0.1, -0.1, 0,  0.2, 0.6, 0.8, ]
+
+        # convert to 32bit float
+
+        triangle = np.array(triangle, dtype=np.float32)
         global shaderProgram
 
         vertexshader = shaders.compileShader(VERTEX_SHADER, GL_VERTEX_SHADER)
@@ -50,8 +69,6 @@ class Triangle(Polygon):
             FRAGNMENT_SHADER, GL_FRAGMENT_SHADER)
 
         shaderProgram = shaders.compileProgram(vertexshader, fragmentshader)
-        triangle = [0.0, 0.1, 0.0, -0.1, -0.1, 0.0, 0.1, -0.1, 0.0]
-        triangle = np.array(triangle, dtype=np.float32)
 
         VBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, VBO)
@@ -59,8 +76,15 @@ class Triangle(Polygon):
                      triangle, GL_STATIC_DRAW)
 
         position = glGetAttribLocation(shaderProgram, "position")
-        glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, 0, None)
+        glVertexAttribPointer(position, 3, GL_FLOAT,
+                              GL_FALSE, 24, ctypes.c_void_p(0))
         glEnableVertexAttribArray(position)
+        # get the color from  shader
+        color = glGetAttribLocation(shaderProgram, 'color')
+        glVertexAttribPointer(color, 3, GL_FLOAT, GL_FALSE,
+                              24, ctypes.c_void_p(12))
+        glEnableVertexAttribArray(color)
+
         glUseProgram(shaderProgram)
 
 
@@ -238,13 +262,6 @@ class Viewer:
         glutInitWindowSize(800, 600)
         glutInitWindowPosition(0, 0)
         glutCreateWindow("CS471 Computer Graphics #1")
-
-        # r = Rectangle()
-        # r.draw()
-        # glClear(GL_COLOR_BUFFER_BIT)
-
-        # Draw Triangle
-        # glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,  None)
 
         glutDisplayFunc(self.display)
 
