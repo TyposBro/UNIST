@@ -56,6 +56,14 @@ object Hw1 extends App {
     case IntNode(v,left,right) =>IntNode(v,insert(left,a),right)
 
   }
-  def eval(f: Formula): Boolean = false
+  def eval(f: Formula): Boolean = f match {
+    case True => true
+    case False=>false
+    case Not(f)=>(!eval(f))
+    case Andalso(left, right)=>eval(left)&&eval(right)
+    case Orelse(left,right)=>eval(left)||eval(right)
+    case Implies(left,right)=>(!eval(left))||eval(right)
+  }
+  
 
 }
