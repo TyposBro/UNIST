@@ -19,51 +19,62 @@ object Hw1 extends App {
 
   println("Hw1!")
 
-  def fibo(n: Int): Int ={
-    _fibo(n+1)
-  }
-  def _fibo(n: Int): Int ={
-    if(n<2) n
-    else _fibo(n-1)+_fibo(n-2)
+  def fibo(n: Int): Int = {
+    // Implementation runs up to n-1, had to manually set to n+1
+  fibonachi(n+1)
+
+}
+  def fibonachi(n: Int): Int = {
+    if(n >= 2) return fibonachi(n-2)+fibonachi(n-1)
+    return n
   }
 
-  def sum(f: Int=>Int, n: Int): Int ={
-    if (n==1) f(1)
-    else f(n)+sum(f, n-1)
-    
+  def sum(f: Int=>Int, n: Int): Int = {
+    if(n<0) 0 
+    else f(n) + sum(f, n-1) 
   }
 
-  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = list match {
-    case Cons(v,t) => ftn(foldRight(init, ftn, t), v)
-    case Nil => init
-  }
-  def filter(f: Int => Boolean, list: IntList): IntList = list match{
 
-    case Cons(v,t) => if (f(v)) Cons(v, filter(f,t)) else filter(f,t)
-    case Nil => Nil
+  def foldRight(init: Int, ftn: (Int, Int)=>Int, list: IntList): Int = {
+    if(list.isInstanceOf[Cons]) {
+    val c = list.asInstanceOf[Cons]
+    ftn(foldRight(init, ftn, c.t), c.v)
+  }
+    else  init
+  }
+  
+  def filter(f: Int => Boolean, list: IntList): IntList =  {
+    if(list.isInstanceOf[Cons]) {
+    val c = list.asInstanceOf[Cons]
+    if (f(c.v)) Cons(c.v, filter(f, c.t)) else  filter(f, c.t)
+  }
+    else  Nil
   }
 
   def iter[A](f: A => A, n: Int): A => A = {
-    if (n>1) f compose iter(f,n-1)
-    else f
+    if (n<=1) f 
+    else f compose iter(f,n-1)
   }
+  
+  def insert(t: BTree, a: Int): BTree = {
+    if(t.isInstanceOf[IntNode]) {
+    val c = t.asInstanceOf[IntNode]
+    if (c.v ==a) return IntNode(a,c.left,c.right)
+    else if(c.v<a) return IntNode(c.v,c.left,insert(c.right,a))
+    return IntNode(c.v,insert(c.left,a),c.right)
+  }
+    return  IntNode(a, Leaf, Leaf)
+  }
+    
 
   
-  def insert(t: BTree, a: Int): BTree = t match {
-    case Leaf =>IntNode(a, Leaf, Leaf)
-    case IntNode(v,left,right) if (v==a)=>IntNode(a,left,right)
-    case IntNode(v,left,right) if (v<a)=>IntNode(v,left,insert(right,a))
-    case IntNode(v,left,right) =>IntNode(v,insert(left,a),right)
-
-  }
-  def eval(f: Formula): Boolean = f match {
+  def eval(f: Formula): Boolean = f match{
+    case Andalso(a, b)=>eval(a)&&eval(b)
+    case Orelse(a,b)=>eval(a)||eval(b)
+    case Implies(a,b)=>(!eval(a))||eval(b)  
+    case Not(f)=>(!eval(f))
     case True => true
     case False=>false
-    case Not(f)=>(!eval(f))
-    case Andalso(left, right)=>eval(left)&&eval(right)
-    case Orelse(left,right)=>eval(left)||eval(right)
-    case Implies(left,right)=>(!eval(left))||eval(right)
   }
-  
 
 }
