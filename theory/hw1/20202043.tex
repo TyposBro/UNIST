@@ -201,6 +201,35 @@ For all strings {$v \in \Alphabet^{+}, (uv)^R = u^R v^R$}. No assumption about v
     where $p$ is the initial state and $r$ is the final state.
     \begin{enumerate}
         \item (10pts) Compute the $\epsilon$-closure(EClosure) of each state.
+            \begin{center}
+                \begin{tabular}{r||c|c|c}
+                & $\epsilon^{*}$ & $a$ & $\epsilon^{*}$\\ \hline\hline
+                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
+                $q$ & $\{p\}$ & $\{p\}$ & $\{\emptyset\}$ \\ 
+                $r$ & $\{q\}$ & $\{q\}$ & $\{p\}$ \\ 
+                \end{tabular}
+            \end{center}
+            \begin{center}
+                \begin{tabular}{r||c|c|c}
+                & $\epsilon^{*}$ & $b$ & $\epsilon^{*}$\\ \hline\hline
+                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
+                $q$ & $\{p\}$ & $\{q\}$ & $\{p\}$ \\ 
+                $r$ & $\{q\}$ & $\{r\}$ & $\{q\}$ \\ 
+                \end{tabular}
+            \end{center}
+            \begin{center}
+                \begin{tabular}{r||c|c|c}
+                & $\epsilon^{*}$ & $c$ & $\epsilon^{*}$\\ \hline\hline
+                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
+                $q$ & $\{p\}$ & $\{r\}$ & $\{p\}$ \\ 
+                $r$ & $\{q\}$ & $\{\emptyset\}$ & $\{\emptyset\}$ \\ 
+                \end{tabular}
+            \end{center}
+
+EClosure(p) = \{p\}\\
+EClosure(q) = \{p,q\}\\
+EClosure(r) = \{p,q,r\}\\
+
         \item (10pts) Convert the automaton to a DFA.
     \end{enumerate}
     
