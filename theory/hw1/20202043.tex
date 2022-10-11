@@ -200,32 +200,7 @@ For all strings {$v \in \Alphabet^{+}, (uv)^R = u^R v^R$}. No assumption about v
     \end{center}
     where $p$ is the initial state and $r$ is the final state.
     \begin{enumerate}
-        \item (10pts) Compute the $\epsilon$-closure(EClosure) of each state.
-            \begin{center}
-                \begin{tabular}{r||c|c|c}
-                & $\epsilon^{*}$ & $a$ & $\epsilon^{*}$\\ \hline\hline
-                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
-                $q$ & $\{p\}$ & $\{p\}$ & $\{\emptyset\}$ \\ 
-                $r$ & $\{q\}$ & $\{q\}$ & $\{p\}$ \\ 
-                \end{tabular}
-            \end{center}
-            \begin{center}
-                \begin{tabular}{r||c|c|c}
-                & $\epsilon^{*}$ & $b$ & $\epsilon^{*}$\\ \hline\hline
-                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
-                $q$ & $\{p\}$ & $\{q\}$ & $\{p\}$ \\ 
-                $r$ & $\{q\}$ & $\{r\}$ & $\{q\}$ \\ 
-                \end{tabular}
-            \end{center}
-            \begin{center}
-                \begin{tabular}{r||c|c|c}
-                & $\epsilon^{*}$ & $c$ & $\epsilon^{*}$\\ \hline\hline
-                $p$ & $\{\emptyset\}$ & $\{\emptyset\}$ & $\{\emptyset\}$\\ 
-                $q$ & $\{p\}$ & $\{r\}$ & $\{p\}$ \\ 
-                $r$ & $\{q\}$ & $\{\emptyset\}$ & $\{\emptyset\}$ \\ 
-                \end{tabular}
-            \end{center}
-
+        \item (10pts) Compute the $\epsilon$-closure(EClosure) of each state.\\
 EClosure(p) = \{p\}\\
 EClosure(q) = \{p,q\}\\
 EClosure(r) = \{p,q,r\}\\
@@ -235,8 +210,9 @@ EClosure(r) = \{p,q,r\}\\
     
 \noindent \textbf{Problem 7} (15pts, 5pts each) Find regular expressions for the following languages.
 \begin{enumerate}
-    \item $L = \myset{\omega \in \myset{a,b,c}^* \mid \omega \mbox{ has no more than three $a$'s}}$
-    \item $L = \myset{\omega \in \myset{0,1}^* \mid \omega \mbox{ begins and ends with 0 and contains at least one 1}}$
+    \item $R = a^n+b^*+c^* \ where\ n \leq3$
+    \item $R=01^{+}0$
+    
     \item $L = \myset{\omega \in \myset{0,1}^* \mid \omega \mbox{ does not contain 111}}$ 
     % \item $S = \myset{2,4,6,\dots} = \myset{x \in \mbn \mid \mbox{$x$ is even}}$
 \end{enumerate}
