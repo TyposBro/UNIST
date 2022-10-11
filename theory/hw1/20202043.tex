@@ -28,12 +28,16 @@
 
 \section*{Solutions} 
 
-\noindent \textbf{Problem 1} (10pts) Prove that $(uv)^{R} = v^{R}u^{R}$ for all $u,v \in \Alphabet^{+}$. (Hint: Use induction on the length of $v$.) \\
-
+\noindent \textbf{Problem 1}
+\begin{itemize}
+\item \textbf{Base case:} Let u be an arbitrary string of length 0. u = {$\epsilon$} since there is only one such string. Then $(uv)^{R} = (\epsilon v)^R = v^R = v^R \epsilon = v^R \epsilon^R =  v^{R}u^{R}$
+\item \textbf{Induction hypothesis:} {$\forall n \ge 0$}, for any string u of length n:
+For all strings {$v \in \Alphabet^{+}, (uv)^R = u^R v^R$}. No assumption about v, hence statement holds for all {$v \in \Alphabet^{+}$}
+\end{itemize}
     
-\noindent \textbf{Problem 2} (10pts) Consider the following language: $L = \{w\in\{0,1\}^{*} \, | \, w$  ends with 1001.$\}$.
-    \begin{enumerate}
-        \item (5pts) Design a DFA that accepts $L$.
+\noindent \textbf{Problem 2}
+    \begin{itemize}
+        \item DFA:
         \begin{center}
             \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
                 \node[state,initial] (q_0)   {$q_0$}; 
@@ -54,7 +58,7 @@
                 (q_4) edge [bend left, below] node {$1$} (q_1);
             \end{tikzpicture}
         \end{center}
-        \item (5pts) Design an NFA that accepts $L$.
+        \item NFA
         \begin{center}
             \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
                 \node[state,initial] (q_0)   {$q_0$}; 
@@ -70,25 +74,66 @@
                 (q_3) edge node {$1$} (q_4);
             \end{tikzpicture}
         \end{center}
-    \end{enumerate}
+    \end{itemize}
     
-\noindent \textbf{Problem 3} (10pts) Design an NFA to recognize the strings that represent real numbers. Assume $\Alphabet = \{0,1,2,3,4,5,6,7,8,9,.\}$. For example, the NFA should accept strings such as ``1.0", ``12.156", and ``.01", but must reject strings such as ``0.5.1", ``12.", and ``3".
+\noindent \textbf{Problem 3} 
+    \begin{center}
+        \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+            \node[state,initial] (q_0)   {$q_0$}; 
+            \node[state] (q_1) [right=of q_0] {$q_1$}; 
+            \node[state,accepting] (q_2) [below=of q_1] {$q_2$};
+            \node[state] (q_3) [right=of q_1] {$q_3$};
+            \path[->]
+            (q_0) edge [loop above] node {$\{0,1,2,3,4,5,6,7,8,9\}$} ()
+            (q_0) edge node {$.$} (q_1)
+            (q_1) edge [below] node {$\{0,1,2,3,4,5,6,7,8,9\}$} (q_2)
+            (q_1) edge node {$\{., \emptyset\}$} (q_3);
+        \end{tikzpicture}
+    \end{center}
+    
 
-\noindent \newline \textbf{Problem 4} (20pts) Use subset construction to convert the following NFA to a DFA:
-\begin{center}
-    \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
-        \node[state,initial] (q_0)   {$q_0$}; 
-        \node[state] (q_1) [right=of q_0] {$q_1$}; 
-        \node[state] (q_2) [right=of q_1] {$q_2$};
-        \node[state,accepting] (q_3) [right=of q_2] {$q_3$}; 
-        \path[->]
-        (q_0) edge node {$a$} (q_1)
-        (q_1) edge node {$a,b$} (q_2)
-        (q_2) edge node {$a$} (q_3)
-        (q_0) edge [loop below] node {$a,b$} ()
-        (q_3) edge [loop below] node {$a,b$} ();
-    \end{tikzpicture}
-\end{center}
+\noindent \newline \textbf{Problem 4}
+\begin{itemize}
+    \item NFA
+        \begin{center}
+            \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+                \node[state,initial] (q_0)   {$q_0$}; 
+                \node[state] (q_1) [right=of q_0] {$q_1$}; 
+                \node[state] (q_2) [right=of q_1] {$q_2$};
+                \node[state,accepting] (q_3) [right=of q_2] {$q_3$}; 
+                \path[->]
+                (q_0) edge node {$a$} (q_1)
+                (q_1) edge node {$a,b$} (q_2)
+                (q_2) edge node {$a$} (q_3)
+                (q_0) edge [loop below] node {$a,b$} ()
+                (q_3) edge [loop below] node {$a,b$} ();
+            \end{tikzpicture}
+        \end{center}
+    \item DFA 
+        \begin{center}
+            \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+                \node[state,initial] (q_0)   {$q_0$}; 
+                \node[state] (q12) [right=of q_0] {$\{q_1, q_2\}$};
+                \node[state] (q23) [right=of q12] {$\{q_2, q_3\}$};
+                \node[state] (q_2) [below=of q12] {$q_2$};
+                \node[state,accepting] (q_3) [below=of q23] {$q_3$}; 
+                \node[state] (q_4) [below=of q_2] {$q_4$};
+        
+                \path[->]
+                (q_0) edge [loop below] node {$b$} ()
+                (q_0) edge node {$a$} (q12)
+                (q12) edge node {$a$} (q23)
+                (q12) edge node {$b$} (q_2)
+                (q23) edge node {$a,b$} (q_3)
+                (q_2) edge node {$a$} (q_3)
+                (q_2) edge node {$b$} (q_4)
+                (q_3) edge [loop below] node {$a,b$} ()
+                (q_4) edge [loop below] node {$a,b$} ();
+            \end{tikzpicture}
+        \end{center}
+\end{itemize}
+
+
 
 \noindent \textbf{Problem 5} (10pts) Design an $\epsilon$-NFA that accepts the following language:
 \begin{center}
