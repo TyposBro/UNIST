@@ -140,6 +140,54 @@ For all strings {$v \in \Alphabet^{+}, (uv)^R = u^R v^R$}. No assumption about v
     $L = \{a^{m}b^{n}c^{o}\,|\,m,n,o \geq 0\}$
 \end{center}
 
+\begin{center}
+\textbf{1st version:}
+\end{center}
+\begin{center}
+            \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+                \node[state,initial] (q_0)   {$q_0$}; 
+                \node[state] (q_1) [right=of q_0] {$q_1$};
+                \node[state] (q_2) [right=of q_1] {$q_2$};
+                \node[state] (q_3) [right=of q_2] {$q_3$};
+                \node[state] (q_4) [right=of q_3] {$q_4$};
+                \node[state] (q_5) [right=of q_4] {$q_5$};
+                \node[state, accepting] (q_6) [right=of q_5] {$q_6$};
+        
+                \path[->]
+                (q_0) edge node {$\epsilon$} (q_1)
+                (q_0) edge [bend right, below] node {$\epsilon$} (q_2)
+                (q_1) edge [below] node {$a$} (q_2)
+                (q_2) edge node {$\epsilon$} (q_3)
+                (q_2) edge [bend right, above] node {$\epsilon$} (q_1)
+                (q_2) edge [bend right, below] node {$\epsilon$} (q_4)
+                (q_3) edge [below] node {$b$} (q_4)
+                (q_4) edge node {$\epsilon$} (q_5)
+                (q_4) edge [bend right, above] node {$\epsilon$} (q_3)
+                (q_4) edge [bend right, below] node {$\epsilon$} (q_6)
+                (q_5) edge [below] node {$c$} (q_6)
+                (q_6) edge [bend right, above] node {$\epsilon$} (q_5);
+                
+            \end{tikzpicture}
+        \end{center}
+\begin{center}
+\textbf{2nd version:}
+\end{center}
+\begin{center}
+            \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+                \node[state,initial] (q_0)   {$q_0$}; 
+                \node[state] (q_1) [right=of q_0] {$q_1$};
+                \node[state] (q_2) [right=of q_1] {$q_2$};
+                \node[state, accepting] (q_3) [right=of q_2] {$q_3$};
+                \path[->]
+                (q_0) edge node {$\{\epsilon, a\}$} (q_1)
+                (q_1) edge node {$\{\epsilon, b\}$} (q_2)             
+                (q_2) edge node {$\{\epsilon, c\}$} (q_3)
+                (q_1) edge [loop below] node {$a$} ()
+                (q_2) edge [loop below] node {$b$} ()
+                (q_3) edge [loop below] node {$c$} ();
+            \end{tikzpicture}
+        \end{center}
+
 \noindent \textbf{Problem 6} (20pts) Consider the following transition table of an $\epsilon$-NFA:
     \begin{center}
     \small
