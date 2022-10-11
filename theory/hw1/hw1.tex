@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=25mm,
+ right=25mm,
+ top=25mm,
+ bottom=25mm
+ }
+\usepackage{url}
+ 
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\input{macro}
+
+
+\title{CSE332 Theory of Computation \\ Homework 1}
+\author{Instructor: Mijung Kim}
+\date{Due: Tuesday, October 11, 2022 at 11:59pm on Blackboard}
+
+\begin{document}
+
+\maketitle
+
+\section*{General Information}
+This homework is worth 10\% of your final grade. It has 10 problems worth 130 points in total.
+
+\noindent We take cheating very  seriously. Please revisit and be well-noted with Syllabus and CSE Cheating Policy on Blackboard. 
+
+\noindent If you have any questions, please actively use Pizza at \url{http://piazza.com/unist.ac.kr/fall2022/cse332} or TA's Office Hours.
+
+
+\section*{Submission Guidelines} 
+
+Your homework must be typed in \texttt{LaTeX} and compiled into a PDF. This PDF file should be submitted on Blackboard. Please note that \textbf{no late submission will be accepted}.
+
+\section*{\texttt{LaTeX} Guidelines}
+
+We recommend to use \texttt{Overleaf} for editing and compiling your \texttt{.tex} files. For a reference, we provided the original \texttt{tex} files that we used to write this homework. Those files are included in the attached \texttt{hw.zip} file.  At \url{overleaf.com},  go to \texttt{New Project} $>$ \texttt{Upload Project} and upload the attached zip file. In the created project, you can get the PDF file by compiling \texttt{hw1.tex}. If you have difficulties in using  \texttt{LaTeX}, please ask TAs for help on Piazza or during their Office Hours. 
+
+\section*{Problems} 
+
+\noindent \textbf{Problem 1} (10pts) Prove that $(uv)^{R} = v^{R}u^{R}$ for all $u,v \in \Alphabet^{+}$. (Hint: Use induction on the length of $v$.) \\
+
+    
+\noindent \textbf{Problem 2} (10pts) Consider the following language: $L = \{w\in\{0,1\}^{*} \, | \, w$  ends with 1001.$\}$.
+    \begin{enumerate}
+        \item (5pts) Design a DFA that accepts $L$.
+        \item (5pts) Design an NFA that accepts $L$.
+    \end{enumerate}
+    
+\noindent \textbf{Problem 3} (10pts) Design an NFA to recognize the strings that represent real numbers. Assume $\Alphabet = \{0,1,2,3,4,5,6,7,8,9,.\}$. For example, the NFA should accept strings such as ``1.0", ``12.156", and ``.01", but must reject strings such as ``0.5.1", ``12.", and ``3".
+
+\noindent \newline \textbf{Problem 4} (20pts) Use subset construction to convert the following NFA to a DFA:
+\begin{center}
+    \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+        \node[state,initial] (q_0)   {$q_0$}; 
+        \node[state] (q_1) [right=of q_0] {$q_1$}; 
+        \node[state] (q_2) [right=of q_1] {$q_2$};
+        \node[state,accepting] (q_3) [right=of q_2] {$q_3$}; 
+        \path[->]
+        (q_0) edge node {$a$} (q_1)
+        (q_1) edge node {$a,b$} (q_2)
+        (q_2) edge node {$a$} (q_3)
+        (q_0) edge [loop below] node {$a,b$} ()
+        (q_3) edge [loop below] node {$a,b$} ();
+    \end{tikzpicture}
+\end{center}
+
+\noindent \textbf{Problem 5} (10pts) Design an $\epsilon$-NFA that accepts the following language:
+\begin{center}
+    $L = \{a^{m}b^{n}c^{o}\,|\,m,n,o \geq 0\}$
+\end{center}
+
+\noindent \textbf{Problem 6} (20pts) Consider the following transition table of an $\epsilon$-NFA:
+    \begin{center}
+    \small
+        \begin{tabular}{r||c|c|c|c}
+        & $\epsilon$ & $a$ & $b$ & $c$\\ \hline\hline
+        $p$ & $\emptyset$ & $\{p\}$ & $\{q\}$ & $\{r\}$\\ 
+        $q$ & $\{p\}$ & $\{q\}$ & $\{r\}$ & $\emptyset$\\ 
+        $r$ & $\{q\}$ & $\{r\}$ & $\emptyset$ & $\{p\}$\\ 
+        \end{tabular}
+    \end{center}
+    where $p$ is the initial state and $r$ is the final state.
+    \begin{enumerate}
+        \item (10pts) Compute the $\epsilon$-closure(EClosure) of each state.
+        \item (10pts) Convert the automaton to a DFA.
+    \end{enumerate}
+    
+\noindent \textbf{Problem 7} (15pts, 5pts each) Find regular expressions for the following languages.
+\begin{enumerate}
+    \item $L = \myset{\omega \in \myset{a,b,c}^* \mid \omega \mbox{ has no more than three $a$'s}}$
+    \item $L = \myset{\omega \in \myset{0,1}^* \mid \omega \mbox{ begins and ends with 0 and contains at least one 1}}$
+    \item $L = \myset{\omega \in \myset{0,1}^* \mid \omega \mbox{ does not contain 111}}$ 
+    % \item $S = \myset{2,4,6,\dots} = \myset{x \in \mbn \mid \mbox{$x$ is even}}$
+\end{enumerate}
+
+\noindent \textbf{Problem 8} (20pts) Consider a DFA represented by a transition table:
+\begin{center}
+\small
+\begin{tabular}{r|c|c}
+& 0 & 1 \\ \hline
+$\rightarrow q_1$ & $q_2$ & $q_1$ \\ 
+$q_2$ & $q_3$ & $q_1$ \\ 
+$*q_3$ & $q_3$ & $q_2$
+\end{tabular}
+\end{center}
+Give all the regular expressions $R^{(0)}_{ij}$,$R^{(1)}_{ij}$,$R^{(2)}_{ij}$. Try to simplify the expressions as much as possible.
+Think of state $q_i$ as if it were the state with number $i$.
+
+\noindent \newline \textbf{Problem 9} (10pts) Convert the following regular expressions to finite automata ($\epsilon$-NFA): $ab^*aa+bba^*ab$ \\
+
+\noindent \textbf{Problem 10} (10pts) Find a $\epsilon$-NFA that accepts language $L(ab^*a^*)\cap L(a^*b^*a)$.
+
+
+\end{document}
+
