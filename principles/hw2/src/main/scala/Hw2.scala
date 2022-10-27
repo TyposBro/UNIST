@@ -13,7 +13,10 @@ case class RecProcVal(fv: Var, av: Var, body: Expr, expr: Expr, env: Env) extend
 case class Env(hashmap: HashMap[Var,Val]) {
   def apply(variable: Var): Val = hashmap(variable)
   def exists(v: Var): Boolean = 
-    hashmap.exists((a: (Var, Val)) => a._1 == v)
+    hashmap.exists((a: (Var, Val))=>a._1==Var(s) => a._1 == v)
+                    env(Var(s))
+                 else throw new Exception("1")
+    case Add(a,b)=>(eval(env, a), eval(env))
   def add(v: Var, value: Val) = Env(hashmap + (v -> value))
   
 }
@@ -50,7 +53,24 @@ package object Hw2 {
 }
 
 object IntInterpreter {
-  def evalInt(expr: IntExpr, env: Option[Int]): Int = 1
+  //TODO: Start here 1st
+
+  def evalInt(expr: IntExpr, env: Option[Int]): Int = expr match {
+    case IntConst(n) => IntVal(n)
+    case IntVar(s)=>if(env.exists((a: (IntVar, IntVal))=>a._1==IntVar(s)))
+                    env(IntVar(s))
+                 else throw new Exception("1")
+    case IntAdd(a,b)=>(evalInt(a, env), evalInt(b, env)) match {
+      case (x: IntVal, y:IntVal) => IntVal(x.n+y.n)
+      case _ => throw new Exception("Type Error")
+    }
+    case IntSub(a,b) => (evalInt(a, env), evalInt(b,env)) match {
+      case (x: IntVal, y: IntVal) => IntVal(x.n - y.n)
+      case _ => throw new Exception("Type Error")
+    }
+
+    
+  } 
   def apply(s: String): Int = {
     val parsed = IntParser(s)
     evalInt(parsed, None)
@@ -59,6 +79,7 @@ object IntInterpreter {
 
 object LetRecInterpreter {
   
+  //TODO: 2nd
   def eval(env: Env, expr: Expr): Val = BoolVal(false)
   
   
@@ -70,6 +91,8 @@ object LetRecInterpreter {
 }
 
 object LetRecToString {
+  //TODO: 3rd
+
   def apply(expr: Expr): String = "1"
 }
 
