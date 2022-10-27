@@ -165,7 +165,21 @@ object LetRecInterpreter {
 }
 
 object LetRecToString {
-  def apply(expr: Expr): String = "1"
+  def apply(expr: Expr): String =expr match {
+    case Const(n) => s"${n}"
+    case Var(s) => s
+    case Add(x,y) => s"${apply(x)} + ${apply(y)}"
+    case Sub(x,y) => s"${apply(x)} - ${apply(y)}"
+    case Iszero(c) => s"iszero ${apply(c)}"
+    case Ite(c, t, f) => s"if ${apply(c)} then ${apply(t)} else ${apply(f)}"
+    case Let(name, value, body) => s"let ${apply(name)} = ${apply(value)} in ${apply(body)}"
+    case Paren(expr) => s"(${apply(expr)})"
+    case LetRec(f, arg, fbody, ibody) =>s"letrec ${apply(f)}(${apply(arg)}) = ${apply(fbody)} in ${apply(ibody)}"
+    case Proc(v, expr) => s"proc ${apply(v)} ${apply(expr)}"
+    case PCall(f, arg) => s"${apply(f)} ${apply(arg)}"
+    case _ => throw new Exception("Type Error")    
+
+  }
 }
 
 object Hw2App extends App {
