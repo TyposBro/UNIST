@@ -14,7 +14,8 @@ case class Env(hashmap: HashMap[Var,Val]) {
   def apply(variable: Var): Val = hashmap(variable)
   def exists(v: Var): Boolean = 
     hashmap.exists((a: (Var, Val)) => a._1 == v)
-  def add(v: Var, value: Val) = Env(hashmap + (v -> value))  
+  def add(v: Var, value: Val) = Env(hashmap + (v -> value))
+  
 }
 
 sealed trait Program
@@ -50,12 +51,17 @@ package object Hw2 {
 
 object IntInterpreter {
   //TODO: Start here 1st
-  def pow(n:Int,m:Int):Int= {if (m!=0) n*pow(n, m-1) else 1}
+  def Pow(n:Int,m:Int):Int= {if (m!=0) n*Pow(n, m-1) else 1}
 
   def evalInt(expr: IntExpr, env: Option[Int]): Int = 
   expr match {
     case IntConst(n) => n
-    case IntVar=>env()
+  
+    case IntVar => env match {
+      case None => throw new Exception("Type Error")
+      case Some(x) => x
+    }
+
     case IntAdd(a,b)=>(evalInt(a, env), evalInt(b, env)) match {
       case (x: Int, y:Int) => x+y
       case _ => throw new Exception("Type Error")
@@ -64,23 +70,43 @@ object IntInterpreter {
       case (x: Int, y: Int) => x - y
       case _ => throw new Exception("Type Error")
     }
+    case IntMul(a,b) => (evalInt(a, env), evalInt(b,env)) match {
+      case (x: Int, y: Int) => x * y
+      case _ => throw new Exception("Type Error")
+    }
 
     case IntPow(a,b) => (evalInt(a, env), evalInt(b,env)) match {
       
-      case (x: Int, y: Int) => pow(x,y)
+      case (x: Int, y: Int) => Pow(x,y)
       case _ => throw new Exception("Type Error")
-    }    
+    }
+
+    case IntSigma(f,t,b) => (evalInt(f, env), evalInt(t, env)) match {
+      case (x: Int, y: Int) => Sigma(x,y,b)
+       
+      case (_) => throw new Exception("Sigma function Error")
+    }      
   } 
+
+  def Sigma(x: Int, y: Int, sig: IntExpr): Int = {
+    val v = sig match {
+        case IntAdd(_,IntConst(n)) => n + x
+        case IntAdd(_,_) => x + x
+        case IntConst(n) => n
+        case IntPow(_,IntConst(n)) => Pow(x,n)
+        case _ => x
+      }
+      if (x >= y) v
+      else v + Sigma(x+1,y,sig)
+  }
   def apply(s: String): Int = {
     val parsed = IntParser(s)
-    println(parsed)
     evalInt(parsed, None)
   }
 }
 
 object LetRecInterpreter {
   
-  //TODO: 2nd
   def eval(env: Env, expr: Expr): Val = BoolVal(false)
   
   
@@ -92,8 +118,6 @@ object LetRecInterpreter {
 }
 
 object LetRecToString {
-  //TODO: 3rd
-
   def apply(expr: Expr): String = "1"
 }
 
@@ -103,7 +127,4 @@ object Hw2App extends App {
 
   val int_prog = """x + 1"""
   val parsed = IntParser(int_prog)
-  println(parsed)
-
-
 }
