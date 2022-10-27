@@ -17,7 +17,7 @@ void receive_input() {
     char buf[128];
     fgets(buffer, 256, stdin);
     strcpy(buf, buffer);
-    //print_secret();
+    // print_secret();
 }
 
 int run() {
@@ -28,3 +28,6 @@ int run() {
 int main() {
     run();
 }
+
+
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111ABCDEFGHBBBBCCCCL
