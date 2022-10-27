@@ -107,7 +107,54 @@ object IntInterpreter {
 
 object LetRecInterpreter {
   
-  def eval(env: Env, expr: Expr): Val = BoolVal(false)
+  def eval(env: Env, expr: Expr): Val = expr match {
+    case Const(n) => IntVal(n)
+    case Var(s) =>
+     
+      if (env.exists(Var(s)))
+        env(Var(s))
+      else throw new Exception("1")
+    case Add(a, b) => (eval(env, a), eval(env, b)) match {
+      case (x: IntVal, y: IntVal) => IntVal(x.n + y.n)
+      case _ => throw new Exception("Type Error")
+    }
+    case Sub(a, b) => (eval(env, a), eval(env, b)) match {
+      case (x: IntVal, y: IntVal) => IntVal(x.n - y.n)
+      case _ => throw new Exception("Type Error")
+    }
+    case Iszero(c) => (eval(env, c)) match {
+      case (x: IntVal) => BoolVal(x.n == 0)
+      case _ => throw new Exception("Type Error")
+    }
+    case Ite(c, t, f) => eval(env,c) match {
+      case v: BoolVal => if (v.b) eval(env,t) else eval(env,f)
+      case _ => throw new Exception("Type Error")
+    }
+    case Let(name, value, body) => eval(env,value) match {
+      case x: Val => eval(env.add(name, x), body)
+      case _ => throw new Exception("Type Error")
+    }
+    case Paren(expr: Expr) => eval(env,expr)
+    
+    case Proc(v, expr) => 
+   
+      if (env.exists(v)) {
+        eval(env, expr)
+      } else {
+        ProcVal(v, expr, env)
+      }
+    case PCall(f, arg) => (eval(env,arg), eval(env,f)) match {
+      case (x: Val, ProcVal(v, expr2, env2)) => eval(env2.add(v, x), expr2)
+      case (x: Val, RecProcVal(f, a, body, expr2, env2)) => eval(env2.add(a, x).add(f, RecProcVal(f, a, body, expr2, env2)), body)
+      case _ => throw new Exception("Type Error")
+    }
+    case LetRec(f, arg, fbody, ibody) => {
+      
+    eval(env.add(f, RecProcVal(f, arg, fbody, ibody, env)), ibody)
+    }     
+    
+  }
+
   
   
   def apply(program: String): Val = {
