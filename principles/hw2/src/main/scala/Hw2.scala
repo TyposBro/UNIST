@@ -50,25 +50,30 @@ package object Hw2 {
 
 object IntInterpreter {
   //TODO: Start here 1st
+  def pow(n:Int,m:Int):Int= {if (m!=0) n*pow(n, m-1) else 1}
 
-  def evalInt(expr: IntExpr, env: Option[Int]): Int = expr match {
-    case IntConst(n) => IntVal(n)
-    case IntVar(s)=>if(env.exists((a: (IntVar, IntVal))=>a._1==IntVar(s)))
-                    env(IntVar(s))
-                 else throw new Exception("1")
+  def evalInt(expr: IntExpr, env: Option[Int]): Int = 
+  expr match {
+    case IntConst(n) => n
+    case IntVar=>env()
     case IntAdd(a,b)=>(evalInt(a, env), evalInt(b, env)) match {
-      case (x: IntVal, y:IntVal) => IntVal(x.n+y.n)
+      case (x: Int, y:Int) => x+y
       case _ => throw new Exception("Type Error")
     }
     case IntSub(a,b) => (evalInt(a, env), evalInt(b,env)) match {
-      case (x: IntVal, y: IntVal) => IntVal(x.n - y.n)
+      case (x: Int, y: Int) => x - y
       case _ => throw new Exception("Type Error")
     }
 
-    
+    case IntPow(a,b) => (evalInt(a, env), evalInt(b,env)) match {
+      
+      case (x: Int, y: Int) => pow(x,y)
+      case _ => throw new Exception("Type Error")
+    }    
   } 
   def apply(s: String): Int = {
     val parsed = IntParser(s)
+    println(parsed)
     evalInt(parsed, None)
   }
 }
