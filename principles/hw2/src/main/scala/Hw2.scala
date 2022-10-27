@@ -13,12 +13,8 @@ case class RecProcVal(fv: Var, av: Var, body: Expr, expr: Expr, env: Env) extend
 case class Env(hashmap: HashMap[Var,Val]) {
   def apply(variable: Var): Val = hashmap(variable)
   def exists(v: Var): Boolean = 
-    hashmap.exists((a: (Var, Val))=>a._1==Var(s) => a._1 == v)
-                    env(Var(s))
-                 else throw new Exception("1")
-    case Add(a,b)=>(eval(env, a), eval(env))
-  def add(v: Var, value: Val) = Env(hashmap + (v -> value))
-  
+    hashmap.exists((a: (Var, Val)) => a._1 == v)
+  def add(v: Var, value: Val) = Env(hashmap + (v -> value))  
 }
 
 sealed trait Program
