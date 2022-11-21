@@ -107,10 +107,12 @@ object MiniScalaInterpreter {
     case Ite(c: Expr, t: Expr, f: Expr) => doInterpret(env,mem,c) match {
       case Result(v: BoolVal,m) => if (v.b) doInterpret(env,m,t) else doInterpret(env,m,f)
       case _ => throw new UndefinedSemantics("condition should be Boolean")}
+      
     case ValExpr(name: Var, value: Expr, body: Expr) =>{
       val r = doInterpret(env,mem,value)
       val new_env = env.updated(name, r.v)
       doInterpret(new_env, r.m, body)}
+      
     case VarExpr(name: Var, value: Expr, body: Expr) =>{
       val r = doInterpret(env,mem,value)
       val e = r.m.extended(r.v)
@@ -118,6 +120,7 @@ object MiniScalaInterpreter {
       val loc = e._2
       val n_env = env.updated(name, e._2)
       doInterpret(n_env, n_mem, body)}
+    
     case Asn(v: Var, e: Expr) =>{
       val r = doInterpret(env,mem,e)
       env.get(v) match {
@@ -130,6 +133,7 @@ object MiniScalaInterpreter {
     case Block(f: Expr, s: Expr) =>{
       val res = doInterpret(env,mem,f)
       doInterpret(env,res.m,s)}
+    // Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti repellendus magnam dignissimos rerum quos quod sunt ex eum corrupti consequatur dolorum, commodi vel ipsum fuga doloremque optio quo non laudantium.
     case Proc(v: Var, expr: Expr) =>Result(ProcVal(v,expr,env),mem)
     case PCall(ftn: Expr, arg: Expr) =>{
       val proc = doInterpret(env,mem,ftn)
@@ -142,6 +146,7 @@ object MiniScalaInterpreter {
           val n_env = rp.env.updated(rp.fv, rp).updated(rp.av, ar.v)
           doInterpret(n_env, ar.m, rp.body)}
         case _ => throw new Exception("Error")}}
+    // Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti repellendus magnam dignissimos rerum quos quod sunt ex eum corrupti consequatur dolorum, commodi vel ipsum fuga doloremque optio quo non laudantium.
     case DefExpr(fv,av,body,expr) => {
       val rp = RecProcVal(fv,av,body,env)
       val new_env = env.updated(fv, rp)
