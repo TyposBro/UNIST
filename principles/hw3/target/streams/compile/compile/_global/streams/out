@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw3/src/main/scala/Parsers.scala:16:51: not found: type Const[0m
+[0m[[0m[31merror[0m] [0m[0m  override def visitInteger(ctx: IntegerContext): Const = {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw3/src/main/scala/Parsers.scala:18:5: not found: value Const[0m
+[0m[[0m[31merror[0m] [0m[0m    Const(exprText.toInt)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
