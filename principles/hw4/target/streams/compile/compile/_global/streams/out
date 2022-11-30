@@ -1,0 +1,21 @@
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw4/src/main/scala/Hw4.scala:296:47: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: hw4.Mem[0m
+[0m[[0m[31merror[0m] [0m[0m    def checkLocVal(l: LocVal, m: Mem): Mem = {}[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw4/src/main/scala/Hw4.scala:297:49: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: hw4.Mem[0m
+[0m[[0m[31merror[0m] [0m[0m    def checkProcVal(p: ProcVal, m: Mem): Mem = {}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw4/src/main/scala/Hw4.scala:298:53: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: hw4.Mem[0m
+[0m[[0m[31merror[0m] [0m[0m    def checkRecordVal(r: RecordVal, m: Mem): Mem = {}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/azizbek/Desktop/UNIST/principles/hw4/src/main/scala/Hw4.scala:299:32: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: hw4.Mem[0m
+[0m[[0m[31merror[0m] [0m[0m    def iterEnv(e: Env): Mem = {}[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
