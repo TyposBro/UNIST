@@ -1,0 +1,209 @@
+CREATE TABLE `person1` (
+  `Person_ID` int NOT NULL,
+  `Name` varchar(45),
+  `Phone` varchar(45),
+  `Email` varchar(45),
+  `Address` varchar(45),
+  PRIMARY KEY (`Person_ID`),
+  KEY `Adderss_idx` (`Address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `address` (
+  `Address` varchar(45) NOT NULL,
+  `PostalCode` varchar(45),
+  `Nation` varchar(45),
+  PRIMARY KEY (`Address`),
+  FOREIGN KEY (`Address`) REFERENCES `person1` (`Address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `laboratory1` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Lab_Name` varchar(45) NOT NULL,
+  `Capacity` varchar(45),
+  `Location` varchar(45),
+  PRIMARY KEY (`Dept_Name`,`Lab_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `department` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Dept_Num` int,
+  PRIMARY KEY (`Dept_Name`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `laboratory1` (`Dept_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `schools` (
+  `School_Name` varchar(45) NOT NULL,
+  `Person_ID` int NOT NULL,
+  PRIMARY KEY (`School_Name`,`Person_ID`),
+  FOREIGN KEY (`Person_ID`) REFERENCES `person1` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `staff` (
+  `Person_ID` int NOT NULL,
+  `Staff_ID` varchar(45),
+  `Date_hired` datetime,
+  `Position` varchar(45),
+  PRIMARY KEY (`Staff_ID`),
+  FOREIGN KEY (`Person_ID`) REFERENCES `person1` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `student` (
+  `Person_ID` int NOT NULL,
+  `Student_ID` int,
+  `Year` int,
+  PRIMARY KEY (`Student_ID`),
+  FOREIGN KEY (`Person_ID`) REFERENCES `person1` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `majors` (
+  `Student_ID` int NOT NULL,
+  `Major` varchar(45),
+  PRIMARY KEY (`Student_ID`,`Major`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `student` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `minors` (
+  `Student_ID` int NOT NULL,
+  `Minor` varchar(45),
+  PRIMARY KEY (`Student_ID`,`Minor`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `student` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `professor` (
+  `Person_ID` int NOT NULL,
+  `Professor_ID` varchar(45),
+  `Dept_Name` varchar(45),
+  `Major` varchar(45),
+  PRIMARY KEY (`Professor_ID`),
+  FOREIGN KEY (`Person_ID`) REFERENCES `person1` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `stakeholder` (
+  `Person_ID` int NOT NULL,
+  `Domain` varchar(45),
+  PRIMARY KEY (`Person_ID`),
+  FOREIGN KEY (`Person_ID`) REFERENCES `person1` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `course` (
+  `Cid` int NOT NULL,
+  `Credit` int,
+  `Date_time` datetime,
+  `Name` varchar(45),
+  `Professor_ID` varchar(45),
+  PRIMARY KEY (`Cid`),
+  FOREIGN KEY (`Professor_ID`) REFERENCES `professor` (`Professor_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `take` (
+  `Student_ID` int NOT NULL,
+  `Cid` int,
+  PRIMARY KEY (`Student_ID`,`Cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `undergrad` (
+  `Student_ID` int NOT NULL,
+  PRIMARY KEY (`Student_ID`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `student` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `graduate` (
+  `Student_ID` int NOT NULL,
+  PRIMARY KEY (`Student_ID`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `student` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `supervise` (
+  `Graduate.Student_ID` int NOT NULL,
+  `Professor_ID` int,
+  `Topic` varchar(45),
+  PRIMARY KEY (`Graduate.Student_ID`,`Professor_ID`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `graduate` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `tech_staff` (
+  `Staff_ID` int NOT NULL,
+  `Laboratory.Lab_Name` varchar(45),
+  `Laboratory.Dept_Name` varchar(45),
+  PRIMARY KEY (`Staff_ID`),
+  FOREIGN KEY (`Staff_ID`) REFERENCES `staff` (`Staff_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `teaching laboratory` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Lab_Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`Dept_Name`,`Lab_Name`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `laboratory1` (`Dept_Name`),
+  FOREIGN KEY (`Lab_Name`) REFERENCES `laboratory1` (`Lab_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `experiments` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Lab_Name` varchar(45) NOT NULL,
+  `Student_ID` varchar(45) NOT NULL,
+  `Date` datetime,
+  PRIMARY KEY (`Dept_Name`,`Lab_Name`,`Student_ID`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `teaching laboratory` (`Dept_Name`),
+  FOREIGN KEY (`Lab_Name`) REFERENCES `teaching laboratory` (`Lab_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `research laboratory` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Lab_Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`Dept_Name`,`Lab_Name`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `laboratory1` (`Dept_Name`),
+  FOREIGN KEY (`Lab_Name`) REFERENCES `laboratory1` (`Lab_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `assign` (
+  `Dept_Name` varchar(45) NOT NULL,
+  `Lab_Name` varchar(45) NOT NULL,
+  `Student_ID` varchar(45) NOT NULL,
+  PRIMARY KEY (`Dept_Name`,`Lab_Name`,`Student_ID`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `research laboratory` (`Dept_Name`),
+  FOREIGN KEY (`Lab_Name`) REFERENCES `research laboratory` (`Lab_Name`),
+  FOREIGN KEY (`Student_ID`) REFERENCES `graduate` (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `admin_staff` (
+  `Staff_ID` int NOT NULL,
+  PRIMARY KEY (`Staff_ID`),
+  FOREIGN KEY (`Staff_ID`) REFERENCES `staff` (`Staff_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `admin_manager` (
+  `Staff_ID` int NOT NULL,
+  `Professor_ID` int,
+  PRIMARY KEY (`Staff_ID`),
+  FOREIGN KEY (`Staff_ID`) REFERENCES `admin_staff` (`Staff_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `comments` (
+  `Stakeholder.Person_ID` int NOT NULL,
+  `Topic` varchar(45) NOT NULL,
+  `Date` datetime NOT NULL,
+  PRIMARY KEY (`Stakeholder.Person_ID`,`Topic`,`Date`),
+  FOREIGN KEY (`Stakeholder.Person_ID`) REFERENCES `stakeholder` (`Person_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `equipment1` (
+  `Lab_Name` varchar(45) NOT NULL,
+  `Dept_Name` varchar(45) NOT NULL,
+  `Date_purchased` datetime,
+  `Model_No` int,
+  PRIMARY KEY (`Lab_Name`,`Dept_Name`),
+  FOREIGN KEY (`Lab_Name`) REFERENCES `laboratory1` (`Lab_Name`),
+  FOREIGN KEY (`Dept_Name`) REFERENCES `laboratory1` (`Dept_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `model_name` (
+  `Model_No` int NOT NULL,
+  `Name` varchar(45),
+  PRIMARY KEY (`Model_No`),
+  FOREIGN KEY (`Model_No`) REFERENCES `equipment1` (`Model_No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+

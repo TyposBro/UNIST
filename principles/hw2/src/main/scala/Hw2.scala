@@ -16,7 +16,7 @@ case class Env(hashmap: HashMap[Var,Val]) {
     hashmap.exists((a: (Var, Val)) => a._1 == v)
   def add(v: Var, value: Val) = Env(hashmap + (v -> value))
   
-}
+} 
 
 sealed trait Program
 sealed trait Expr extends Program
@@ -45,63 +45,64 @@ case class IntPow(b: IntExpr, e: IntExpr) extends IntExpr
 
 package object Hw2 {
 
-  
-
 }
 
-object IntInterpreter {
-  //TODO: Start here 1st
-  def Pow(n:Int,m:Int):Int= {if (m!=0) n*Pow(n, m-1) else 1}
 
-  def evalInt(expr: IntExpr, env: Option[Int]): Int = 
-  expr match {
+
+  object IntInterpreter {
+  def evalInt(expr: IntExpr, env: Option[Int]): Int = expr match{
     case IntConst(n) => n
-  
-    case IntVar => env match {
-      case None => throw new Exception("Type Error")
-      case Some(x) => x
+    case IntAdd(a,b) => (evalInt(a, env), evalInt(b, env)) match {
+      case (x: Int, y: Int) => x + y
+      case (_) => throw new Exception("Addition Error")
     }
-
-    case IntAdd(a,b)=>(evalInt(a, env), evalInt(b, env)) match {
-      case (x: Int, y:Int) => x+y
-      case _ => throw new Exception("Type Error")
-    }
-    case IntSub(a,b) => (evalInt(a, env), evalInt(b,env)) match {
-      case (x: Int, y: Int) => x - y
-      case _ => throw new Exception("Type Error")
-    }
-    case IntMul(a,b) => (evalInt(a, env), evalInt(b,env)) match {
+     case IntMul(a,b) => (evalInt(a, env), evalInt(b, env)) match {
       case (x: Int, y: Int) => x * y
-      case _ => throw new Exception("Type Error")
+      case (_) => throw new Exception("Multiplication Error")
     }
-
-    case IntPow(a,b) => (evalInt(a, env), evalInt(b,env)) match {
-      
-      case (x: Int, y: Int) => Pow(x,y)
-      case _ => throw new Exception("Type Error")
+    case IntSub(a,b) => (evalInt(a, env), evalInt(b, env)) match {
+      case (x: Int, y: Int) => x - y
+      case (_) => throw new Exception("Subtraction Error")
     }
-
-    case IntSigma(f,t,b) => (evalInt(f, env), evalInt(t, env)) match {
-      case (x: Int, y: Int) => Sigma(x,y,b)
+   
+     case IntSigma(a,b,f) => (evalInt(a, env), evalInt(b, env)) match {
+      case (x: Int, y: Int) => computeSigma(x,y,f)
        
       case (_) => throw new Exception("Sigma function Error")
-    }      
-  } 
-
-  def Sigma(x: Int, y: Int, sig: IntExpr): Int = {
-    val v = sig match {
-        case IntAdd(_,IntConst(n)) => n + x
-        case IntAdd(_,_) => x + x
-        case IntConst(n) => n
-        case IntPow(_,IntConst(n)) => Pow(x,n)
-        case _ => x
-      }
-      if (x >= y) v
-      else v + Sigma(x+1,y,sig)
+    }
+    
+    case IntPow(a,b) => (evalInt(a, env), evalInt(b, env)) match {
+      case (x: Int, y: Int) => power(x,y)
+      case (_) => throw new Exception("Power funct Error")
+    }
+    case (_) => throw new Exception("Error")
   }
+
+
+    def power(x: Int, y:Int): Int = {
+    if (y == 0) {
+      return 1
+    } 
+    return x * power(x, y-1)
+  }
+
   def apply(s: String): Int = {
     val parsed = IntParser(s)
     evalInt(parsed, None)
+  }
+  
+   def computeSigma(x: Int, y: Int, f: IntExpr): Int = {
+    val v = f match {
+        case IntAdd(_,IntConst(n)) => n + x
+        case IntAdd(_,_) => x + x
+        case IntConst(n) => n
+        case IntPow(_,IntConst(n)) => power(x,n)
+        case _ => x
+      } 
+      if (x >= y) {
+        return v
+      } 
+      return v + computeSigma(x+1,y,f)
   }
 }
 
@@ -110,7 +111,6 @@ object LetRecInterpreter {
   def eval(env: Env, expr: Expr): Val = expr match {
     case Const(n) => IntVal(n)
     case Var(s) =>
-     
       if (env.exists(Var(s)))
         env(Var(s))
       else throw new Exception("1")
