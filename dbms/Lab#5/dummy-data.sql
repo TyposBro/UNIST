@@ -5,22 +5,34 @@ INSERT INTO Address VALUE ("242, Cheomdan-ro, Jeju-si, Jeju-do", "63309", "Korea
 
 INSERT INTO Person1 VALUE (1, "staff1", "010-7777-7777", "staff1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
 INSERT INTO Person1 VALUE (2, "staff2", "010-3333-3333", "staff2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (3, "student1", "010-1234-1234", "student1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (4, "student2", "010-4321-4321", "student2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (5, "student3", "010-1234-5678", "student3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (6, "student4", "010-1234-4321", "student4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (7, "student5", "010-1234-0987", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (8, "student6", "010-1234-2231", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (9, "student7", "010-1234-3342", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (10, "student8", "010-1234-4451", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (11, "student9", "010-1234-5567", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (12, "student10", "010-1234-6675", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (13, "professor1", "010-0000-0000", "professor1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (14, "professor2", "010-1111-1111", "professor2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (15, "professor3", "010-1111-0000", "professor3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (16, "professor4", "010-0000-1111", "professor4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (17, "stakeholder1", "010-9999-1111", "stakeholder1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
-INSERT INTO Person1 VALUE (18, "stakeholder2", "010-8777-1111", "stakeholder2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (3, "staff3", "010-7777-7771", "staff3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (4, "staff4", "010-3333-3331", "staff4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (5, "staff5", "010-7777-7772", "staff5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (6, "staff6", "010-3333-3332", "staff6@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (7, "staff7", "010-7777-7774", "staff7@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (8, "staff8", "010-3333-3334", "staff8@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (9, "staff9", "010-7777-7775", "staff9@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (10, "staff10", "010-3333-3335", "staff10@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (11, "staff11", "010-7777-7776", "staff11@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (12, "staff12", "010-3333-3336", "staff12@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (13, "student1", "010-1234-1234", "student1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (14, "student2", "010-4321-4321", "student2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (15, "student3", "010-1234-5678", "student3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (16, "student4", "010-1234-4321", "student4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (17, "student5", "010-1234-0987", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (18, "student6", "010-1234-2231", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (19, "student7", "010-1234-3342", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (20, "student8", "010-1234-4451", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (21, "student9", "010-1234-5567", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (22, "student10", "010-1234-6675", "student5@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (23, "professor1", "010-0000-0000", "professor1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (24, "professor2", "010-1111-1111", "professor2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (25, "professor3", "010-1111-0000", "professor3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (26, "professor4", "010-0000-1111", "professor4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (27, "stakeholder1", "010-9999-1111", "stakeholder1@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (28, "stakeholder2", "010-8777-1111", "stakeholder2@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (29, "stakeholder3", "010-9999-1112", "stakeholder3@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
+INSERT INTO Person1 VALUE (30, "stakeholder4", "010-8777-1113", "stakeholder4@unist.ac.kr", "50, UNIST-gil, Eonyang-eup, Ulju-gun, Ulsan");
 
 INSERT INTO Department VALUE ("Computer Science Engineering", 1);
 INSERT INTO Department VALUE ("Business Administration", 2);
@@ -38,20 +50,29 @@ INSERT INTO Schools VALUE ("UNIST", 3);
 INSERT INTO Schools VALUE ("UNIST", 4);
 INSERT INTO Schools VALUE ("UNIST", 5);
 
-INSERT INTO Staff VALUE (1, 1, "2020-01-01 00:00:00", "Administrative Officer");
-INSERT INTO Staff VALUE (2, 2, "2021-01-01 00:00:00", "Administrative Officer");
-INSERT INTO Staff VALUE (3, 3, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (1, 1, "2020-01-01 00:00:00", "Technical Officer");
+INSERT INTO Staff VALUE (2, 2, "2021-01-01 00:00:00", "Technical Officer");
+INSERT INTO Staff VALUE (3, 3, "2021-01-01 00:00:00", "Technical Officer");
+INSERT INTO Staff VALUE (4, 4, "2020-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (5, 5, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (6, 6, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (7, 7, "2020-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (8, 8, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (9, 9, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (10, 10, "2020-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (11, 11, "2021-01-01 00:00:00", "Administrative Officer");
+INSERT INTO Staff VALUE (12, 12, "2021-01-01 00:00:00", "Administrative Officer");
 
-INSERT INTO Student VALUE (3, 1, 2016);
-INSERT INTO Student VALUE (4, 2, 2017);
-INSERT INTO Student VALUE (5, 3, 2018);
-INSERT INTO Student VALUE (6, 4, 2019);
-INSERT INTO Student VALUE (7, 5, 2020);
-INSERT INTO Student VALUE (8, 6, 2020);
-INSERT INTO Student VALUE (9, 7, 2020);
-INSERT INTO Student VALUE (10, 8, 2020);
-INSERT INTO Student VALUE (11, 9, 2020);
-INSERT INTO Student VALUE (12, 10, 2020);
+INSERT INTO Student VALUE (13, 1, 2016);
+INSERT INTO Student VALUE (14, 2, 2017);
+INSERT INTO Student VALUE (15, 3, 2018);
+INSERT INTO Student VALUE (16, 4, 2019);
+INSERT INTO Student VALUE (17, 5, 2020);
+INSERT INTO Student VALUE (18, 6, 2020);
+INSERT INTO Student VALUE (19, 7, 2020);
+INSERT INTO Student VALUE (20, 8, 2020);
+INSERT INTO Student VALUE (21, 9, 2020);
+INSERT INTO Student VALUE (22, 10, 2020);
 
 INSERT INTO Majors VALUE (1, "Computer Science Engineering");
 INSERT INTO Majors VALUE (2, "Computer Science Engineering");
@@ -75,15 +96,15 @@ INSERT INTO Minors VALUE (8, "Business Administration");
 INSERT INTO Minors VALUE (9, "Business Administration");
 INSERT INTO Minors VALUE (10, "Computer Science Engineering");
 
-INSERT INTO Professor VALUE (11, 1, "Computer Science Engineering", "Computer Science Engineering");
-INSERT INTO Professor VALUE (12, 2, "Computer Science Engineering", "Computer Science Engineering");
-INSERT INTO Professor VALUE (13, 3, "Computer Science Engineering", "Computer Science Engineering");
-INSERT INTO Professor VALUE (14, 4, "Business Administration", "Business Administration");
+INSERT INTO Professor VALUE (23, 1, "Computer Science Engineering", "Computer Science Engineering");
+INSERT INTO Professor VALUE (24, 2, "Computer Science Engineering", "Computer Science Engineering");
+INSERT INTO Professor VALUE (25, 3, "Computer Science Engineering", "Computer Science Engineering");
+INSERT INTO Professor VALUE (26, 4, "Business Administration", "Business Administration");
 
-INSERT INTO Stakeholder VALUE (15, "Individual");
-INSERT INTO Stakeholder VALUE (16, "Government");
-INSERT INTO Stakeholder VALUE (17, "Individual");
-INSERT INTO Stakeholder VALUE (18, "Overseas");
+INSERT INTO Stakeholder VALUE (27, "Individual");
+INSERT INTO Stakeholder VALUE (28, "Government");
+INSERT INTO Stakeholder VALUE (29, "Individual");
+INSERT INTO Stakeholder VALUE (30, "Overseas");
 
 
 
@@ -160,26 +181,39 @@ INSERT INTO Research_Laboratory VALUE ("Computer Science Engineering", "Algorith
 INSERT INTO Research_Laboratory VALUE ("Computer Science Engineering", "Network Lab");
 
 INSERT INTO Assign VALUE ("Computer Science Engineering", "Algorithm Lab", 5);
+INSERT INTO Assign VALUE ("Computer Science Engineering", "Network Lab", 6);
+INSERT INTO Assign VALUE ("Computer Science Engineering", "Algorithm Lab", 7);
+INSERT INTO Assign VALUE ("Computer Science Engineering", "Network Lab", 8);
+INSERT INTO Assign VALUE ("Computer Science Engineering", "Network Lab", 9);
 
-INSERT INTO Admin_Staff VALUE (1);
 
-INSERT INTO Admin_Manager VALUE (1, 1);
-INSERT INTO Admin_Manager VALUE (2, 3);
-INSERT INTO Admin_Manager VALUE (3, 2);
-INSERT INTO Admin_Manager VALUE (4, 2);
-INSERT INTO Admin_Manager VALUE (5, 2);
-INSERT INTO Admin_Manager VALUE (6, 4);
-INSERT INTO Admin_Manager VALUE (7, 1);
-INSERT INTO Admin_Manager VALUE (8, 3);
-INSERT INTO Admin_Manager VALUE (9, 2);
+INSERT INTO Admin_Staff VALUE (4);
+INSERT INTO Admin_Staff VALUE (5);
+INSERT INTO Admin_Staff VALUE (6);
+INSERT INTO Admin_Staff VALUE (7);
+INSERT INTO Admin_Staff VALUE (8);
+INSERT INTO Admin_Staff VALUE (9);
+INSERT INTO Admin_Staff VALUE (10);
+INSERT INTO Admin_Staff VALUE (11);
+INSERT INTO Admin_Staff VALUE (12);
 
-INSERT INTO Comments VALUE (15, "Regarding CSE Curriculum", "2022-11-01 00:00:00");
-INSERT INTO Comments VALUE (16, "CSE Events", "2022-12-01 00:00:00");
-INSERT INTO Comments VALUE (17, "Regarding scholarship", "2022-12-02 00:00:00");
-INSERT INTO Comments VALUE (18, "Academic Calendar", "2022-12-02 00:00:00");
-INSERT INTO Comments VALUE (17, "More scholarships for students", "2022-12-02 00:00:00");
-INSERT INTO Comments VALUE (16, "Regarding CSE Gatherings", "2022-12-02 00:00:00");
-INSERT INTO Comments VALUE (15, "Scholarship issues", "2022-12-02 00:00:00");
+INSERT INTO Admin_Manager VALUE (4, 1);
+INSERT INTO Admin_Manager VALUE (5, 3);
+INSERT INTO Admin_Manager VALUE (6, 2);
+INSERT INTO Admin_Manager VALUE (7, 2);
+INSERT INTO Admin_Manager VALUE (8, 2);
+INSERT INTO Admin_Manager VALUE (9, 4);
+INSERT INTO Admin_Manager VALUE (10, 1);
+INSERT INTO Admin_Manager VALUE (11, 3);
+INSERT INTO Admin_Manager VALUE (12, 2);
+
+INSERT INTO Comments VALUE (27, "Regarding CSE Curriculum", "2022-11-01 00:00:00");
+INSERT INTO Comments VALUE (28, "CSE Events", "2022-12-01 00:00:00");
+INSERT INTO Comments VALUE (29, "Regarding scholarship", "2022-12-02 00:00:00");
+INSERT INTO Comments VALUE (30, "Academic Calendar", "2022-12-02 00:00:00");
+INSERT INTO Comments VALUE (29, "More scholarships for students", "2022-12-02 00:00:00");
+INSERT INTO Comments VALUE (28, "Regarding CSE Gatherings", "2022-12-02 00:00:00");
+INSERT INTO Comments VALUE (27, "Scholarship issues", "2022-12-02 00:00:00");
 
 -- Not sure what should be Model Name
 INSERT INTO Model_Name VALUE (1, "Model1");
