@@ -313,7 +313,7 @@ class Wall:
         self.y = 110
         self.z = 2
         self.temp = []
-        self.image = cv2.imread("pngwing.png",cv2.IMREAD_UNCHANGED)
+        self.image = cv2.imread("wing.png",cv2.IMREAD_UNCHANGED)
         self.image_width = self.image.shape[0]
         self.image_height = self.image.shape[1]
 
@@ -403,7 +403,7 @@ class Body:
         self.x = 0
         self.y = 0
         self.z = -4
-        self.image = cv2.imread("Body.png",cv2.IMREAD_UNCHANGED)
+        self.image = cv2.imread("body.png",cv2.IMREAD_UNCHANGED)
         self.image_width = self.image.shape[0]
         self.image_height = self.image.shape[1]
     def draw(self):
