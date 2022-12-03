@@ -6,9 +6,10 @@
       "port": 5432,
       "askForPassword": true,
       "driver": "PostgreSQL",
-      "name": "Foo",
+      "name": "postgres",
       "username": "postgres",
-      "database": "mydb"
+      "database": "mydb",
+      "password": "5656"
     }
   ]
 }
