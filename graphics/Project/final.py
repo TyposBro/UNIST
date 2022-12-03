@@ -2,7 +2,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import numpy as np
-import random 
+import cv2
+import random
 
 width = 1600
 length = 900
@@ -15,13 +16,22 @@ class floor:
         self.x = 0
         self.y = -30
         self.z = -12.5
+        self.image = cv2.imread("grass.jpg",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def draw(self):
         glPushMatrix()
-        w = 1000
-        d = 200000
+        w = 10
+        d = 10000
         h = 4.25
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, self.image)
+
+        glEnable(GL_TEXTURE_2D)
+
         #Top Bottom Front Back Left Right
         glTranslatef(self.x, self.y, self.z)
         glScalef(1,1,1)
@@ -35,6 +45,14 @@ class floor:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -44,6 +62,9 @@ class obstacle2:
         self.x = x
         self.y = y
         self.z = z
+        self.image = cv2.imread("images.jpg",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def moving(self, speed):
         self.y = self.y - speed
     def draw(self):
@@ -54,6 +75,10 @@ class obstacle2:
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x, self.y, self.z)
         glScalef(1,1,1)
         glColor3f(0.5, 0, 0)
@@ -66,6 +91,14 @@ class obstacle2:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(0.0, 1.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(1.0,0.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         #self.y = self.y - 0.5
         glEnd()
@@ -83,6 +116,9 @@ class obstacle:
         self.x = x
         self.y = y
         self.z = z
+        self.image = cv2.imread("images.jpg",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def moving(self, speed):
         self.y = self.y - speed
     def draw(self):
@@ -93,6 +129,10 @@ class obstacle:
         h = 2.25
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         #Top Bottom Front Back Left Right
         glTranslatef(self.x, self.y, self.z)
         glScalef(1,1,1)
@@ -106,6 +146,14 @@ class obstacle:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         #self.y = self.y - 0.5
         glEnd()
@@ -121,7 +169,7 @@ class obstacle:
             print(self.x, self.y,self.z)
             print(moving[0], moving[1],moving[2])
             return True
-        
+
         return False
 class movingobstacle2:
     def __init__(self,x=0,y=0,z=-20):
@@ -129,6 +177,9 @@ class movingobstacle2:
         self.x = x
         self.y = y
         self.z = z
+        self.image = cv2.imread("images.jpg",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
         self.swtich = True
     def moving(self, speed):
         self.y = self.y - speed
@@ -140,7 +191,7 @@ class movingobstacle2:
             self.x = self.x - speed/10
         else:
             self.x = self.x + speed/10
-        
+
     def draw(self):
         glPushMatrix()
         w = 1
@@ -148,6 +199,10 @@ class movingobstacle2:
         h = 25
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         #Top Bottom Front Back Left Right
         glTranslatef(self.x, self.y, self.z)
         glScalef(1,1,1)
@@ -161,6 +216,14 @@ class movingobstacle2:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         #self.y = self.y - 0.5
         glEnd()
@@ -178,6 +241,9 @@ class movingobstacle:
         self.x = x
         self.y = y
         self.z = z
+        self.image = cv2.imread("images.jpg",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
         self.swtich = True
     def moving(self, speed):
         self.y = self.y - speed
@@ -198,6 +264,10 @@ class movingobstacle:
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x, self.y, self.z)
         glScalef(1,1,1)
         glColor3f(0.5, 0, 0)
@@ -210,6 +280,14 @@ class movingobstacle:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         #self.y = self.y - 0.5
         glEnd()
@@ -225,7 +303,7 @@ class movingobstacle:
             print(self.x, self.y,self.z)
             print(moving[0], moving[1],moving[2])
             return True
-        
+
         return False
 
 class Wall:
@@ -234,7 +312,11 @@ class Wall:
         self.x = x
         self.y = 110
         self.z = 2
-        pass
+        self.temp = []
+        self.image = cv2.imread("pngwing.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
+
     def draw(self):
         glPushMatrix()
         w = 20
@@ -243,6 +325,10 @@ class Wall:
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x, self.y, self.z)
         glScalef(0.5,0.5,0.5)
         glColor3f(1, 1, 1)
@@ -253,8 +339,16 @@ class Wall:
             v3 = np.cross(v1,v2)
             if i == 1 or i ==3 or i == 5:
                 v3 = v3*-1
-            glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
+                glNormal3f(v3[0],v3[1],v3[2])
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -265,16 +359,23 @@ class Head:
         self.x = 0
         self.y = 0
         self.z = -2
+        self.image = cv2.imread("head.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def draw(self):
         glPushMatrix()
         vertex =[[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1],[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         #Top Bottom Front Back Left Right
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
         glRotatef(rotation[0]*30, 0.0, 0.0, 1.0)
         glRotatef(-rotation[1]*30, 1.0, 0.0, 0.0)
-        glColor3f(0.5, 0.5, 0.5)
+        glColor3f(1, 1, 1)
         glBegin( GL_QUADS )
         for i in range(6):
             v1 = np.array([vertex[order[i][0]][0] - vertex[order[i][1]][0], vertex[order[i][0]][1] - vertex[order[i][1]][1] , vertex[order[i][0]][2] - vertex[order[i][1]][2]])
@@ -282,6 +383,15 @@ class Head:
             v3 = np.cross(v1,v2)
             if i == 1 or i ==3 or i == 5:
                 v3 = v3*-1
+            for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
@@ -293,6 +403,9 @@ class Body:
         self.x = 0
         self.y = 0
         self.z = -4
+        self.image = cv2.imread("Body.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def draw(self):
         glPushMatrix()
         w = 4
@@ -300,6 +413,10 @@ class Body:
         h = 6
         vertex =[[-w/2,d/2,-h/2],[w/2,d/2,-h/2],[w/2,d/2,h/2],[-w/2,d/2,h/2],[-w/2,-d/2,-h/2],[w/2,-d/2,-h/2],[w/2,-d/2,h/2],[-w/2,-d/2,h/2]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         #Top Bottom Front Back Left Right
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
@@ -315,6 +432,14 @@ class Body:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -324,6 +449,9 @@ class Leftarm:
         self.y = 0.25
         self.z = -3
         self.switch = True
+        self.image = cv2.imread("arm.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def draw(self,k):
         glPushMatrix()
         w = 0.5
@@ -333,6 +461,10 @@ class Leftarm:
         vertex =[[-w,0,-h],[0,0,-h],[0,0,0],[-w,0,0],[-w,-d,-h],[0,-d,-h],[0,-d,0],[-w,-d,0]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
         glRotatef(k, 1.0, 0.0, 0.0)
@@ -346,6 +478,14 @@ class Leftarm:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -355,6 +495,9 @@ class Rightarm:
         self.x = -1
         self.y = 0.25
         self.z = -3
+        self.image = cv2.imread("arm.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
     def draw(self, k):
         glPushMatrix()
         w = 0.5
@@ -363,6 +506,10 @@ class Rightarm:
         vertex =[[-w,0,-h],[0,0,-h],[0,0,0],[-w,0,0],[-w,-d,-h],[0,-d,-h],[0,-d,0],[-w,-d,0]]
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
         glRotatef(k, 1.0, 0.0, 0.0)
@@ -376,6 +523,14 @@ class Rightarm:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -385,6 +540,9 @@ class Leftleg:
         self.x = 0.5
         self.y = 0.25
         self.z = -4
+        self.image = cv2.imread("leg.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
         self.switch = True
     def draw(self, k):
         glPushMatrix()
@@ -395,6 +553,10 @@ class Leftleg:
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
 
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
         glRotatef(k, 1.0, 0.0, 0.0)
@@ -408,6 +570,14 @@ class Leftleg:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
@@ -417,6 +587,9 @@ class Rightleg:
         self.x = -0.2
         self.y = 0.25
         self.z = -4
+        self.image = cv2.imread("leg.png",cv2.IMREAD_UNCHANGED)
+        self.image_width = self.image.shape[0]
+        self.image_height = self.image.shape[1]
         self.switch = True
     def draw(self, k):
         glPushMatrix()
@@ -427,9 +600,13 @@ class Rightleg:
         order =[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]]
 
         #Top Bottom Front Back Left Right
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.image_width, self.image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glEnable(GL_TEXTURE_2D)
         glTranslatef(self.x+moving[0], self.y+moving[1], self.z+moving[2])
         glScalef(0.5,0.5,0.5)
-        
+
         glRotatef(k, 1.0, 0.0, 0.0)
         glColor3f(0, 0, 1)
         glBegin( GL_QUADS )
@@ -441,11 +618,19 @@ class Rightleg:
                 v3 = v3*-1
             glNormal3f(v3[0],v3[1],v3[2])
             for j in range(4):
+                if j ==0:
+                    glTexCoord2f(0.0, 0.0)
+                elif j == 1:
+                    glTexCoord2f(1.0, 0.0)
+                elif j == 2:
+                    glTexCoord2f(1.0, 1.0)
+                elif j == 3:
+                    glTexCoord2f(0.0,1.0)
                 glVertex4f(vertex[order[i][j]][0],vertex[order[i][j]][1],vertex[order[i][j]][2],1)
         glEnd()
         glPopMatrix()
 
-class Viewer: 
+class Viewer:
     #bottom -7.5
     #top :7.5
     #left = 3
@@ -469,6 +654,7 @@ class Viewer:
         self.t = 0
         self.k = 0
         self.switch = True
+
     def light(self):
         glEnable(GL_COLOR_MATERIAL)
         glEnable(GL_LIGHTING)
@@ -476,8 +662,8 @@ class Viewer:
 
         # feel free to adjust light colors
         lightAmbient = [0.5, 0.5, 0.5, 1.0]
-        lightDiffuse = [0.5, 0.5, 0.5, 0.0]
-        lightSpecular = [0.5, 0.5, 0.5, 0.0]
+        lightDiffuse = [0.5, 0.5, 0.5, 1.0]
+        lightSpecular = [1.0, 1.0, 1.0, 1.0]
         lightPosition = [10, 10, -10, 0]    # vector: point at infinity
         glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient)
         glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse)
@@ -487,6 +673,8 @@ class Viewer:
 
     def display(self):
         glViewport(0,0,width,length)
+        glGenTextures(2)
+        #self.light()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glClearColor(0, 0, 0, 1)
         glMatrixMode(GL_PROJECTION)
@@ -557,7 +745,7 @@ class Viewer:
     def mousepassive(self, x, y):
         rotation[0] = -((x/width) - 0.5)
         rotation[1] = -((y/length) - 0.5)
-        
+
         glutPostRedisplay()
 
     def mouse(self, button, state, x, y):
@@ -590,11 +778,11 @@ class Viewer:
                 x2s = True
             if x1s == False:
                 x1 = x1 + speed/10
-            else : 
+            else :
                 x1 = x1 - speed/10
             if x2s == False:
                 x2 = x2 + speed/10
-            else : 
+            else :
                 x2 = x2 - speed/10
         if np.abs(x1-x2) > 2.5:
             return True
@@ -619,11 +807,11 @@ class Viewer:
                 z2s = True
             if z1s == False:
                 z1 = z1 + speed/10
-            else : 
+            else :
                 z1 = z1 - speed/10
             if z2s == False:
                 z2 = z2 + speed/10
-            else : 
+            else :
                 z2 = z2 - speed/10
         if np.abs(z1-z2) > 10:
             return True
@@ -645,7 +833,7 @@ class Viewer:
         """# x : -3.7~3.7, y : -7.5~12.5
         #print(self.timer)
         if x ==1 and self.perspective == 0:
-            if self.timer %300 == 1: # 0 rightbelow 1centerbelow 2leftbelow 3 4 5 
+            if self.timer %300 == 1: # 0 rightbelow 1centerbelow 2leftbelow 3 4 5
                 temp = random.randrange(0,7)
                 if  temp == 0:
                     self.obstacles.append(obstacle(y = moving[1] + 20, z= 12.5))
@@ -692,7 +880,7 @@ class Viewer:
                     self.obstacles.append(movingobstacle2(x=random.uniform(-3.7,3.7), y=moving[1] + 20, z= 0))
                     self.obstacles.append(movingobstacle(y=moving[1] + 20, z= random.uniform(-7.5,12.5)))
                     self.obstacles.append(movingobstacle(y=moving[1] + 20, z= random.uniform(-7.5,12.5)))
-                    
+
             for i in range(len(self.obstacles)):
                 self.obstacles[i].moving(1.2)
             i = 0
@@ -741,13 +929,13 @@ class Viewer:
             glutTimerFunc(1, self.animation, 1)
 
 
+
     def run(self):
         glutInit()
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
         glutInitWindowSize(width, length)
         glutInitWindowPosition(0, 0)
         glutCreateWindow(b"CS471 Computer Graphics #2")
-
         glutDisplayFunc(self.display)
         glutTimerFunc(100, self.animation, 1) #add
         glutKeyboardFunc(self.keyboard)
@@ -758,7 +946,7 @@ class Viewer:
         glutReshapeFunc(self.reshape)
 
         self.light()
-        
+
 
         glutMainLoop()
 
