@@ -1,6 +1,8 @@
 import argparse
 import math
 
+# * RSA Key Generation
+
 
 # Euclid's algorithm for determining the greatest common divisor
 def gcd(a, b):
@@ -64,3 +66,12 @@ with open('private_key.txt', 'w') as f:
     f.write(f'n={mod}\n')
     f.write(f'd={decrypt}')
     f.close()
+
+
+# * RSA Encryption & Descryption
+
+def char_to_hex(char):
+    return hex(ord(char))
+
+
+# print(char_to_hex('a'))  # Output: 0x61
