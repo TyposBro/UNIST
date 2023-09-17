@@ -70,16 +70,16 @@ def print_generated_keys_to_file(e, d, mod):
 
 
 # *2.1 RSA Encryption
-def encrypt_text(plaintext_ascii, public_key_obj):
+def encrypt_text(plaintext_ascii, e, n):
     ciphertext = []
     for i in plaintext_ascii:
         ciphertext.append(
-            pow(i, int(public_key_obj['e']), int(public_key_obj['n'])))
+            pow(i, int(e), int(n)))
     return [hex(c) for c in ciphertext]
 
 
-def print_ciphertext(ciphertext):
-    txt = "Ciphertext:"
+def print_ciphertext(ciphertext, prefix="Ciphertext:"):
+    txt = prefix
     for i in ciphertext:
         txt += f' {i}'
     print(txt)
@@ -96,16 +96,17 @@ def write_ciphertext_to_file(ciphertext, output):
 
 
 # *2.2 RSA Descryption
-def decrypt_text(ciphertext, private_key_obj):
+def decrypt_text(ciphertext, d, n):
     plaintext = []
     for i in ciphertext:
         plaintext.append(
-            pow(i, int(private_key_obj['d']), int(private_key_obj['n'])))
+            pow(i, int(d), int(n)))
     return ''.join([chr(c) for c in plaintext])
 
 
-# Driver code
+#! Driver code
 parser = argparse.ArgumentParser(description='RSA Key Generator')
+
 
 # ~Args for part #1
 parser.add_argument('--generate-key', action='store_true',
@@ -113,17 +114,29 @@ parser.add_argument('--generate-key', action='store_true',
 parser.add_argument('--p', type=int, help='Prime number p')
 parser.add_argument('--q', type=int, help='Prime number q')
 
+
 # ~Args for 2.1 part
 parser.add_argument("--encrypt", type=str, help="Path to the plaintext file.")
 parser.add_argument("--public-key", type=str,
                     help="Path to the public key file.")
 parser.add_argument("--output", type=str,
-                    help="Path to the output ciphertext file.")
+                    help="Path to the output file.")
+
 
 # ~Args for part #2.2
-parser.add_argument("--decrypt", type=str, help="Path to the plaintext file.")
+parser.add_argument("--decrypt", type=str, help="Path to the encrypted file.")
 parser.add_argument("--private-key", type=str,
-                    help="Path to the public key file.")
+                    help="Path to the private key file.")
+
+
+# ~Args for part #3.1
+parser.add_argument("--sign", type=str, help="Verification message.")
+parser.add_argument("--signature", type=str,
+                    help="Path to the signature file.")
+
+
+# ~Args for part #3.2
+parser.add_argument("--verify", type=str, help="Verification message.")
 
 
 # ~Parse the arguments
@@ -152,7 +165,8 @@ elif args.encrypt:
     public_key_obj = read_and_parse_key(public_key)
     plaintext_ascii = [ord(c) for c in plaintext]
     # encrypt plaintext
-    hex_ciphertext = encrypt_text(plaintext_ascii, public_key_obj)
+    hex_ciphertext = encrypt_text(
+        plaintext_ascii, public_key_obj["e"], public_key_obj["n"])
     # print ciphertext
     print_ciphertext(hex_ciphertext)
     # write ciphertext to file
@@ -174,12 +188,29 @@ elif args.decrypt:
     private_key_obj = read_and_parse_key(private_key)
 
     # decrypt ciphertext
-    plaintext = decrypt_text(ciphertext, private_key_obj)
+    plaintext = decrypt_text(
+        ciphertext, private_key_obj["d"], private_key_obj["n"])
     print(f'Decrypted plaintext: {plaintext}')
     # write plaintext to file
     with open(output_decrypt, 'w') as f:
         f.write(f'{plaintext}')
         f.close()
+
+elif args.sign:
+    sign = args.sign
+    private_key = args.private_key
+    signature = args.signature
+    sign_ascii = [ord(c) for c in sign]
+    private_key_obj = read_and_parse_key(private_key)
+    singed_msg = encrypt_text(
+        sign_ascii, private_key_obj["d"], private_key_obj["n"])
+    write_ciphertext_to_file(singed_msg, signature)
+    print_ciphertext(singed_msg, "Signature:")
+
+
+# elif args.verify:
+#     verify = args.verify
+#     public_key = args.public_key
 
 
 else:
