@@ -208,9 +208,23 @@ elif args.sign:
     print_ciphertext(singed_msg, "Signature:")
 
 
-# elif args.verify:
-#     verify = args.verify
-#     public_key = args.public_key
+elif args.verify:
+    verify = args.verify
+    public_key = args.public_key
+    signature = args.signature
+    verify_ascii = [ord(c) for c in verify]
+    public_key_obj = read_and_parse_key(public_key)
+
+    # read signature
+    signature = read_text(signature)
+    signature = signature.split(' ')
+    signature = [int(c, 16) for c in signature]
+    decrypted_signature = decrypt_text(
+        signature, public_key_obj["e"], public_key_obj["n"])
+    if verify == decrypted_signature:
+        print("Signature is valid")
+    else:
+        print("Signature is invalid")
 
 
 else:
