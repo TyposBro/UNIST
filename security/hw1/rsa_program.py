@@ -6,6 +6,7 @@ import math
 def read_text(txt):
     with open(txt, 'r') as file:
         data = file.read()
+        file.close()
     return data
 
 
@@ -18,6 +19,7 @@ def read_and_parse_key(public_key):
             # Split the line on the equals sign
             key, value = line.split('=')
             obj[key] = value
+        file.close()
     return obj
 
 
