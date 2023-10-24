@@ -1,336 +1,26 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite hostname="azizbek" name="HweTest" tests="55" errors="0" failures="5" skipped="0" time="0.226" timestamp="2022-11-25T15:31:26">
+<testsuite hostname="azizbek" name="HweTest" tests="55" errors="0" failures="0" skipped="0" time="0.113" timestamp="2022-12-05T20:01:23">
                      <properties>
       <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/><property name="java.specification.version" value="11"/><property name="sun.cpu.isalist" value=""/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="java.vendor.url" value="https://openjdk.java.net/"/><property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk/lib"/><property name="sun.java.command" value="/usr/share/sbt/bin/sbt-launch.jar test"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2022-10-18"/><property name="java.home" value="/usr/lib/jvm/java-11-openjdk"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="32-bit"/><property name="line.separator" value="
 "/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="11.0.17+1"/><property name="user.name" value="azizbek"/><property name="log4j.ignoreTCL" value="true"/><property name="file.encoding" value="UTF-8"/><property name="java.io.tmpdir" value="/tmp"/><property name="java.version" value="11.0.17"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/><property name="sun.os.patch.level" value="unknown"/><property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/><property name="java.vendor" value="Oracle Corporation"/><property name="scala.ext.dirs" value="/home/azizbek/.sbt/1.0/java9-rt-ext-oracle_corporation_11_0_17"/><property name="sun.io.unicode.encoding" value="UnicodeLittle"/><property name="java.class.path" value="/usr/share/sbt/bin/sbt-launch.jar"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="Asia/Seoul"/><property name="os.name" value="Linux"/><property name="java.vm.specification.version" value="11"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="US"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/home/azizbek"/><property name="user.language" value="en"/><property name="sbt.script" value="/usr/bin/sbt"/><property name="swoval.tmpdir" value="/home/azizbek/.sbt/1.0"/><property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/><property name="jline.esc.timeout" value="0"/><property name="path.separator" value=":"/><property name="os.version" value="5.15.78-1-MANJARO"/><property name="jna.nosys" value="true"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/><property name="user.dir" value="/home/azizbek/Desktop/UNIST/principles/hw4"/><property name="os.arch" value="amd64"/><property name="java.vm.info" value="mixed mode"/><property name="java.vm.version" value="11.0.17+1"/><property name="java.class.version" value="55.0"/>
     </properties>
-                     <testcase classname="HweTest" name="GcTest env: HashMap(), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)" time="0.079">
-                                                 <failure message="Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(),6)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(),6)
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at HweTest.$anonfun$new$2(Hw4Test.scala:126)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:189)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:187)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:199)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:199)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:181)
-	at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:232)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:232)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:231)
-	at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1562)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:236)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:236)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:235)
-	at org.scalatest.funsuite.AnyFunSuite.run(AnyFunSuite.scala:1562)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
-	at sbt.TestRunner.run(TestFramework.scala:154)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFunction.apply(TestFramework.scala:329)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
-	at sbt.Execute.work(Execute.scala:290)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
-                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2), Var(&quot;x&quot;) -&gt; LocVal(1), Var(&quot;y&quot;) -&gt; LocVal(5), Var(&quot;ret&quot;) -&gt; LocVal(4), Var(&quot;p&quot;) -&gt; LocVal(3)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(0) -&gt; ProcVal(List(Var(&quot;x&quot;)),Ite(LTEExpr(Var(&quot;x&quot;),Const(0)),Const(0),Ite(LTEExpr(Var(&quot;x&quot;),Const(2)),Const(1),Let(Var(&quot;temp&quot;),Const(1),Let(Var(&quot;p&quot;),Const(1),Let(Var(&quot;ret&quot;),Const(1),Let(Var(&quot;y&quot;),Const(3),Block(BeginEnd(WhileExpr(LTEExpr(Var(&quot;y&quot;),Var(&quot;x&quot;)),BeginEnd(Block(Block(Block(Asn(Var(&quot;temp&quot;),Var(&quot;ret&quot;)),Asn(Var(&quot;ret&quot;),Add(Var(&quot;p&quot;),Var(&quot;ret&quot;)))),Asn(Var(&quot;p&quot;),Var(&quot;temp&quot;))),Asn(Var(&quot;y&quot;),Add(Var(&quot;y&quot;),Const(1))))))),Var(&quot;ret&quot;)))))))),HashMap()), LocVal(2) -&gt; IntVal(13)),6)" time="0.004">
-                                                 <failure message="Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(0) -&gt; ProcVal(List(Var(&quot;x&quot;)),Ite(LTEExpr(Var(&quot;x&quot;),Const(0)),Const(0),Ite(LTEExpr(Var(&quot;x&quot;),Const(2)),Const(1),Let(Var(&quot;temp&quot;),Const(1),Let(Var(&quot;p&quot;),Const(1),Let(Var(&quot;ret&quot;),Const(1),Let(Var(&quot;y&quot;),Const(3),Block(BeginEnd(WhileExpr(LTEExpr(Var(&quot;y&quot;),Var(&quot;x&quot;)),BeginEnd(Block(Block(Block(Asn(Var(&quot;temp&quot;),Var(&quot;ret&quot;)),Asn(Var(&quot;ret&quot;),Add(Var(&quot;p&quot;),Var(&quot;ret&quot;)))),Asn(Var(&quot;p&quot;),Var(&quot;temp&quot;))),Asn(Var(&quot;y&quot;),Add(Var(&quot;y&quot;),Const(1))))))),Var(&quot;ret&quot;)))))))),HashMap()), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(0) -&gt; ProcVal(List(Var(&quot;x&quot;)),Ite(LTEExpr(Var(&quot;x&quot;),Const(0)),Const(0),Ite(LTEExpr(Var(&quot;x&quot;),Const(2)),Const(1),Let(Var(&quot;temp&quot;),Const(1),Let(Var(&quot;p&quot;),Const(1),Let(Var(&quot;ret&quot;),Const(1),Let(Var(&quot;y&quot;),Const(3),Block(BeginEnd(WhileExpr(LTEExpr(Var(&quot;y&quot;),Var(&quot;x&quot;)),BeginEnd(Block(Block(Block(Asn(Var(&quot;temp&quot;),Var(&quot;ret&quot;)),Asn(Var(&quot;ret&quot;),Add(Var(&quot;p&quot;),Var(&quot;ret&quot;)))),Asn(Var(&quot;p&quot;),Var(&quot;temp&quot;))),Asn(Var(&quot;y&quot;),Add(Var(&quot;y&quot;),Const(1))))))),Var(&quot;ret&quot;)))))))),HashMap()), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at HweTest.$anonfun$new$2(Hw4Test.scala:126)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:189)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:187)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:199)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:199)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:181)
-	at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:232)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:232)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:231)
-	at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1562)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:236)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:236)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:235)
-	at org.scalatest.funsuite.AnyFunSuite.run(AnyFunSuite.scala:1562)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
-	at sbt.TestRunner.run(TestFramework.scala:154)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFunction.apply(TestFramework.scala:329)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
-	at sbt.Execute.work(Execute.scala:290)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
-                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)" time="0.003">
-                                                 <failure message="Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(LocVal(2) -&gt; IntVal(13)),6)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6) did not equal Mem(HashMap(LocVal(2) -&gt; IntVal(13)),6)
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at HweTest.$anonfun$new$2(Hw4Test.scala:126)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:189)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:187)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:199)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:199)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:181)
-	at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:232)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:232)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:231)
-	at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1562)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:236)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:236)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:235)
-	at org.scalatest.funsuite.AnyFunSuite.run(AnyFunSuite.scala:1562)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
-	at sbt.TestRunner.run(TestFramework.scala:154)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFunction.apply(TestFramework.scala:329)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
-	at sbt.Execute.work(Execute.scala:290)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
-                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6)" time="0.002">
-                                                 <failure message="Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6) did not equal Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(2) -&gt; LocVal(3)),6)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6) did not equal Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(2) -&gt; LocVal(3)),6)
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at HweTest.$anonfun$new$2(Hw4Test.scala:126)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:189)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:187)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:199)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:199)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:181)
-	at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:232)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:232)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:231)
-	at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1562)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:236)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:236)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:235)
-	at org.scalatest.funsuite.AnyFunSuite.run(AnyFunSuite.scala:1562)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
-	at sbt.TestRunner.run(TestFramework.scala:154)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFunction.apply(TestFramework.scala:329)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
-	at sbt.Execute.work(Execute.scala:290)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
-                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6)" time="0.002">
-                                                 <failure message="Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6) did not equal Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(2) -&gt; LocVal(3)),6)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6) did not equal Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(2) -&gt; LocVal(3)),6)
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at HweTest.$anonfun$new$2(Hw4Test.scala:126)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:189)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:187)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:199)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:199)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:181)
-	at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:232)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:232)
-	at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:231)
-	at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1562)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1562)
-	at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:236)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:236)
-	at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:235)
-	at org.scalatest.funsuite.AnyFunSuite.run(AnyFunSuite.scala:1562)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
-	at sbt.TestRunner.run(TestFramework.scala:154)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
-	at sbt.TestFunction.apply(TestFramework.scala:329)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
-	at sbt.Execute.work(Execute.scala:290)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
+                     <testcase classname="HweTest" name="GcTest env: HashMap(), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)" time="0.023">
+                                                 
+                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2), Var(&quot;x&quot;) -&gt; LocVal(1), Var(&quot;y&quot;) -&gt; LocVal(5), Var(&quot;ret&quot;) -&gt; LocVal(4), Var(&quot;p&quot;) -&gt; LocVal(3)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(0) -&gt; ProcVal(List(Var(&quot;x&quot;)),Ite(LTEExpr(Var(&quot;x&quot;),Const(0)),Const(0),Ite(LTEExpr(Var(&quot;x&quot;),Const(2)),Const(1),Let(Var(&quot;temp&quot;),Const(1),Let(Var(&quot;p&quot;),Const(1),Let(Var(&quot;ret&quot;),Const(1),Let(Var(&quot;y&quot;),Const(3),Block(BeginEnd(WhileExpr(LTEExpr(Var(&quot;y&quot;),Var(&quot;x&quot;)),BeginEnd(Block(Block(Block(Asn(Var(&quot;temp&quot;),Var(&quot;ret&quot;)),Asn(Var(&quot;ret&quot;),Add(Var(&quot;p&quot;),Var(&quot;ret&quot;)))),Asn(Var(&quot;p&quot;),Var(&quot;temp&quot;))),Asn(Var(&quot;y&quot;),Add(Var(&quot;y&quot;),Const(1))))))),Var(&quot;ret&quot;)))))))),HashMap()), LocVal(2) -&gt; IntVal(13)),6)" time="0.001">
+                                                 
+                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; IntVal(13)),6)" time="0.001">
+                                                 
+                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; IntVal(13), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6)" time="0.0">
+                                                 
+                                               </testcase><testcase classname="HweTest" name="GcTest env: HashMap(Var(&quot;temp&quot;) -&gt; LocVal(2)), mem: Mem(HashMap(LocVal(3) -&gt; RecordVal(Var(&quot;x&quot;),LocVal(5),EmptyRecordVal), LocVal(5) -&gt; IntVal(9), LocVal(1) -&gt; IntVal(10), LocVal(4) -&gt; IntVal(21), LocVal(2) -&gt; LocVal(3)),6)" time="0.0">
+                                                 
                                                </testcase><testcase classname="HweTest" name="test with expected result: SkipVal input: skip" time="0.0">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: true" time="0.001">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: true" time="0.0">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(false) input: false" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let x = 1 in x" time="0.0">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let x = 1 in x" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: 1" time="0.001">
                                                  
@@ -348,43 +38,43 @@
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(false) input: 1 &lt;= 0" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: 1 &lt;= 10" time="0.0">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: 1 &lt;= 10" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(false) input: not true" time="0.001">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(false) input: not true" time="0.0">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: not false" time="0.001">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: not false" time="0.0">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(false) input: not 1 == 1" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: BoolVal(true) input: not 1 == 2" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: if true then 1 else 2" time="0.0">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: if true then 1 else 2" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: if false then 1 else 2" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(11) input: let x = 0 in begin while x &lt;= 10 x := x + 1 end ; x" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(0) input: let x = 0 in begin while false x := x + 1 end ; x" time="0.001">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(0) input: let x = 0 in begin while false x := x + 1 end ; x" time="0.002">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: let x = 1 in x+1" time="0.002">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: let x = 1 in x+1" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;)),Add(Var(&quot;x&quot;),Const(10)),HashMap()) input: proc (x) x + 10" time="0.002">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;)),Add(Var(&quot;x&quot;),Const(10)),HashMap()) input: proc (x) x + 10" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;), Var(&quot;y&quot;)),Add(Add(Var(&quot;x&quot;),Var(&quot;y&quot;)),Const(10)),HashMap()) input: proc (x,y) x + y + 10" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;), Var(&quot;y&quot;)),Add(Add(Var(&quot;x&quot;),Var(&quot;y&quot;)),Const(10)),HashMap()) input: proc (x,y) x + y + 10" time="0.002">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;), Var(&quot;z&quot;)),Add(Add(Var(&quot;x&quot;),Var(&quot;x&quot;)),Const(10)),HashMap()) input: proc (x,z) x + x + 10" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: ProcVal(List(Var(&quot;x&quot;), Var(&quot;z&quot;)),Add(Add(Var(&quot;x&quot;),Var(&quot;x&quot;)),Const(10)),HashMap()) input: proc (x,z) x + x + 10" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(13) input: let f = proc (x,y)  x + y + 10 in f (1,2)" time="0.004">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(13) input: let f = proc (x,y)  x + y + 10 in f (1,2)" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(11) input: let f = proc (x)  x  + 10 in f (1)" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(11) input: let f = proc (x)  x  + 10 in f (1)" time="0.002">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(20) input: let f = proc (x)  x  + 10 in let y = 10 in f &lt;y&gt;" time="0.002">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(20) input: let f = proc (x)  x  + 10 in let y = 10 in f &lt;y&gt;" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(5) input: let f = proc (x)  x := 5 in let y = 10 in begin f &lt;y&gt;; y end" time="0.002">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(15) input: let f = proc (x,y)  x - y + 10 in let y = 10 in let z = 5 in f &lt;y,z&gt;" time="0.005">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(15) input: let f = proc (x,y)  x - y + 10 in let y = 10 in let z = 5 in f &lt;y,z&gt;" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(10) input: let f = proc (x)  x := 5 in let y = 10 in begin f (y); y end" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(10) input: let f = proc (x)  x := 5 in let y = 10 in begin f (y); y end" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(11) input: let x = 10 in x := 11" time="0.002">
                                                  
@@ -392,25 +82,25 @@
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: EmptyRecordVal input: {}" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: RecordVal(Var(&quot;x&quot;),LocVal(0),EmptyRecordVal) input: {x := 1}" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: RecordVal(Var(&quot;x&quot;),LocVal(0),EmptyRecordVal) input: {x := 1}" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: RecordVal(Var(&quot;y&quot;),LocVal(0),RecordVal(Var(&quot;x&quot;),LocVal(1),EmptyRecordVal)) input: {y := 1, x := 1}" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(3) input: let z = 1 in begin {y := z := 0, x := z := 3}; z end" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(3) input: let z = 1 in begin {y := z := 0, x := z := 3}; z end" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:=2} in r.x" time="0.004">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:=2} in r.x" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(3) input: let r = {x:=1,y:={z:=3}} in r.y.z" time="0.003">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(3) input: let r = {x:=1,y:={z:=3}} in r.y.z" time="0.004">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:={z:=3}} in r.y := 1" time="0.004">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:={z:=3}} in r.y := 1" time="0.002">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:={z:=3}} in begin r.y := 1; r.y end" time="0.004">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let r = {x:=1,y:={z:=3}} in begin r.y := 1; r.y end" time="0.002">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: begin {x:=1,y:={z:=3}} end . y := 1" time="0.001">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: let z = 1 in begin {x:=1,y:={k:=z := 2}} end . y := z" time="0.002">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: let z = 1 in begin {x:=1,y:={k:=z := 2}} end . y := z" time="0.003">
                                                  
-                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: if 0 &lt;= 1 then 1 else 2" time="0.002">
+                                               </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: if 0 &lt;= 1 then 1 else 2" time="0.001">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(0) input: let fibo = 
 proc (x)
@@ -428,7 +118,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (0)" time="0.011">
+         in fibo (0)" time="0.006">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let fibo = 
 proc (x)
@@ -446,7 +136,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (1)" time="0.008">
+         in fibo (1)" time="0.004">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(1) input: let fibo = 
 proc (x)
@@ -464,7 +154,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (2)" time="0.009">
+         in fibo (2)" time="0.004">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(2) input: let fibo = 
 proc (x)
@@ -482,7 +172,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (3)" time="0.008">
+         in fibo (3)" time="0.003">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(3) input: let fibo = 
 proc (x)
@@ -500,7 +190,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (4)" time="0.008">
+         in fibo (4)" time="0.004">
                                                  
                                                </testcase><testcase classname="HweTest" name="test with expected result: IntVal(55) input: let fibo = 
 proc (x)
@@ -518,7 +208,7 @@ proc (x)
             y := y + 1
           end end;
         ret
-         in fibo (10)" time="0.01">
+         in fibo (10)" time="0.004">
                                                  
                                                </testcase>
                      <system-out><![CDATA[]]></system-out>
